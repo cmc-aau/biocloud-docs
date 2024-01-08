@@ -17,6 +17,13 @@ nav:
     - software/modules.md
     - software/conda.md
     - software/containers.md
+  - Snakemake:
+    - snakemake/intro.md
+    - snakemake/snakemake-vs-bash.md
+    - snakemake/getting-started.md
+    - snakemake/wildcards-and-configuration.md
+    - snakemake/reproducibility.md
+    - snakemake/running-snakemake.md
   - storage.md
   - events.md
 theme:
