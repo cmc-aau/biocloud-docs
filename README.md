@@ -12,7 +12,7 @@ Everything is markdown so `mkdocs` is not strictly needed locally unless you wan
 Install the "Dev Containers" extension and reopen the folder in a container (F1 -> Dev Containers: Reopen in Container).
 
  - Use pipenv
-Install `pipenv` from `pip` or `apt`, then run `pipenv install mkdocs mkdocs-material --python /usr/bin/python3` to install the required packages.
+Install `pipenv` from `pip`, `pipx`, or `apt` (might be broken), then run `pipenv install mkdocs mkdocs-material --python /usr/bin/python3` to install the required packages.
 
  - Install `mkdocs` and `mkdocs-material` locally using `pip` or `conda` or any other way you want.
 

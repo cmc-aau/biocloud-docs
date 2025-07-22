@@ -3,7 +3,7 @@
 Many steps in a complex workflow will only run on a single thread regardless of whether you've asked for more. This leads to a waste of resources. You can submit separate jobs by writing down the commands in separate shell scripts, then submit them as individual jobs using sbatch with different resource requirements:
 
 **`launchscript.sh`**
-```bash
+```
 #!/bin/bash
 
 set -euo pipefail

@@ -44,7 +44,7 @@ $ scontrol show config
 ```
 
 ## SLURM environment variables
-SLURM jobs will have a variety of environment variables set within job allocations, which might become handy programmatically. Below is an overview of relevant ones. For all of them refer to the SLURM documentation for [input environment variables](https://slurm.schedmd.com/archive/slurm-23.02.6/sbatch.html#SECTION_INPUT-ENVIRONMENT-VARIABLES) and [output environment variables](https://slurm.schedmd.com/archive/slurm-23.02.6/sbatch.html#SECTION_OUTPUT-ENVIRONMENT-VARIABLES). Some may not be present for your particular job, so to list only those currently available within a job run for example `env | grep -iE 'SLURM|SBATCH'`.
+SLURM jobs will have a variety of environment variables set within job allocations, which might become handy programmatically. Below is an overview of relevant ones. For all of them refer to the SLURM documentation for [input environment variables](https://slurm.schedmd.com/archive/slurm-24.11.4/sbatch.html#SECTION_INPUT-ENVIRONMENT-VARIABLES) and [output environment variables](https://slurm.schedmd.com/archive/slurm-24.11.4/sbatch.html#SECTION_OUTPUT-ENVIRONMENT-VARIABLES). Some may not be present for your particular job, so to list only those currently available within a job run for example `env | grep -iE 'SLURM|SBATCH'`.
 
 | Variable(s) | Description |
 | :--- | :--- |

@@ -17,12 +17,8 @@ When you have inspected the DAG or output from the dry run and you are ready to 
 #!/usr/bin/bash -l
 #SBATCH --job-name=<snakemake_template>
 #SBATCH --output=job_%j_%x.out
-#SBATCH --nodes=1
-#SBATCH --ntasks=1
-#SBATCH --ntasks-per-node=1
 #SBATCH --cpus-per-task=1
 #SBATCH --time=1-00:00:00
-#SBATCH --partition=shared
 #SBATCH --mem=1G
 #SBATCH --mail-type=END,FAIL
 #SBATCH --mail-user=abc@bio.aau.dk
@@ -68,7 +64,6 @@ cluster:
 #if rules don't have resources set, use these default values.
 #Note that "mem" will be converted to "mem_mb" under the hood, so mem_mb is prefered
 default-resources:
-  - partition="shared"
   - qos="normal"
   - threads=1
   - mem_mb=512

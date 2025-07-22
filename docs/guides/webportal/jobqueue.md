@@ -7,7 +7,7 @@ By default you will only see your own jobs, so it might be empty at first. To se
 
 ![web portal queue show all button](img/jobqueue_alljobsbutton.png)
 
-You can now see a list of **all** queued and running jobs as well as recently completed jobs for each [hardware partition](../../slurm/partitions.md) (confusingly named **Queue**):
+You can now see a list of **all** queued and running jobs as well as recently completed jobs for each [compute node partition](../../slurm/partitions.md) (confusingly named **Queue**):
 
 ![web portal queue all jobs list](img/jobqueue_alljobs.png)
 

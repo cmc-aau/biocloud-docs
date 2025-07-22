@@ -13,7 +13,7 @@ nav:
     - slurm/intro.md
     - slurm/jobsubmission.md
     - slurm/partitions.md
-    - slurm/efficiency.md
+    #- slurm/efficiency.md
     - slurm/accounting.md
     - slurm/jobcontrol.md
     - slurm/other.md
