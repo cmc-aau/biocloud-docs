@@ -75,4 +75,4 @@ SLURM jobs will have a variety of environment variables set within job allocatio
 | `SLURMD_NODENAME` | Name of the node running the job script |
 | `SLURM_JOB_GPUS` | GPU IDs allocated to the job (if any). |
 
-`sbcast`?
+

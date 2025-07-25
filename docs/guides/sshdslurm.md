@@ -14,12 +14,9 @@ When you normally connect to a remote server, you use an SSH client to connect t
 #!/bin/bash
 #SBATCH --output=/dev/null
 #SBATCH --job-name=sshdbridge
-#SBATCH --time=0-3:00:00
-#SBATCH --partition=shared
-#SBATCH --cpus-per-task=4
-#SBATCH --mem=6G
-#SBATCH --mail-type=END,FAIL
-#SBATCH --mail-user=abc@bio.aau.dk
+#SBATCH --time=0-9:00:00
+#SBATCH --cpus-per-task=2
+#SBATCH --mem=3G
 
 # exit on first error or unset variable
 set -eu
@@ -39,7 +36,8 @@ fi
 
 # start sshd server on the available port
 echo "Starting sshd on port $PORT"
-/usr/sbin/sshd -D -p "${PORT}" -h "${HOME}/.ssh/ssh_host_ed25519_key"
+/usr/sbin/sshd -D -p "${PORT}" -h -o "UsePAM no" "${HOME}/.ssh/ssh_host_ed25519_key"
+
 ```
 
 ## Adjust local SSH config
@@ -51,17 +49,17 @@ Then add the following line somewhere:
 
 **Windows**
 ```
-Host bio-ospikachu02-sshdbridge
-    ProxyCommand ssh bio-ospikachu02.srv.aau.dk bash -c \"nc \$(squeue --me --name=sshdbridge --states=R -h -O NodeList,Comment)\"
+Host bio-fe02-sshdbridge
+    ProxyCommand ssh bio-fe02.srv.aau.dk bash -c \"nc \$(squeue --me --name=sshdbridge --states=R -h -O NodeList,Comment)\"
 ```
 
 **Linux/MacOS**
 ```
-Host bio-ospikachu02-sshdbridge
-    ProxyCommand ssh bio-ospikachu02.srv.aau.dk "nc \$(squeue --me --name=sshdbridge --states=R -h -O NodeList,Comment)"
+Host bio-fe02-sshdbridge
+    ProxyCommand ssh bio-fe02.srv.aau.dk "nc \$(squeue --me --name=sshdbridge --states=R -h -O NodeList,Comment)"
 ```
 
-In this example, the hostname of the login node `bio-ospikachu02.srv.aau.dk` must already exist in your SSH config file for it to work. You can use the provided [SSH config template](../access/ssh.md#ssh-config-file-template) if you haven't added any BioCloud hosts there yet, and you can also use any other login node. Save the file and you should now see the new bridge host under "Remote Explorer" (you may need to hit refresh first):
+In this example, the hostname of the login node `bio-fe02.srv.aau.dk` must already exist in your SSH config file for it to work. You can use the provided [SSH config template](../access/ssh.md#ssh-config-file-template) if you haven't added any BioCloud hosts there yet, and you can also use any other login node. Save the file and you should now see the new bridge host under "Remote Explorer" (you may need to hit refresh first):
 
 ![Connect through bridge host](img/sshdbridgeconnect.png)
 
@@ -72,5 +70,5 @@ Finally, click the "Connect in New (or current) Window" icon next to the name. I
 Now you can start working! Whatever you do in VS Code now will run remotely inside a SLURM job on one of the compute nodes with a connection through the login node. Magic.
 
 ## Notes
- - You will not be able to connect if you use an [SSH jump host](../access/ssh.md#using-an-ssh-jump-host). [Connect through VPN](../access/ssh.md#vpn) instead if you are not at AAU.
+ - You will **NOT** be able to connect if you use an [SSH jump host](../access/ssh.md#using-an-ssh-jump-host). [Connect through VPN](../access/ssh.md#vpn) instead if you are not at AAU.
  - You can have multiple simultaneous connections to the same job, however if there are different resource requirements for each task you need to do, you must submit individual jobs and use a different name for each job, and also create separate entries in the SSH config for each job.

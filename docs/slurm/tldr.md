@@ -6,7 +6,7 @@ Start with [logging in](../access/ssh.md) to one of the login nodes through SSH.
 
 ### Interactive
 If you just need an interactive shell to experiment with some quick commands use `salloc`, for example:
-```bash
+```
 salloc --cpus-per-task 2 --mem 4G --time 0-3:00:00
 ```
 
@@ -20,7 +20,7 @@ For larger jobs that will run for several hours or days, you need to submit SLUR
 
  - Write a shell script (using `nano` or whatever editor you want) named for example `submit.sh` which contains the command(s) you need to run, and let SLURM know how many resources your job needs by filling in the `#SBATCH` comments ([more options here](jobsubmission.md#most-essential-options)) at the top, for example:
 
-```bash
+```
 #!/usr/bin/bash -l
 #SBATCH --job-name=minimap2test
 #SBATCH --output=job_%j_%x.out
