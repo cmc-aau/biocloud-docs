@@ -7,7 +7,7 @@ Below is a list of the current compute node partitions, as well as the hardware 
       To make it as simple as possible for you, and to increase the overall cluster efficiency by ensuring that the most appropriate hardware is used for each job, the partition for your job(s) is assigned automatically by the SLURM scheduler. The resulting partition is selected based on several factors, where the most important are the requested **memory per CPU ratio** and any required **node features**. Therefore, submitting jobs to specific partitions using the `--partition` option will have no effect, as it will be overwritten. In very specific scenarios the automatically assigned partition may not be ideal, in which case exceptions can be made, just contact an administrator.
 
 ## CPU partitions
-All compute node CPUs are currently various AMD EPYC models. Details about the exact CPU model, scratch space and special features for each compute node are listed below.
+Below is a brief overview of all CPU partitions. Details about the exact CPU model, scratch space and special features for each compute node are listed further down.
 
 ### Overview
 | Partition | Nodes | Total CPUs | Total memory | Billing factor |
@@ -24,10 +24,8 @@ This partition is reserved for interactive jobs for people to be able to do data
 
 The `interactive` partition is set up with an over-subscription factor of 2, which means each CPU can be used by up to 2 jobs at once to maximize CPU utilization because interactive jobs are usually very inefficient.
 
-`maxmempercpu` setting
-
 ???+ info "Memory per CPU on the interactive partition"
-      On the `interactive` partition, the SLURM scheduler will sometimes allocate more CPUs than you request for your job until the `maxmempercpu` setting is satisfied to avoid idle CPU's due to exhausted memory, [details here](https://slurm.schedmd.com/archive/slurm-24.11.4/slurm.conf.html#OPT_MaxMemPerCPU). It is therefore ideal to detect the number of CPUs available dynamically in your scripts and commands using for example `nproc` or from the `SLURM_JOB_CPUS_PER_NODE` environment variable provided by SLURM.
+      Because the CPU's on the `interactive` partition are over-subscribed, the SLURM scheduler will sometimes allocate more CPUs than you have initially requested for your job until the max memory per CPU setting of **2.0 GB** is satisfied. This is to avoid idle CPU's due to exhausted memory (memory cannot be shared) and to avoid that nodes crash because they run out of memory, [details here](https://slurm.schedmd.com/archive/slurm-24.11.4/slurm.conf.html#OPT_MaxMemPerCPU). It is therefore ideal to detect the number of CPUs available dynamically in your scripts and commands using for example `nproc` or from the `SLURM_JOB_CPUS_PER_NODE` environment variable.
 
 | Hostname | CPU model | CPUs | Memory | Scratch space | Features |
 | ---: | :---: | :---: | :---: | :---: | :---: |

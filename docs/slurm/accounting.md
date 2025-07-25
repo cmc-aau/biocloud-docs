@@ -1,5 +1,5 @@
 # Usage accounting and priority
-All users belong to an account (usually their PI) where all usage is tracked on a per-user basis, which directly impact the priority of future jobs. Additionally, limitations and extra high priorities can be obtained by submitting jobs to different SLURM "Quality of Service"s (QOS). By default, all users are only allowed to submit jobs to the `normal` QOS with equal resource limits and base priority for everyone. Periodically users may submit to the `highprio` QOS instead, which has extra resources and a higher base priority (and therefore the usage is also billed 2x), however this must first be discussed among the owners of the hardware (PI's), and then you must contact an administrator to grant your user permission to submit jobs to it for a period of time.
+All users belong to an account (usually their PI) where all usage is tracked on a per-user basis, which directly impact the priority of future jobs. Additionally, limitations and extra high priorities can be obtained by submitting jobs to different SLURM "Quality of Service"s (QOS). By default, all users are only allowed to submit jobs to the `normal` QOS with equal resource limits and base priority for everyone. Periodically users may submit to the `highprio` QOS instead, which has higher resource [usage limits](#usage-limits-and-qos) and a base priority higher than everyone else (and therefore the usage is also billed 3x), however this must first be discussed among the owners of the hardware (PI's), and then you must contact an administrator to grant your user permission to submit jobs to it for a period of time.
 
 ## Job scheduling
 BioCloud uses the first-in-first-out (FIFO) scheduling algorithm with **backfilling enabled**, which means that occasionally lower priority jobs may start before higher priority jobs to maximize the utilization of the cluster, since smaller (usually shorter) jobs may be able to finish before the larger jobs are scheduled to start. To increase the chance of backfilling, it is therefore important to set a realistic timelimit for your jobs that is as short as possible, but long enough for it to finish.
@@ -81,17 +81,22 @@ root                                          0.000000   699456285      1.000000
 
 For more details about job prioritization see the [SLURM documentation](https://slurm.schedmd.com/archive/slurm-24.11.4/priority_multifactor.html) and this [presentation](https://slurm.schedmd.com/SLUG19/Priority_and_Fair_Trees.pdf).
 
-## QOS info and limitations
-See all available QOS and their limitations:
-```
-$ sacctmgr show qos format="name,priority,usagefactor,mintres%20,maxtrespu,maxjobspu"
-      Name   Priority UsageFactor              MinTRES     MaxTRESPU MaxJobsPU 
----------- ---------- ----------- -------------------- ------------- --------- 
-    normal          0    1.000000       cpu=1,mem=512M       cpu=384       500 
-  highprio          1    2.000000       cpu=1,mem=512M       cpu=1024     2000 
-```
+## Usage limits and QOS
+Currently, the following QOS's are available:
 
-See details about account associations, allowed QOS's, and more, for your user:
+| | `normal` | `highprio` |
+| ---: | :---: | :---: |
+| [UsageFactor](https://slurm.schedmd.com/archive/slurm-24.11.4/sacctmgr.html#OPT_UsageFactor) | 1.0 | 3.0 |
+| [Priority](https://slurm.schedmd.com/archive/slurm-24.11.4/sacctmgr.html#OPT_Priority_2) | +0 | +1000 |
+| [MinPrioThres](https://slurm.schedmd.com/archive/slurm-24.11.4/sacctmgr.html#OPT_MinPrioThreshold) | 100 |  |
+| [MaxTRESPU](https://slurm.schedmd.com/archive/slurm-24.11.4/sacctmgr.html#OPT_MaxTRESPerUser) | cpu=576 |  |
+| [MaxJobsPU](https://slurm.schedmd.com/archive/slurm-24.11.4/sacctmgr.html#OPT_MaxJobsPerUser) | 100 | 100 |
+| [MaxSubmitPU](https://slurm.schedmd.com/archive/slurm-24.11.4/sacctmgr.html#OPT_MaxSubmitJobsPerUser) | 200 | 200 |
+| [MaxTRESPA](https://slurm.schedmd.com/archive/slurm-24.11.4/sacctmgr.html#OPT_MaxTRESPerAccount) | cpu=1728 | cpu=1728 |
+| [MaxTRESRunMinsPA](https://slurm.schedmd.com/archive/slurm-24.11.4/sacctmgr.html#OPT_MaxTRESPerAccount) | cpu=17500000 | cpu=30000000 |
+| [MaxTRESRunMinsPU](https://slurm.schedmd.com/archive/slurm-24.11.4/sacctmgr.html#OPT_MaxTRESRunMinsPerUser) | cpu=6000000 |  |
+
+To see details about account associations, allowed QOS's, limits set at the user level, and more, for your user, use the following command:
 ```
 # your user
 $ sacctmgr show user withassoc where name=$USER
@@ -104,7 +109,7 @@ $ sacctmgr show user withassoc | less
 ```
 
 ### Undergraduate students
-Undergraduate students (up to but NOT including master projects) share resources within the `students` account and only their combined usage is limited. View current limitations with for example:
+Undergraduate students (up to but NOT including master students) share resources within the `students` account and only their combined usage is limited. View current limitations with for example:
 
 ```
 $ sacctmgr list account students -s format="account,priority,MaxCPUs,grpcpus,qos" | head -n 3
