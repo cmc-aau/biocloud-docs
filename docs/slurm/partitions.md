@@ -1,62 +1,72 @@
 # Compute node partitions
-The compute nodes are divided into separate partitions based on their hardware configuration. This is to ensure that for example CPU's from different manufacturer generations can be billed differently in the usage accounting (newer CPU's are faster), nodes with more memory (per CPU) are only used for jobs that actually require more memory, and GPU nodes are only used for jobs that require GPU's, etc. BioCloud is a **heterogeneous cluster** because nodes are purchased at different times, hence their hardware configuration is different. Furthermore, the number of partitions will only increase in the future as more nodes are added to the cluster at different times, which increases complexity, making it difficult or confusing to submit jobs to the most appropriate partition(s). This can result in an inefficient cluster with longer queue times and wasted computing resources.
+The compute nodes are divided into separate partitions based on their hardware configuration. This is to allow that for example CPU's from different manufacturer generations can be set up with a different [billing factor](https://slurm.schedmd.com/archive/slurm-24.11.4/slurm.conf.html#OPT_TRESBillingWeights) to ensure fair usage accounting (newer CPU's are faster), nodes with more memory (per CPU) are only used for jobs that actually require more memory, and GPU nodes are only used for jobs that require GPU's, etc. BioCloud is a quite **heterogeneous cluster** because nodes are purchased at different times, hence their hardware configuration is also different. Furthermore, the number of partitions will only increase in the future as more nodes are added to the cluster at different times, which increases complexity, making it difficult or confusing to submit jobs to the most appropriate partition(s). This can result in an inefficient cluster with longer queue times and wasted computing resources.
 
-Below is a list of the current compute node partitions, their hardware configuration, and the billing factor for each partition. 
+Below is a list of the current compute node partitions, as well as the hardware configuration and unique features of each node.
 
 ???+ info "Partition selection is automatic"
-      To make it as simple as possible for you, and to increase the overall cluster efficiency by ensuring that the most appropriate hardware is used for each job, the partition for your job(s) is set automatically by the SLURM scheduler. The resulting partition is selected based on several factors, where the most important are the requested **memory per CPU ratio** and the required [**node features**](#node-features), if any. Therefore, submitting jobs to specific partitions using the `--partition` option will have no effect, as it will be overwritten.
+      To make it as simple as possible for you, and to increase the overall cluster efficiency by ensuring that the most appropriate hardware is used for each job, the partition for your job(s) is assigned automatically by the SLURM scheduler. The resulting partition is selected based on several factors, where the most important are the requested **memory per CPU ratio** and any required **node features**. Therefore, submitting jobs to specific partitions using the `--partition` option will have no effect, as it will be overwritten. In very specific scenarios the automatically assigned partition may not be ideal, in which case exceptions can be made, just contact an administrator.
 
 ## CPU partitions
-All CPUs are AMD EPYC, all except one are dual socket. Interactive
+All compute node CPUs are currently various AMD EPYC models. Details about the exact CPU model, scratch space and special features for each compute node are listed below.
 
-| Partition | Hostname | EPYC model | CPUs/Threads | Memory | Scratch space |
-| ---: | :--- | :---: | :---: | :---: | :---: |
-| `interactive` | `node1` <br> `axomamma`| 7552 <br> 7713 | 48C / 96T <br> 128C / 256T | 0.5 TB <br> 1.0 TB | <br> 3.5 TB |
-| `slim-zen3` | `node[2-6]` | 7643 |  96C / 192T | 1.0 TB | 18 TB (node5) |
-| `slim-zen5` | `node[7-9]` | 9565 | 144C / 288T | 1.5 TB | |
-| `fat-zen3` | `node10` <br> `node11` | 7643 <br> 7713 | 96C / 192T <br> 128C / 256T | 2.0 TB <br> 2.0 TB | |
-| `fat-zen5` | `node[12-13]` | 9565 | 144C / 288T | 2.3 TB | 12.8 TB |
+### Overview
+| Partition | Nodes | Total CPUs | Total memory | Billing factor |
+| ---: | :--: | :--: | :--: | :--- |
+| `interactive` | 2 | 352T (x2) | 1.5 TB | 0.5x |
+| `slim-zen3` | 5 | 960T | 5.0 TB | 1.0x |
+| `slim-zen5` | 3 | 864T | 4.5 TB | 1.5x |
+| `fat-zen3` | 2 | 576T | 4.0 TB | 1.5x |
+| `fat-zen5` | 2 | 576T | 4.6 TB | 2.0x |
+| **TOTAL** | **14** | **3328T (3680)** | **19.6 TB** | |
 
-| Partition | Usage billing factor |
-| ---: | :--- |
-| `interactive` | 0.5x |
-| `slim-zen3` | 1.0x |
-| `slim-zen5` | 1.5x |
-| `fat-zen3` | 1.5x |
-| `fat-zen5` | 2.0x |
-| `gpu-a10` | 1.0x / GPU 32x|
+### The `interactive` partition
+This partition is reserved for interactive jobs for people to be able to do data analysis (usually produced from batch jobs) without having to wait for hours or days due to queue time.
+
+The `interactive` partition is set up with an over-subscription factor of 2, which means each CPU can be used by up to 2 jobs at once to maximize CPU utilization because interactive jobs are usually very inefficient.
+
+`maxmempercpu` setting
+
+???+ info "Memory per CPU on the interactive partition"
+      On the `interactive` partition, the SLURM scheduler will sometimes allocate more CPUs than you request for your job until the `maxmempercpu` setting is satisfied to avoid idle CPU's due to exhausted memory, [details here](https://slurm.schedmd.com/archive/slurm-24.11.4/slurm.conf.html#OPT_MaxMemPerCPU). It is therefore ideal to detect the number of CPUs available dynamically in your scripts and commands using for example `nproc` or from the `SLURM_JOB_CPUS_PER_NODE` environment variable provided by SLURM.
+
+| Hostname | CPU model | CPUs | Memory | Scratch space | Features |
+| ---: | :---: | :---: | :---: | :---: | :---: |
+| `bio-node01`| 2x AMD EPYC 7713 | 128C / 256T | 1.0 TB | 3.5 TB NVMe | `zen3` <br>`scratch` |
+| `bio-node02` | 1x AMD EPYC 7552P | 48C / 96T | 0.5 TB | | `zen3` |
+
+### Batch job partitions
+These partitions are dedicated to non-interactive and efficient batch jobs that can run for a long time. The `slim-*` nodes generally have less memory per CPU, while the `fat-*` nodes have more memory per CPU, which is useful for jobs that require a lot of memory. The `zen3` and `zen5` features indicate the generation of AMD EPYC CPUs used in the nodes.
+
+**`slim-zen3`**
+
+| Hostname | CPU model | CPUs | Memory | Scratch space | Features |
+| ---: | :---: | :---: | :---: | :---: | :---: |
+| `bio-node[03-06]` | 2x AMD EPYC 7643 | 96C / 192T | 1.0 TB | | `zen3` |
+| `bio-node07` | 2x AMD EPYC 7643 | 96C / 192T | 1.0 TB | 18 TB NVMe | `zen3`<br>`scratch` |
+
+**`slim-zen5`**
+
+| Hostname | CPU model | CPUs | Memory | Scratch space | Features |
+| ---: | :---: | :---: | :---: | :---: | :---: |
+| `bio-node08` | 2x AMD EPYC 9565 | 144C / 288T | 1.5 TB | | `zen5` |
+
+**`fat-zen3`**
+
+| Hostname | CPU model | CPUs | Memory | Scratch space | Features |
+| ---: | :---: | :---: | :---: | :---: | :---: |
+| `bio-node09` | 2x AMD EPYC 7643 | 96C / 192T | 2.0 TB | | `zen3` |
+| `bio-node10` | 2x AMD EPYC 7713 | 128C / 256T | 2.0 TB | 12.8 TB NVMe | `zen3`<br>`scratch` |
+
+**`fat-zen5`**
+
+| Hostname | CPU model | CPUs | Memory | Scratch space | Features |
+| ---: | :---: | :---: | :---: | :---: | :---: |
+| `node[12-13]` | 2x AMD EPYC 9565 | 144C / 288T | 2.3 TB | 12.8 TB NVMe | `zen5`<br>`scratch` |
 
 ## GPU partitions
-| Partition | Hostname | EPYC model | CPUs/Threads | Memory | Scratch space | GPU |
-| ---: | :--- | :---: | :---: | :---: | :---: | :---: |
-| `gpu-a10` | `node14`| 7313 | 32C / 64T | 256 GB | 3.0 TB | NVIDIA A10 |
 
-## Billing
-```
-$ scontrol show partition | grep -e '^PartitionName' -e 'TRESBillingWeights'
-PartitionName=interactive
-   TRESBillingWeights=cpu=0.5
-PartitionName=slim-zen3
-   TRESBillingWeights=cpu=1.0
-PartitionName=slim-zen5
-   TRESBillingWeights=cpu=1.5
-PartitionName=fat-zen3
-   TRESBillingWeights=cpu=1.5
-PartitionName=fat-zen5
-   TRESBillingWeights=cpu=2.0
-PartitionName=gpu-a10
-   TRESBillingWeights=cpu=1.0,gres/gpu=32.0
-```
+**`gpu-a10`**
 
-## Node features
-Use `--prefer` or `--constraint`.
-```
-$ sinfo
-  PARTITION AVAIL  TIMELIMIT  CPUS(A/I/O/T)     STATE       REASON  NODES NODELIST AVAIL_FEATURES
-interactiv*    up 1-00:00:00      0/40/0/40      idle         none      1 bio-comp1 zen3,scratch
-  slim-zen3    up 14-00:00:0      0/40/0/40      idle         none      1 bio-comp2 zen3
-  slim-zen5    up 14-00:00:0      0/40/0/40      idle         none      1 bio-comp4 zen5
-   fat-zen3    up 14-00:00:0      0/40/0/40      idle         none      1 bio-comp3 zen3,scratch
-   fat-zen5    up 14-00:00:0      0/40/0/40      idle         none      1 bio-comp5 zen5,scratch
-    gpu-a10    up 14-00:00:0      0/40/0/40      idle         none      1 bio-comp6 zen3,scratch,a10
-```
+| Hostname | CPU model | CPUs | Memory | Scratch space | GPU | Features |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: |
+| `node14`| 2x AMD EPYC 7313 | 32C / 64T | 256 GB | 3.0 TB NVMe | NVIDIA A10 | `zen3`<br>`scratch`<br>`a10` |
