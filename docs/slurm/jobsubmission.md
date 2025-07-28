@@ -91,7 +91,7 @@ minimap2 -t "$max_threads" database.fastq input.fastq > out.file
 ```
 
 ### Array jobs
-If you need to run the same command or script multiple times with different input files, parameters, or arguments, you can use SLURM arrays. This allows you to submit any number of jobs at once, which can then run simultaneously in parallel across the cluster. By making the unique array ID for each job within the array available with the environment variable `SLURM_ARRAY_TASK_ID`, you can ensure that each job will run with a different input file, parameter, or argument, etc. Each job within the array will get their respective job array ID appended to the parent job ID, for example `<jobid>_[0,1,2,3]`, and can be [controlled](jobcontrol.md) individually. You can also set `--mail-type=ARRAY_TASKS` to receive notification emails for each task in the array if necessary.
+If you need to run the same command or script multiple times with different input files, parameters, or arguments, you can use SLURM arrays. This allows you to submit any number of jobs at once, which can then run simultaneously in parallel across the cluster. By making the unique array ID for each job within the array available with the [environment variable](other.md#slurm-environment-variables) `SLURM_ARRAY_TASK_ID`, you can ensure that each job will run with a different input file, parameter, or argument, etc. Each job within the array will get their respective job array ID appended to the parent job ID, for example `<jobid>_[0,1,2,3]`, and can be [controlled](jobcontrol.md) individually. You can also set `--mail-type=ARRAY_TASKS` to receive notification emails for each task in the array if necessary.
 
 ```
 #!/bin/bash -l

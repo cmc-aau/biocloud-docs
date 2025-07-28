@@ -1,5 +1,5 @@
 # Job control and useful commands
-Below are some nice to know commands for controlling and checking up on running or queued jobs.
+Below are some nice-to-know commands for controlling and checking up on running or queued jobs.
 
 ## Overall cluster status
 This will normally show some colored bars for each partition, which unfortunately doesn't render here.

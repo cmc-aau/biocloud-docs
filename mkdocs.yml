@@ -15,6 +15,7 @@ nav:
     - slurm/partitions.md
     #- slurm/efficiency.md
     - slurm/accounting.md
+    - slurm/usagereporting.md
     - slurm/jobcontrol.md
     - slurm/other.md
   - Software:
