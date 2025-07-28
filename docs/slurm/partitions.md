@@ -3,7 +3,7 @@ The compute nodes are divided into separate partitions based on their hardware c
 
 
 ???+ info "Partition selection is automatic"
-      To make it as simple as possible for you, and to increase the overall cluster efficiency by ensuring that the most appropriate hardware is used for each job, the partition for your job(s) is assigned automatically by the SLURM scheduler. The resulting partition is selected based on several factors, where the most important are the requested **memory per CPU ratio** and any required **node features**. Therefore, submitting jobs to specific partitions using the `--partition` option will have no effect, as it will be overwritten. In very specific scenarios the automatically assigned partition may not be ideal, in which case exceptions can be made, just contact an administrator.
+      To both make it as simple as possible for you, and to increase the overall cluster efficiency by ensuring that the most appropriate hardware is used for each job, the partition for your job(s) is assigned automatically by the SLURM scheduler. The resulting partition is selected based on several factors, where the most important are the requested **memory per CPU ratio** and any required [**node features**](jobsubmission.md#requesting-compute-nodes-with-special-features). Therefore, submitting jobs to specific partitions using the `--partition` option will have no effect, as it will be overwritten. In very specific scenarios the automatically assigned partition may not be ideal, in which case exceptions can be made, just contact an administrator.
 
 ## CPU partitions
 Below is a brief overview of all CPU partitions. Details about the exact CPU model, scratch space and special features for each compute node are listed further down.
@@ -28,7 +28,7 @@ The `interactive` partition is set up with an over-subscription factor of 2, whi
 
 | Hostname | CPU model | CPUs | Memory | Scratch space | Features |
 | ---: | :---: | :---: | :---: | :---: | :---: |
-| `bio-node01`| 2x AMD EPYC 7713 | 128C / 256T | 1.0 TB | 3.5 TB NVMe | `zen3` <br>`scratch` |
+| `bio-node01`| 2x AMD EPYC 7713 | 128C / 256T | 1.0 TB | 3.5 TB NVMe | `zen3` <br>`scratch` <br> `clc` |
 | `bio-node02` | 1x AMD EPYC 7552P | 48C / 96T | 0.5 TB | | `zen3` |
 
 ### Batch job partitions

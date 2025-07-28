@@ -2,7 +2,7 @@
 Once you are [logged in](../access/ssh.md) to one of the login nodes through SSH, there are several ways to request resources and run jobs at different complexity levels through SLURM. Here are the most essential ways for interactive (foreground) and non-interactive (background) use. Usually, you only need to be acquainted with 3 SLURM job submission commands depending on your needs. These are [`srun`](https://slurm.schedmd.com/archive/slurm-24.11.4/srun.html), [`salloc`](https://slurm.schedmd.com/archive/slurm-24.11.4/salloc.html), and [`sbatch`](https://slurm.schedmd.com/archive/slurm-24.11.4/sbatch.html). They all share the exact same [options](#most-essential-options) to define trackable resource constraints ("TRES" in SLURM parlor, fx number of CPUs, memory, GPU, etc), time limits, email for job status notifications, and many other things, but are made for different use-cases, which will be described below.
 
 ## Interactive jobs
-An interactive job is useful for quick testing and development purposes, where you only need resources for a short period of time to experiment with scripts or workflows on minimal test data, before submitting larger batch jobs using [`sbatch`](#non-interactive-jobs) that are expected to run for much longer in the background.
+An interactive job is useful for quick testing and development purposes, where you only need resources for a short period of time to experiment with scripts or workflows on minimal test data, before submitting larger batch jobs using [`sbatch`](#batch-jobs-non-interactive-jobs) that are expected to run for much longer in the background.
 
 To immediately request and allocate resources (once available) and start an **interactive shell** session directly on the allocated compute node(s) through SLURM, just type [`salloc`](https://slurm.schedmd.com/archive/slurm-24.11.4/salloc.html):
 
@@ -27,7 +27,7 @@ If you just need to run a single command/script in the foreground, it's much bet
 $ srun --cpus-per-task 8 --mem 16G --time 1-00:00:00 mycommand myoptions
 ```
 
-The terminal will be blocked for the entire duration, hence for longer running jobs it's much more convenient to instead write the commands in a script and submit a non-interactive batch job using [`sbatch`](#non-interactive-jobs), which will run in the background.
+The terminal will be blocked for the entire duration, hence for longer running jobs it's much more convenient to instead write the commands in a script and submit a non-interactive batch job using [`sbatch`](#batch-jobs-non-interactive-jobs), which will run in the background.
 
 [`srun`](https://slurm.schedmd.com/archive/slurm-24.11.4/srun.html) is sometimes also used to run multiple tasks/steps (parallel processes) from within batch scripts, which can then span multiple compute nodes and run concurrently.
 
@@ -57,8 +57,8 @@ Submit the batch script to the SLURM job queue using `sbatch script.sh`, and it 
 
 You can also simply add `#SBATCH` lines to any shell script you already have, and also run the script with arguments, so for example instead of `bash script.sh -i input -o output ...` you can simply run `sbatch script.sh -i input -o output ...`.
 
-???+ warning "ALWAYS check up on running jobs after submission and recently completed jobs"
-      The queue time and efficiency of the whole cluster is directly dependent on the average CPU efficiency of all jobs. It is therefore extremely important to ensure that your job uses all the CPU's that you've requested for most of the duration of the job. If not, please cancel the job and submit a new one with fewer CPU's, or adjust the job to use all the CPU's more efficiently. Furthermore, please ALWAYS also [check up on the CPU efficiency](accounting.md#job-efficiency-summary) of recently finished jobs by either checking the stats in job notification emails or by using `seff <jobid>` and adjust your next submissions accordingly to minimize idle CPU's.
+???+ warning "ALWAYS check up on running and recently completed jobs"
+      The queue time and efficiency of the whole cluster is directly dependent on the average CPU efficiency of all jobs. It is therefore extremely important to ensure that your job uses all the CPU's that you've requested for most of the duration of the job. If not, please cancel the job and submit a new one with fewer CPU's, or adjust the job to use all the CPU's more efficiently. Furthermore, please ALWAYS also [check up on the CPU efficiency](usagereporting.md#job-efficiency-summary) of recently finished jobs by either checking the stats in job notification emails or by using `seff <jobid>` and adjust your next submissions accordingly to avoid idle CPU's.
 
 ???- "Non-interactive job output (`stdout`/`stderr` streams)"
       The job is handled in the background by the SLURM daemons on the individual compute nodes, so you won't see any output in the terminal. It will instead be written to the file(s) defined by `--output` and/or `--error`. To follow along in real time run for example `tail -f job_123.out` from a login node.
@@ -135,9 +135,7 @@ $ sbatch --prefer=zen5 batchscript.sh
 Of course these options can be written in the `#SBATCH` section of the batch script as well.
 
 ## How to check up on the resource utilization of running jobs
-As the `srun` command can be used to run commands within job allocations you have already been granted, it can also be used to monitor the resource usage of running jobs from the inside in real time. This is possible by obtaining an interactive shell within the job allocation using `srun --jobid <jobid> --pty bash`, and then run `htop` or `top` to inspect CPU and memory usage of processes run by your user (hit `u` and filter by your user) on a particular compute node. To inspect GPU usage use `nvidia-smi` or `nvtop`.
-
-Note that only a single interactive shell can be active within the same job allocation at any one time.
+As the `srun` command can be used to run commands within job allocations you have already been granted, it can also be used to monitor the resource usage of running jobs from the inside in real time. This is possible by obtaining an interactive shell within the job allocation using `srun --jobid <jobid> --pty bash`, and then run `htop` or `top` to inspect CPU and memory usage of processes run by your user (hit `u` and filter by your user) on a particular compute node. To inspect GPU usage use `nvidia-smi` or `nvtop`. Note that only a single interactive shell can be active within the same job allocation at any one time.
 
 ## Most essential options
 There are plenty of options with the SLURM job submission commands. Below are the most important ones for our current setup and common use-cases. If you need anything else you can start with the [SLURM cheatsheet](https://slurm.schedmd.com/pdfs/summary.pdf), or refer to the SLURM documentation for the individual commands [`srun`](https://slurm.schedmd.com/archive/slurm-24.11.4/srun.html), [`salloc`](https://slurm.schedmd.com/archive/slurm-24.11.4/salloc.html), and [`sbatch`](https://slurm.schedmd.com/archive/slurm-24.11.4/sbatch.html).

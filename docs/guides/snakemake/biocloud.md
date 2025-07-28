@@ -53,7 +53,6 @@ cluster:
   mkdir -p logs/{rule}/ &&
   sbatch
     --parsable
-    --partition={resources.partition}
     --qos={resources.qos}
     --cpus-per-task={threads}
     --mem={resources.mem_mb}

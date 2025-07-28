@@ -44,7 +44,7 @@ When you are done with your work, it's important to stop the app to free up reso
 Then stop the job by clicking the red **Cancel** button under **My Interactive Sessions**, see the screenshots above.
 
 !!! warning "Always inspect and optimize efficiency for next time!"
-    When the job completes, **!!!ALWAYS!!!** inspect the CPU and memory usage of the job in either the notification email received or using [these commands](../../../slurm/accounting.md#job-efficiency-summary) and adjust the next job accordingly! This is essential to avoid wasting resources which other people could have used.
+    When the job completes, **!!!ALWAYS!!!** inspect the CPU and memory usage of the job in either the notification email received or using [these commands](../../../slurm/accounting.md#job-efficiency-summary) and adjust the next job accordingly! This is essential to avoid wasting resources which other people could used, and to reduce queue time.
 
 ## Containerization
 The RStudio server runs in the SLURM job from within a [singularity/apptainer container](../../../software/containers.md#singularityapptainer), that is based on [Rocker](https://rocker-project.org/) container images. This means that R packages installed from the RStudio app may not work with other R installations due to different base operating system packages, so the RStudio app uses a different R library location by default, which is located under `$HOME/R/rstudio-server/R_MAJOR_VERSION`.

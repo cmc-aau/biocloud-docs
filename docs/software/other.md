@@ -22,7 +22,7 @@ As mentioned in the [job submission guide](../slurm/jobsubmission.md#graphical-a
 To make folders available inside the container you need to bind/mount them, as described [here](containers.md#binding-mounting-folders-from-the-host-to-the-container).
 
 ## CLC
-CLC is licensed to a single machine and is only available through a [virtual desktop](../guides/webportal/apps/virtualdesktop.md) on `axomamma`. So ensure that you fill in the `Nodelist` field. You can then find CLC in the menus.
+CLC is licensed software tied to specific machines and is only available through a [virtual desktop](../guides/webportal/apps/virtualdesktop.md) on nodes with the `clc` [node feature](../slurm/partitions.md#the-interactive-partition) listed. So ensure that you write `--constraint clc` in the "Additional job options" field. You can then find CLC in the menus.
 
 ## AlphaFold
 [AlphaFold](https://github.com/google-deepmind/alphafold) is quite complex to install and run. It runs through containers, but through a python wrapper script. Copy the SLURM sbatch script from `/shared_software/biocloud-software/alphafold_singularity/sbatch_example.sh` and adjust to suit your needs. `AlphaFold` benefits from GPU-accelerated servers, but can also run on regular CPUs. So submit to the appropriate partition.
