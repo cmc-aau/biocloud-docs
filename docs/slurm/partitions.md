@@ -14,9 +14,9 @@ Below is a brief overview of all CPU partitions. Details about the exact CPU mod
 | `interactive` | 2 | 352T (x2) | 1.5 TB | 0.5x |
 | `slim-zen3` | 5 | 960T | 5.0 TB | 1.0x |
 | `slim-zen5` | 3 | 864T | 4.5 TB | 1.5x |
-| `fat-zen3` | 2 | 576T | 4.0 TB | 1.5x |
+| `fat-zen3` | 2 | 448T | 4.0 TB | 1.5x |
 | `fat-zen5` | 2 | 576T | 4.6 TB | 2.0x |
-| **TOTAL** | **14** | **3328T (3680)** | **19.6 TB** | |
+| **TOTAL** | **14** | **3264 (3616)** | **19.6 TB** | |
 
 ### The `interactive` partition
 This partition is reserved for interactive jobs for people to be able to do data analysis (usually produced from batch jobs) without having to wait for hours or days due to queue time. Therefore, no batch jobs will be able to run here.
