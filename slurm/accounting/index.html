@@ -1,0 +1,1901 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="User guide for the BioCloud HPC at the section of Biotechnology at Aalborg University">
+      
+      
+        <meta name="author" content="Kasper Skytte Andersen">
+      
+      
+      
+        <link rel="prev" href="../efficiency/">
+      
+      
+        <link rel="next" href="../jobcontrol/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.17">
+    
+    
+      
+        <title>Usage accounting and priority - BioCloud HPC user guide</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.bcfcd587.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#usage-accounting-and-priority" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="BioCloud HPC user guide" class="md-header__button md-logo" aria-label="BioCloud HPC user guide" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            BioCloud HPC user guide
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Usage accounting and priority
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/cmc-aau/biocloud-docs" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    cmc-aau/biocloud-docs
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="BioCloud HPC user guide" class="md-nav__button md-logo" aria-label="BioCloud HPC user guide" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    BioCloud HPC user guide
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/cmc-aau/biocloud-docs" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    cmc-aau/biocloud-docs
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introduction
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Access
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Access
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../access/ssh/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Shell access through SSH
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../access/webportal/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Interactive Web portal (OpenOndemand)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Resource management
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Resource management
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../intro/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introduction to SLURM
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../jobsubmission/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Job submission
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../partitions/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Hardware partitions
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../efficiency/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Optimizing CPU efficiency
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Usage accounting and priority
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Usage accounting and priority
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#job-scheduling" class="md-nav__link">
+    <span class="md-ellipsis">
+      Job scheduling
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#job-priority" class="md-nav__link">
+    <span class="md-ellipsis">
+      Job priority
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Job priority">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-fair-share-factor" class="md-nav__link">
+    <span class="md-ellipsis">
+      The fair-share factor
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#qos-info-and-limitations" class="md-nav__link">
+    <span class="md-ellipsis">
+      QOS info and limitations
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="QOS info and limitations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#undergraduate-students" class="md-nav__link">
+    <span class="md-ellipsis">
+      Undergraduate students
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#job-resource-usage-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Job resource usage summary
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Job resource usage summary">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#running-jobs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Running jobs
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#past-jobs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Past jobs
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reservation-usage" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reservation usage
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#job-efficiency-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Job efficiency summary
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Job efficiency summary">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#individual-jobs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Individual jobs
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#multiple-jobs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Multiple jobs
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage-reports" class="md-nav__link">
+    <span class="md-ellipsis">
+      Usage reports
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Usage reports">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#account-usage-by-user" class="md-nav__link">
+    <span class="md-ellipsis">
+      Account usage by user
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#user-usage-by-account" class="md-nav__link">
+    <span class="md-ellipsis">
+      User usage by account
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#top-users" class="md-nav__link">
+    <span class="md-ellipsis">
+      Top users
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../jobcontrol/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Job control and useful commands
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../other/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Other commands / FAQ
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Software
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Software
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/conda/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Conda environments
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/containers/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Containers
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/other/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Other software
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Guides
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Guides
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_1" id="__nav_5_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Interactive Web portal (OpenOndemand)
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_1">
+            <span class="md-nav__icon md-icon"></span>
+            Interactive Web portal (OpenOndemand)
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/webportal/files/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    File browser
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/webportal/jobqueue/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Job queue
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/webportal/shell/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Shell access
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_1_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_1_4" id="__nav_5_1_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Interactive apps
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_5_1_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_1_4">
+            <span class="md-nav__icon md-icon"></span>
+            Interactive apps
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/webportal/apps/virtualdesktop/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Virtual Desktop
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/webportal/apps/jupyter/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Jupyter notebook
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/webportal/apps/rstudio/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    RStudio
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/webportal/apps/coder/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Code server
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Snakemake
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            Snakemake
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/snakemake/intro/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Getting Started
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/snakemake/tutorial/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Workflow tutorial
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/snakemake/biocloud/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Running Snakemake workflows on SLURM clusters
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/sshdslurm/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Interactive VS Code session in a SLURM job
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/git/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Connecting to GitHub
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../storage/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Storage
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#job-scheduling" class="md-nav__link">
+    <span class="md-ellipsis">
+      Job scheduling
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#job-priority" class="md-nav__link">
+    <span class="md-ellipsis">
+      Job priority
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Job priority">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-fair-share-factor" class="md-nav__link">
+    <span class="md-ellipsis">
+      The fair-share factor
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#qos-info-and-limitations" class="md-nav__link">
+    <span class="md-ellipsis">
+      QOS info and limitations
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="QOS info and limitations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#undergraduate-students" class="md-nav__link">
+    <span class="md-ellipsis">
+      Undergraduate students
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#job-resource-usage-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Job resource usage summary
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Job resource usage summary">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#running-jobs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Running jobs
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#past-jobs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Past jobs
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reservation-usage" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reservation usage
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#job-efficiency-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Job efficiency summary
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Job efficiency summary">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#individual-jobs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Individual jobs
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#multiple-jobs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Multiple jobs
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage-reports" class="md-nav__link">
+    <span class="md-ellipsis">
+      Usage reports
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Usage reports">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#account-usage-by-user" class="md-nav__link">
+    <span class="md-ellipsis">
+      Account usage by user
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#user-usage-by-account" class="md-nav__link">
+    <span class="md-ellipsis">
+      User usage by account
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#top-users" class="md-nav__link">
+    <span class="md-ellipsis">
+      Top users
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="usage-accounting-and-priority">Usage accounting and priority</h1>
+<p>All users belong to an account (usually their PI) where all usage is tracked on a per-user basis, which directly impact the priority of future jobs. Additionally, limitations and extra high priorities can be obtained by submitting jobs to different SLURM "Quality of Service"s (QOS). By default, all users are only allowed to submit jobs to the <code>normal</code> QOS with equal resource limits and base priority for everyone. Periodically users may submit to the <code>highprio</code> QOS instead, which has extra resources and a higher base priority (and therefore the usage is also billed 2x), however this must first be discussed among the owners of the hardware (PI's), and then you must contact an administrator to grant your user permission to submit jobs to it for a period of time.</p>
+<h2 id="job-scheduling">Job scheduling</h2>
+<p>BioCloud uses the first-in-first-out (FIFO) scheduling algorithm with <strong>backfilling enabled</strong>, which means that occasionally lower priority jobs may start before higher priority jobs to maximize the utilization of the cluster, since smaller (usually shorter) jobs may be able to finish before the larger jobs are scheduled to start. To increase the chance of backfilling, it is therefore important to set a realistic timelimit for your jobs that is as short as possible, but long enough for it to finish.</p>
+<p><img alt="FIFO-Backfill" src="../img/fifo-backfill.svg" /></p>
+<h2 id="job-priority">Job priority</h2>
+<p>When a job is submitted a priority value is calculated based on several factors, where a higher number indicates a higher priority in the queue. This does not impact running jobs, and the effect of prioritization is only noticable when the cluster is operating near peak capacity, or when the hardware partition to which the job has been submitted is fully allocated by running jobs. Otherwise jobs will usually start immediately as long as there are resources available and you haven't reached the <a href="#qos-info-and-limitations">maximum CPU's per user limit</a>, if any.</p>
+<p>Different weights are given to the individual priority factors, where the most significant ones are the account fair-share factor (described in more detail below) and the QOS, as described above. All factors are normalized to a value between 0-1, then weighted by an adjustable scalar, which may be adjusted occasionally depending on the overall cluster usage. Users can also be nice to other users and reduce the priority of their own jobs by setting a "nice" value using <code>--nice</code> when submitting for example less time-critical jobs. Job priorities are then calculated according to the following formula:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>Job_priority =
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    (PriorityWeightQOS) * (QOS_factor)
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    (PriorityWeightAge) * (age_factor) +
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    (PriorityWeightFairshare) * (fair-share_factor) +
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    (PriorityWeightJobSize) * (job_size_factor) -
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>    - nice_factor
+</span></code></pre></div>
+<p>To obtain the current configured weights use <code>sprio -w</code>:
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>$ sprio -w
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>  JOBID PARTITION   PRIORITY       SITE        AGE  FAIRSHARE    JOBSIZE        QOS
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>Weights                               1        100        800       904        1000
+</span></code></pre></div></p>
+<p>The priority of pending jobs will be shown in the job queue when running <code>squeue</code>. To see the exact contributions of each factor to the priority of a pending job use <code>sprio -j &lt;jobid&gt;</code>:
+<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>$ sprio -j 1282256
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>  JOBID PARTITION   PRIORITY       SITE        AGE  FAIRSHARE    JOBSIZE        QOS
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>1282256 general          586          0        129        619        138          0
+</span></code></pre></div></p>
+<p>The job <strong>age</strong> and <strong>size</strong> factors are important to avoid the situation where large jobs can get stuck in the queue for a long time because smaller jobs will always fit in everywhere much more easily. The age factor will max out to <code>1.0</code> when 3 days of queue time has been accrued for any job. The job size factor is directly proportional to the number of CPUs requested, regardless of the time limit, and is normalized to the total number of CPUs in the cluster. Therefore the weight of it will always be configured to be equal to the total number of (physical) CPUs available in the cluster.</p>
+<h3 id="the-fair-share-factor">The fair-share factor</h3>
+<p>As the name implies, the fair-share factor is used to ensure that users within each account have their fair share of computing resources made available to them over time. Because the individual research groups have contributed with different amounts of hardware to the cluster, the overall share of computing resources made available to them should match accordingly. Secondly, the resource usage of individual users within each account is important to consider as well, so that users who may recently have vastly overused their shares within each account will not have the highest priority. The goal of the fair-share factor is to balance the usage of all users by adjusting job priorities, so that it's possible for everyone to use their fair share of computing resources over time. The fair-share factor is calculated according to the <a href="https://slurm.schedmd.com/archive/slurm-23.02.6/fair_tree.html">fair-tree algorithm</a>, which is an integrated part of the SLURM scheduler. At the time of writing, it has been configured with a usage decay half-life of 2 weeks, and the usage data is never reset.</p>
+<p>To see the current fair-share factor for your user and the amount of shares available for each account, you can run <code>sshare</code>:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>$ sshare
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>Account                    User  RawShares  NormShares    RawUsage  EffectvUsage  FairShare 
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>-------------------- ---------- ---------- ----------- ----------- ------------- ---------- 
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>root                                          0.000000   699456285      1.000000            
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a> root                abc@bio.a+          1    0.000548     1136501      0.001625   0.115183 
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a> ao                                     16    0.008762           0      0.000000            
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a> jln                                   272    0.148959   148170579      0.211843            
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a> kln                                    16    0.008762    48720153      0.069656            
+</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a> kt                                     48    0.026287    60884827      0.087049            
+</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a> ma                                    624    0.341731   185384914      0.265043            
+</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a> md                                    259    0.141840    60612473      0.086659            
+</span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a> ml                                     16    0.008762     2789545      0.003974            
+</span><span id="__span-3-13"><a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a> mms                                    48    0.026287    92148476      0.131738            
+</span><span id="__span-3-14"><a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a> mto                                    16    0.008762           0      0.000000            
+</span><span id="__span-3-15"><a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a> ndj                                    16    0.008762     5181213      0.007408            
+</span><span id="__span-3-16"><a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a> phn                                   381    0.208653    62047356      0.088711            
+</span><span id="__span-3-17"><a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a> pk                                     16    0.008762           1      0.000000            
+</span><span id="__span-3-18"><a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a> rw                                     16    0.008762    18346721      0.026231            
+</span><span id="__span-3-19"><a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a> sss                                    48    0.026287    13392398      0.019147            
+</span><span id="__span-3-20"><a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a> students                               16    0.008762      499066      0.000714            
+</span><span id="__span-3-21"><a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a> ts                                     16    0.008762      142053      0.000203            
+</span></code></pre></div>
+<ul>
+<li><code>RawShares</code>: the amount of "shares" assigned to each account (in our setup simply the number of CPUs each account has contributed with)</li>
+<li><code>NormShares</code>: the fraction of shares given to each account normalized to the total shares available across all accounts, e.g. a value of 0.33 means an account has been assigned 33% of all the resources available in the cluster.</li>
+<li><code>RawUsage</code>: usage of all jobs charged to the account or user. The value will decay over time depending on the usage decay half-life configured. The <code>RawUsage</code> for an account is the sum of the <code>RawUsage</code> for each user within the account, thus indicative of which users have contributed the most to the account’s overall score.</li>
+<li><code>EffectvUsage</code>: <code>RawUsage</code> divided by the <strong>total</strong> <code>RawUsage</code> for the cluster, hence the column always sums to <code>1.0</code>. <code>EffectvUsage</code> is therefore the percentage of the total cluster usage the account has actually used (in relation to the total usage, NOT the total capacity). In the example above, the <code>ma</code> account has used <code>26.5%</code> of the total cluster usage since the last usage reset, if any.</li>
+<li><code>FairShare</code>: The fair-share score calculated using the following formula <code>FS = 2^(-EffectvUsage/NormShares)</code>. The <code>FairShare</code> score can be interpreted by the following intervals: <ul>
+<li>1.0: <strong>Unused</strong>. The account has not run any jobs since the last usage reset, if any.</li>
+<li>0.5 - 1.0: <strong>Underutilization</strong>. The account is underutilizing their granted share. For example a value of 0.75 means the account has underutilized their share 1:2</li>
+<li>0.5: <strong>Average utilization</strong>. The account on average is using exactly as much as their granted share.</li>
+<li>0.0 - 0.5: <strong>Over-utilization</strong>. The account is overusing their granted share. For example a value of 0.75 means the account has recently overutilized their share 2:1</li>
+<li>0: No share left. The account is vastly overusing their granted share and users will get the lowest possible priority.</li>
+</ul>
+</li>
+</ul>
+<details class="tip" open="open">
+<summary>The fair-share factor and CPU efficiency</summary>
+<p>The value of the fair-share factor is calculated based on CPU usage in units of <strong>allocation seconds</strong> and <strong>not</strong> CPU seconds, which is normally the unit used for CPU usage reported by the <code>sreport</code> and <code>sacct</code> commands. Therefore, this also means that the CPU efficiency of past jobs directly impacts how much actual work can be done by the allocated CPUs for each user within each account before their fair share of resources is consumed for the period.</p>
+</details>
+<p>For more details about job prioritization see the <a href="https://slurm.schedmd.com/archive/slurm-23.02.6/priority_multifactor.html">SLURM documentation</a> and this <a href="https://slurm.schedmd.com/SLUG19/Priority_and_Fair_Trees.pdf">presentation</a>.</p>
+<h2 id="qos-info-and-limitations">QOS info and limitations</h2>
+<p>See all available QOS and their limitations:
+<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>$ sacctmgr show qos format=&quot;name,priority,usagefactor,mintres%20,maxtrespu,maxjobspu&quot;
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>      Name   Priority UsageFactor              MinTRES     MaxTRESPU MaxJobsPU 
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>---------- ---------- ----------- -------------------- ------------- --------- 
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>    normal          0    1.000000       cpu=1,mem=512M       cpu=384       500 
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>  highprio          1    2.000000       cpu=1,mem=512M       cpu=1024     2000 
+</span></code></pre></div></p>
+<p>See details about account associations, allowed QOS's, and more, for your user:
+<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a># your user
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>$ sacctmgr show user withassoc where name=$USER
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>      User   Def Acct     Admin    Cluster    Account  Partition     Share   Priority MaxJobs MaxNodes  MaxCPUs MaxSubmit     MaxWall  MaxCPUMins                  QOS   Def QOS
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>---------- ---------- --------- ---------- ---------- ---------- --------- ---------- ------- -------- -------- --------- ----------- ----------- -------------------- ---------
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>abc@bio.a+       root      None   biocloud       root                    1          1                                                                  highprio,normal    normal
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>
+</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a># all users
+</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>$ sacctmgr show user withassoc | less
+</span></code></pre></div></p>
+<h3 id="undergraduate-students">Undergraduate students</h3>
+<p>Undergraduate students (up to but NOT including master projects) share resources within the <code>students</code> account and only their combined usage is limited. View current limitations with for example:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>$ sacctmgr list account students -s format=&quot;account,priority,MaxCPUs,grpcpus,qos&quot; | head -n 3
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>   Account   Priority  MaxCPUs  GrpCPUs                  QOS 
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>---------- ---------- -------- -------- -------------------- 
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>  students                          192               normal
+</span></code></pre></div>
+<h2 id="job-resource-usage-summary">Job resource usage summary</h2>
+<h3 id="running-jobs">Running jobs</h3>
+<p>Use <a href="https://slurm.schedmd.com/archive/slurm-23.02.6/sstat.html"><code>sstat</code></a> to show the status and live usage accounting information of only <strong>running</strong> jobs. For batch scripts you need to add <code>.batch</code> to the job ID, for example:
+<div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>$ sstat &lt;job_id&gt;.batch
+</span></code></pre></div></p>
+<p>This will print EVERY metric, so it's nice to select only a few most relevant ones, for example:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>$ sstat --jobs &lt;job_id&gt;.batch --format=jobid,avecpu,maxrss,ntasks
+</span></code></pre></div>
+<details>
+<summary>Useful format variables</summary>
+<table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>avecpu</td>
+<td>Average CPU time of all tasks in job.</td>
+</tr>
+<tr>
+<td>averss</td>
+<td>Average resident set size of all tasks.</td>
+</tr>
+<tr>
+<td>avevmsize</td>
+<td>Average virtual memory of all tasks in a job.</td>
+</tr>
+<tr>
+<td>jobid</td>
+<td>The id of the Job.</td>
+</tr>
+<tr>
+<td>maxrss</td>
+<td>Maximum number of bytes read by all tasks in the job.</td>
+</tr>
+<tr>
+<td>maxvsize</td>
+<td>Maximum number of bytes written by all tasks in the job.</td>
+</tr>
+<tr>
+<td>ntasks</td>
+<td>Number of tasks in a job.</td>
+</tr>
+</tbody>
+</table>
+<p>For all variables see the <a href="https://slurm.schedmd.com/archive/slurm-23.02.6/sstat.html#SECTION_Job-Status-Fields">SLURM documentation</a></p>
+</details>
+<h3 id="past-jobs">Past jobs</h3>
+<p>To view the status of <strong>past</strong> jobs and their usage accounting information use <a href="https://slurm.schedmd.com/archive/slurm-23.02.6/sacct.html"><code>sacct</code></a>. <code>sacct</code> will return <strong>everything</strong> accounted for by default which is very inconvenient to view in a terminal window, so the below command will show the most essential information:
+<div class="language-text highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>$ sacct -o jobid,jobname,start,end,NNodes,NCPUS,ReqMem,CPUTime,AveRSS,MaxRSS --user=$USER --units=G -j 138
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>JobID           JobName               Start                 End   NNodes      NCPUS     ReqMem    CPUTime     AveRSS     MaxRSS 
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>------------ ---------- ------------------- ------------------- -------- ---------- ---------- ---------- ---------- ---------- 
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>138          interacti+ 2023-11-21T10:43:48 2023-11-21T10:43:59        1         16        20G   00:02:56                       
+</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>138.interac+ interacti+ 2023-11-21T10:43:48 2023-11-21T10:43:59        1         16              00:02:56          0          0 
+</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>138.extern       extern 2023-11-21T10:43:48 2023-11-21T10:43:59        1         16              00:02:56      0.00G      0.00G 
+</span></code></pre></div></p>
+<p>There are a huge number of other options to show, see <a href="https://slurm.schedmd.com/archive/slurm-23.02.6/sacct.html#SECTION_Job-Accounting-Fields">SLURM docs</a>. If you really want to see everything use <code>sacct --long &gt; file.txt</code> and dump it into a file or else it's too much for the terminal.</p>
+<h2 id="reservation-usage">Reservation usage</h2>
+<p>Show reservation usage in CPU hours and percent of the reservation total used
+<div class="language-text highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>$ sreport reservation utilization -t hourper
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>--------------------------------------------------------------------------------
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>Reservation Utilization 2024-11-04T00:00:00 - 2024-11-04T23:59:59
+</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>Usage reported in TRES Hours/Percentage of Total
+</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>--------------------------------------------------------------------------------
+</span><span id="__span-10-6"><a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>  Cluster      Name               Start                 End      TRES Name                     Allocated                          Idle 
+</span><span id="__span-10-7"><a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>--------- --------- ------------------- ------------------- -------------- ----------------------------- ----------------------------- 
+</span><span id="__span-10-8"><a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a> biocloud  amplicon 2024-11-04T08:00:00 2024-11-05T15:18:55            cpu                  1154(19.20%)                  4858(80.80%) 
+</span></code></pre></div></p>
+<h2 id="job-efficiency-summary">Job efficiency summary</h2>
+<h3 id="individual-jobs">Individual jobs</h3>
+<p>To view the efficiencies of individual jobs use <code>seff</code>, for example:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>$ seff 2357
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>Job ID: 2357
+</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>Cluster: biocloud
+</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>User/Group: &lt;username&gt;
+</span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>State: COMPLETED (exit code 0)
+</span><span id="__span-11-6"><a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a>Nodes: 1
+</span><span id="__span-11-7"><a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a>Cores per node: 96
+</span><span id="__span-11-8"><a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a>CPU Utilized: 60-11:06:29
+</span><span id="__span-11-9"><a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a>CPU Efficiency: 45.76% of 132-02:48:00 core-walltime
+</span><span id="__span-11-10"><a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a>Job Wall-clock time: 1-09:01:45
+</span><span id="__span-11-11"><a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a>Memory Utilized: 383.42 GB
+</span><span id="__span-11-12"><a id="__codelineno-11-12" name="__codelineno-11-12" href="#__codelineno-11-12"></a>Memory Efficiency: 45.11% of 850.00 GB
+</span></code></pre></div>
+<p>This information will also be shown in notification emails when jobs finish.</p>
+<h3 id="multiple-jobs">Multiple jobs</h3>
+<p>Perhaps a more useful way to use <code>sacct</code> is through the <a href="https://github.com/troycomi/reportseff">reportseff</a> tool (pre-installed), which can be used to calculate the CPU, memory, and time efficiencies of past jobs, so that you can optimize future jobs and ensure resources are utilized to the max (<strong>2TM</strong>). For example:
+<div class="language-text highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>$ reportseff -u $(whoami) --format partition,jobid,state,jobname,alloccpus,reqmem,elapsed,cputime,CPUEff,MemEff,TimeEff -S r,pd,s --since d=4
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>  Partition     JobID        State                       JobName                    AllocCPUS     ReqMem   Elapsed        CPUTime      CPUEff   MemEff   TimeEff 
+</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>    shared      306282     COMPLETED                     midasok                        2         8G       00:13:07       00:26:14      4.1%    15.4%     10.9%  
+</span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>   general      306290     COMPLETED           smk-map2db-sample=barcode46             16         24G      00:01:38       00:26:08     90.6%    18.7%     2.7%   
+</span><span id="__span-12-5"><a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>   general      306291     COMPLETED           smk-map2db-sample=barcode47             16         24G      00:02:14       00:35:44     92.8%    18.4%     3.7%   
+</span><span id="__span-12-6"><a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>   general      306292     COMPLETED           smk-map2db-sample=barcode58             16         24G      00:02:32       00:40:32     80.3%    19.0%     4.2%   
+</span><span id="__span-12-7"><a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a>   general      306293     COMPLETED           smk-map2db-sample=barcode34             16         24G      00:02:16       00:36:16     78.1%    18.7%     3.8%   
+</span><span id="__span-12-8"><a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a>   general      306294     COMPLETED           smk-map2db-sample=barcode22             16         24G      00:02:38       00:42:08     81.1%    19.0%     4.4%   
+</span><span id="__span-12-9"><a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a>   general      306295     COMPLETED           smk-map2db-sample=barcode35             16         24G      00:02:26       00:38:56     79.0%    19.0%     4.1%   
+</span><span id="__span-12-10"><a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a>   general      306296     COMPLETED           smk-map2db-sample=barcode82             16         24G      00:01:39       00:26:24     68.9%    17.8%     2.8%   
+</span><span id="__span-12-11"><a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a>   general      306297     COMPLETED           smk-map2db-sample=barcode70             16         24G      00:02:04       00:33:04     76.0%    19.5%     3.4%   
+</span><span id="__span-12-12"><a id="__codelineno-12-12" name="__codelineno-12-12" href="#__codelineno-12-12"></a>   general      306298     COMPLETED           smk-map2db-sample=barcode94             16         24G      00:01:44       00:27:44     70.1%    17.9%     2.9%   
+</span><span id="__span-12-13"><a id="__codelineno-12-13" name="__codelineno-12-13" href="#__codelineno-12-13"></a>   general      306331     COMPLETED           smk-map2db-sample=barcode59             16         24G      00:04:00       01:04:00     87.2%    19.6%     6.7%   
+</span><span id="__span-12-14"><a id="__codelineno-12-14" name="__codelineno-12-14" href="#__codelineno-12-14"></a>   general      306332     COMPLETED           smk-map2db-sample=barcode83             16         24G      00:02:13       00:35:28     76.3%    19.0%     3.7%   
+</span><span id="__span-12-15"><a id="__codelineno-12-15" name="__codelineno-12-15" href="#__codelineno-12-15"></a>   general      306333     COMPLETED           smk-map2db-sample=barcode11             16         24G      00:02:49       00:45:04     81.6%    19.4%     4.7%   
+</span><span id="__span-12-16"><a id="__codelineno-12-16" name="__codelineno-12-16" href="#__codelineno-12-16"></a>   general      306334     COMPLETED           smk-map2db-sample=barcode23             16         24G      00:03:33       00:56:48     61.6%    19.0%     5.9%   
+</span><span id="__span-12-17"><a id="__codelineno-12-17" name="__codelineno-12-17" href="#__codelineno-12-17"></a>   general      306598     COMPLETED      smk-mapping_overview-sample=barcode46         1         4G       00:00:09       00:00:09     77.8%     0.0%     1.5%   
+</span><span id="__span-12-18"><a id="__codelineno-12-18" name="__codelineno-12-18" href="#__codelineno-12-18"></a>   general      306601     COMPLETED      smk-mapping_overview-sample=barcode82         1         4G       00:00:09       00:00:09     77.8%     0.0%     1.5%   
+</span><span id="__span-12-19"><a id="__codelineno-12-19" name="__codelineno-12-19" href="#__codelineno-12-19"></a>   general      306625     COMPLETED      smk-mapping_overview-sample=barcode94         1         4G       00:00:07       00:00:07     71.4%     0.0%     1.2%   
+</span><span id="__span-12-20"><a id="__codelineno-12-20" name="__codelineno-12-20" href="#__codelineno-12-20"></a>   general      306628     COMPLETED      smk-concatenate_fastq-sample=barcode71        1         1G       00:00:07       00:00:07     71.4%     0.0%     1.2%   
+</span><span id="__span-12-21"><a id="__codelineno-12-21" name="__codelineno-12-21" href="#__codelineno-12-21"></a>   general      306629     COMPLETED      smk-concatenate_fastq-sample=barcode70        1         1G       00:00:07       00:00:07     71.4%     0.0%     1.2%   
+</span><span id="__span-12-22"><a id="__codelineno-12-22" name="__codelineno-12-22" href="#__codelineno-12-22"></a>   general      306630     COMPLETED      smk-concatenate_fastq-sample=barcode34        1         1G       00:00:07       00:00:07     57.1%     0.0%     1.2%   
+</span></code></pre></div></p>
+<p>In the example above, way too much memory was requested for all the jobs in general, and also the time limits were way too long. The most important is the CPU efficiency, however, which was generally good except for one job, but it was a very small job.</p>
+<h2 id="usage-reports">Usage reports</h2>
+<p><code>sreport</code> can be used to summarize usage in many different ways, below are some examples.</p>
+<h3 id="account-usage-by-user">Account usage by user</h3>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>$ sreport cluster AccountUtilizationByUser format=account%8,login%23,used%10 -t hourper start=&quot;now-1week&quot;
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>--------------------------------------------------------------------------------
+</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>Cluster/Account/User Utilization 2024-03-13T12:00:00 - 2024-03-19T23:59:59 (561600 secs)
+</span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>Usage reported in CPU Hours/Percentage of Total
+</span><span id="__span-13-5"><a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>--------------------------------------------------------------------------------
+</span><span id="__span-13-6"><a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a> Account                   Login               Used 
+</span><span id="__span-13-7"><a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a>-------- ----------------------- ------------------ 
+</span><span id="__span-13-8"><a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a>    root                             154251(63.71%) 
+</span><span id="__span-13-9"><a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a>    root              &lt;username&gt;      37176(15.35%) 
+</span><span id="__span-13-10"><a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a>     jln                                3988(1.65%) 
+</span><span id="__span-13-11"><a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a>     jln              &lt;username&gt;        2010(0.83%) 
+</span><span id="__span-13-12"><a id="__codelineno-13-12" name="__codelineno-13-12" href="#__codelineno-13-12"></a>     jln              &lt;username&gt;           0(0.00%) 
+</span><span id="__span-13-13"><a id="__codelineno-13-13" name="__codelineno-13-13" href="#__codelineno-13-13"></a>     jln              &lt;username&gt;        1978(0.82%) 
+</span><span id="__span-13-14"><a id="__codelineno-13-14" name="__codelineno-13-14" href="#__codelineno-13-14"></a>     kln                                   7(0.00%) 
+</span><span id="__span-13-15"><a id="__codelineno-13-15" name="__codelineno-13-15" href="#__codelineno-13-15"></a>     kln              &lt;username&gt;           7(0.00%) 
+</span><span id="__span-13-16"><a id="__codelineno-13-16" name="__codelineno-13-16" href="#__codelineno-13-16"></a>      ma                               13460(5.56%) 
+</span><span id="__span-13-17"><a id="__codelineno-13-17" name="__codelineno-13-17" href="#__codelineno-13-17"></a>      ma              &lt;username&gt;        6152(2.54%) 
+</span><span id="__span-13-18"><a id="__codelineno-13-18" name="__codelineno-13-18" href="#__codelineno-13-18"></a>      ma              &lt;username&gt;        2504(1.03%) 
+</span><span id="__span-13-19"><a id="__codelineno-13-19" name="__codelineno-13-19" href="#__codelineno-13-19"></a>      ma              &lt;username&gt;        3710(1.53%) 
+</span><span id="__span-13-20"><a id="__codelineno-13-20" name="__codelineno-13-20" href="#__codelineno-13-20"></a>      ma              &lt;username&gt;         963(0.40%) 
+</span><span id="__span-13-21"><a id="__codelineno-13-21" name="__codelineno-13-21" href="#__codelineno-13-21"></a>      ma              &lt;username&gt;         131(0.05%) 
+</span><span id="__span-13-22"><a id="__codelineno-13-22" name="__codelineno-13-22" href="#__codelineno-13-22"></a>      md                              52921(21.86%) 
+</span><span id="__span-13-23"><a id="__codelineno-13-23" name="__codelineno-13-23" href="#__codelineno-13-23"></a>      md              &lt;username&gt;       18690(7.72%) 
+</span><span id="__span-13-24"><a id="__codelineno-13-24" name="__codelineno-13-24" href="#__codelineno-13-24"></a>      md              &lt;username&gt;       22443(9.27%) 
+</span><span id="__span-13-25"><a id="__codelineno-13-25" name="__codelineno-13-25" href="#__codelineno-13-25"></a>      md              &lt;username&gt;       11788(4.87%) 
+</span><span id="__span-13-26"><a id="__codelineno-13-26" name="__codelineno-13-26" href="#__codelineno-13-26"></a>     mms                               17036(7.04%) 
+</span><span id="__span-13-27"><a id="__codelineno-13-27" name="__codelineno-13-27" href="#__codelineno-13-27"></a>     mms              &lt;username&gt;         600(0.25%) 
+</span><span id="__span-13-28"><a id="__codelineno-13-28" name="__codelineno-13-28" href="#__codelineno-13-28"></a>     mms              &lt;username&gt;       16436(6.79%) 
+</span><span id="__span-13-29"><a id="__codelineno-13-29" name="__codelineno-13-29" href="#__codelineno-13-29"></a>     phn                                6799(2.81%) 
+</span><span id="__span-13-30"><a id="__codelineno-13-30" name="__codelineno-13-30" href="#__codelineno-13-30"></a>     phn              &lt;username&gt;         114(0.05%) 
+</span><span id="__span-13-31"><a id="__codelineno-13-31" name="__codelineno-13-31" href="#__codelineno-13-31"></a>     phn              &lt;username&gt;          31(0.01%) 
+</span><span id="__span-13-32"><a id="__codelineno-13-32" name="__codelineno-13-32" href="#__codelineno-13-32"></a>     phn              &lt;username&gt;        6654(2.75%) 
+</span><span id="__span-13-33"><a id="__codelineno-13-33" name="__codelineno-13-33" href="#__codelineno-13-33"></a>     phn              &lt;username&gt;           0(0.00%) 
+</span><span id="__span-13-34"><a id="__codelineno-13-34" name="__codelineno-13-34" href="#__codelineno-13-34"></a>     sss                               22081(9.12%) 
+</span><span id="__span-13-35"><a id="__codelineno-13-35" name="__codelineno-13-35" href="#__codelineno-13-35"></a>     sss              &lt;username&gt;       22081(9.12%) 
+</span><span id="__span-13-36"><a id="__codelineno-13-36" name="__codelineno-13-36" href="#__codelineno-13-36"></a>students                                 638(0.26%) 
+</span><span id="__span-13-37"><a id="__codelineno-13-37" name="__codelineno-13-37" href="#__codelineno-13-37"></a>students              &lt;username&gt;         638(0.26%) 
+</span></code></pre></div>
+<h3 id="user-usage-by-account">User usage by account</h3>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>$ sreport cluster UserUtilizationByAccount format=login%23,account%8,used%10 -t hourper start=&quot;now-1week&quot;
+</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>--------------------------------------------------------------------------------
+</span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>Cluster/User/Account Utilization 2024-03-13T12:00:00 - 2024-03-19T23:59:59 (561600 secs)
+</span><span id="__span-14-4"><a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>Usage reported in CPU Hours/Percentage of Total
+</span><span id="__span-14-5"><a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a>--------------------------------------------------------------------------------
+</span><span id="__span-14-6"><a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a>                  Login  Account               Used 
+</span><span id="__span-14-7"><a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a>----------------------- -------- ------------------ 
+</span><span id="__span-14-8"><a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a>             &lt;username&gt;     root      37176(15.35%) 
+</span><span id="__span-14-9"><a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a>             &lt;username&gt;       md       22443(9.27%) 
+</span><span id="__span-14-10"><a id="__codelineno-14-10" name="__codelineno-14-10" href="#__codelineno-14-10"></a>             &lt;username&gt;      sss       22081(9.12%) 
+</span><span id="__span-14-11"><a id="__codelineno-14-11" name="__codelineno-14-11" href="#__codelineno-14-11"></a>             &lt;username&gt;       md       18690(7.72%) 
+</span><span id="__span-14-12"><a id="__codelineno-14-12" name="__codelineno-14-12" href="#__codelineno-14-12"></a>             &lt;username&gt;      mms       16436(6.79%) 
+</span><span id="__span-14-13"><a id="__codelineno-14-13" name="__codelineno-14-13" href="#__codelineno-14-13"></a>             &lt;username&gt;       md       11788(4.87%) 
+</span><span id="__span-14-14"><a id="__codelineno-14-14" name="__codelineno-14-14" href="#__codelineno-14-14"></a>             &lt;username&gt;      phn        6654(2.75%) 
+</span><span id="__span-14-15"><a id="__codelineno-14-15" name="__codelineno-14-15" href="#__codelineno-14-15"></a>             &lt;username&gt;       ma        6152(2.54%) 
+</span><span id="__span-14-16"><a id="__codelineno-14-16" name="__codelineno-14-16" href="#__codelineno-14-16"></a>             &lt;username&gt;       ma        3710(1.53%) 
+</span><span id="__span-14-17"><a id="__codelineno-14-17" name="__codelineno-14-17" href="#__codelineno-14-17"></a>             &lt;username&gt;       ma        2504(1.03%) 
+</span><span id="__span-14-18"><a id="__codelineno-14-18" name="__codelineno-14-18" href="#__codelineno-14-18"></a>             &lt;username&gt;      jln        2010(0.83%) 
+</span><span id="__span-14-19"><a id="__codelineno-14-19" name="__codelineno-14-19" href="#__codelineno-14-19"></a>             &lt;username&gt;      jln        1978(0.82%) 
+</span><span id="__span-14-20"><a id="__codelineno-14-20" name="__codelineno-14-20" href="#__codelineno-14-20"></a>             &lt;username&gt;       ma         963(0.40%) 
+</span><span id="__span-14-21"><a id="__codelineno-14-21" name="__codelineno-14-21" href="#__codelineno-14-21"></a>             &lt;username&gt; students         638(0.26%) 
+</span><span id="__span-14-22"><a id="__codelineno-14-22" name="__codelineno-14-22" href="#__codelineno-14-22"></a>             &lt;username&gt;      mms         600(0.25%) 
+</span><span id="__span-14-23"><a id="__codelineno-14-23" name="__codelineno-14-23" href="#__codelineno-14-23"></a>             &lt;username&gt; compute+         145(0.06%) 
+</span><span id="__span-14-24"><a id="__codelineno-14-24" name="__codelineno-14-24" href="#__codelineno-14-24"></a>             &lt;username&gt;       ma         131(0.05%) 
+</span><span id="__span-14-25"><a id="__codelineno-14-25" name="__codelineno-14-25" href="#__codelineno-14-25"></a>             &lt;username&gt;      phn         114(0.05%) 
+</span><span id="__span-14-26"><a id="__codelineno-14-26" name="__codelineno-14-26" href="#__codelineno-14-26"></a>             &lt;username&gt;      phn          31(0.01%) 
+</span><span id="__span-14-27"><a id="__codelineno-14-27" name="__codelineno-14-27" href="#__codelineno-14-27"></a>             &lt;username&gt;      kln           7(0.00%) 
+</span><span id="__span-14-28"><a id="__codelineno-14-28" name="__codelineno-14-28" href="#__codelineno-14-28"></a>             &lt;username&gt;      phn           0(0.00%) 
+</span><span id="__span-14-29"><a id="__codelineno-14-29" name="__codelineno-14-29" href="#__codelineno-14-29"></a>             &lt;username&gt;      jln           0(0.00%) 
+</span></code></pre></div>
+<h3 id="top-users">Top users</h3>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>$ sreport user top topcount=20 format=login%21,account%8,used%10 start=&quot;now-1week&quot; -t hourper
+</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>--------------------------------------------------------------------------------
+</span><span id="__span-15-3"><a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>Top 20 Users 2024-03-13T11:00:00 - 2024-03-19T23:59:59 (565200 secs)
+</span><span id="__span-15-4"><a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>Usage reported in CPU Hours/Percentage of Total
+</span><span id="__span-15-5"><a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a>--------------------------------------------------------------------------------
+</span><span id="__span-15-6"><a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a>                Login  Account               Used 
+</span><span id="__span-15-7"><a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a>--------------------- -------- ------------------ 
+</span><span id="__span-15-8"><a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a>          &lt;username&gt;      root      37176(15.26%) 
+</span><span id="__span-15-9"><a id="__codelineno-15-9" name="__codelineno-15-9" href="#__codelineno-15-9"></a>          &lt;username&gt;        md       22698(9.32%) 
+</span><span id="__span-15-10"><a id="__codelineno-15-10" name="__codelineno-15-10" href="#__codelineno-15-10"></a>          &lt;username&gt;       sss       22082(9.06%) 
+</span><span id="__span-15-11"><a id="__codelineno-15-11" name="__codelineno-15-11" href="#__codelineno-15-11"></a>          &lt;username&gt;        md       18850(7.74%) 
+</span><span id="__span-15-12"><a id="__codelineno-15-12" name="__codelineno-15-12" href="#__codelineno-15-12"></a>          &lt;username&gt;       mms       16436(6.75%) 
+</span><span id="__span-15-13"><a id="__codelineno-15-13" name="__codelineno-15-13" href="#__codelineno-15-13"></a>          &lt;username&gt;        md       12038(4.94%) 
+</span><span id="__span-15-14"><a id="__codelineno-15-14" name="__codelineno-15-14" href="#__codelineno-15-14"></a>          &lt;username&gt;       phn        6654(2.73%) 
+</span><span id="__span-15-15"><a id="__codelineno-15-15" name="__codelineno-15-15" href="#__codelineno-15-15"></a>          &lt;username&gt;        ma        6167(2.53%) 
+</span><span id="__span-15-16"><a id="__codelineno-15-16" name="__codelineno-15-16" href="#__codelineno-15-16"></a>          &lt;username&gt;        ma        3780(1.55%) 
+</span><span id="__span-15-17"><a id="__codelineno-15-17" name="__codelineno-15-17" href="#__codelineno-15-17"></a>          &lt;username&gt;        ma        2504(1.03%) 
+</span><span id="__span-15-18"><a id="__codelineno-15-18" name="__codelineno-15-18" href="#__codelineno-15-18"></a>          &lt;username&gt;       jln        2383(0.98%) 
+</span><span id="__span-15-19"><a id="__codelineno-15-19" name="__codelineno-15-19" href="#__codelineno-15-19"></a>          &lt;username&gt;       jln        1978(0.81%) 
+</span><span id="__span-15-20"><a id="__codelineno-15-20" name="__codelineno-15-20" href="#__codelineno-15-20"></a>          &lt;username&gt;        ma         963(0.40%) 
+</span><span id="__span-15-21"><a id="__codelineno-15-21" name="__codelineno-15-21" href="#__codelineno-15-21"></a>          &lt;username&gt;  students         648(0.27%) 
+</span><span id="__span-15-22"><a id="__codelineno-15-22" name="__codelineno-15-22" href="#__codelineno-15-22"></a>          &lt;username&gt;       mms         600(0.25%) 
+</span><span id="__span-15-23"><a id="__codelineno-15-23" name="__codelineno-15-23" href="#__codelineno-15-23"></a>          &lt;username&gt;        kt         146(0.06%) 
+</span><span id="__span-15-24"><a id="__codelineno-15-24" name="__codelineno-15-24" href="#__codelineno-15-24"></a>          &lt;username&gt;        ma         133(0.05%) 
+</span><span id="__span-15-25"><a id="__codelineno-15-25" name="__codelineno-15-25" href="#__codelineno-15-25"></a>          &lt;username&gt;       phn         114(0.05%) 
+</span><span id="__span-15-26"><a id="__codelineno-15-26" name="__codelineno-15-26" href="#__codelineno-15-26"></a>          &lt;username&gt;       kln          98(0.04%) 
+</span><span id="__span-15-27"><a id="__codelineno-15-27" name="__codelineno-15-27" href="#__codelineno-15-27"></a>          &lt;username&gt;       phn          31(0.01%) 
+</span></code></pre></div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../efficiency/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Optimizing CPU efficiency">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Optimizing CPU efficiency
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../jobcontrol/" class="md-footer__link md-footer__link--next" aria-label="Next: Job control and useful commands">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Job control and useful commands
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["content.code.copy", "navigation.footer"], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.1e8ae164.min.js"></script>
+      
+    
+  </body>
+</html>
