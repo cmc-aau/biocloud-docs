@@ -11,20 +11,15 @@ Below is a brief overview of all CPU partitions. Details about the exact CPU mod
 ### Overview
 | Partition | Nodes | Total CPUs | Total memory | Billing factor |
 | ---: | :--: | :--: | :--: | :--- |
-| `interactive` | 2 | 352T (x2) | 1.5 TB | 0.5x |
+| `interactive` | 2 | 352T | 1.5 TB | 0.5x |
 | `slim-zen3` | 5 | 960T | 5.0 TB | 1.0x |
 | `slim-zen5` | 3 | 864T | 4.5 TB | 1.5x |
 | `fat-zen3` | 2 | 448T | 4.0 TB | 1.5x |
 | `fat-zen5` | 2 | 576T | 4.6 TB | 2.0x |
-| **TOTAL** | **14** | **3264 (3616)** | **19.6 TB** | |
+| **TOTAL** | **14** | **3264** | **19.6 TB** | |
 
 ### The `interactive` partition
-This partition is reserved for interactive jobs for people to be able to do data analysis (usually produced from batch jobs) without having to wait for hours or days due to queue time. Therefore, no batch jobs will be able to run here.
-
-The `interactive` partition is set up with an over-subscription factor of 2, which means each CPU can be used by up to 2 jobs at once to maximize CPU utilization because interactive jobs are usually very inefficient (e.i. the allocated CPU's do absolutely nothing when you are just typing code or clicking around).
-
-???+ info "Memory per CPU on the interactive partition"
-      Because the CPU's on the `interactive` partition are over-subscribed, the SLURM scheduler will sometimes allocate more CPUs than you have initially requested for your job until the max memory per CPU setting of **2.0 GB** is satisfied. This is to avoid idle CPU's due to exhausted memory (memory cannot be shared) and to avoid that nodes crash because they run out of memory, [details here](https://slurm.schedmd.com/archive/slurm-24.11.4/slurm.conf.html#OPT_MaxMemPerCPU). It is therefore ideal to detect the number of CPUs available dynamically in your scripts and commands using for example `nproc` or from the `SLURM_JOB_CPUS_PER_NODE` [environment variable](other.md#slurm-environment-variables).
+This partition is reserved for short and small interactive jobs, where users can do data analysis, quick testing, and day-to-day work without having to wait for hours or even days due to queue time. Therefore, no batch jobs will be able to run here, and there is a max CPUs per job limit of `32` to ensure high availability. Ideally, the `interactive` partition should never be fully utilized. Furthermore, it is optimized for interactive jobs, which are usually very inefficient (e.i. the allocated CPU's do absolutely nothing when you are just typing or clicking around).
 
 | Hostname | CPU model | CPUs | Memory | Scratch space | Features |
 | ---: | :---: | :---: | :---: | :---: | :---: |
