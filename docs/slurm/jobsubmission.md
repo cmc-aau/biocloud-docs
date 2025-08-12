@@ -27,7 +27,11 @@ If you just need to run a single command/script in the foreground, it's much bet
 $ srun --cpus-per-task 8 --mem 16G --time 1-00:00:00 mycommand myoptions
 ```
 
-The terminal will be blocked for the entire duration, hence for longer running jobs it's much more convenient to instead write the commands in a script and submit a non-interactive batch job using [`sbatch`](#batch-jobs-non-interactive-jobs), which will run in the background.
+The terminal will be blocked for the entire duration, hence for longer running jobs it's much more convenient to instead write the commands in a script and [submit a non-interactive batch job](#batch-jobs-non-interactive-jobs) using `sbatch`, which will run in the background. For shorter commands, you can also instead of `srun <options> <command>` use the [`--wrap` option](https://slurm.schedmd.com/archive/slurm-24.11.4/sbatch.html#OPT_wrap) to `sbatch` to submit it as a non-interactive batch job, for example:
+
+```
+sbatch --cpus-per-task 2 --mem 4G --time 0-01:00:00 --wrap "mycommand myoptions"
+```
 
 [`srun`](https://slurm.schedmd.com/archive/slurm-24.11.4/srun.html) is sometimes also used to run multiple tasks/steps (parallel processes) from within batch scripts, which can then span multiple compute nodes and run concurrently.
 
@@ -160,3 +164,4 @@ There are plenty of options with the SLURM job submission commands. Below are th
 | `--mail-type`                                | `NONE` | Configures email notifications for certain job events. One or more comma-separated values of: `NONE`, `ALL`, `BEGIN`, `END`, `FAIL`, `REQUEUE`, `ARRAY_TASKS`. `TIME_LIMIT_90`, `TIME_LIMIT_80`, and `TIME_LIMIT_50` might also become handy to be able to extend the time limit before the job is killed. [Details here](https://slurm.schedmd.com/archive/slurm-24.11.4/sbatch.html#OPT_mail-type) |
 | `--mail-user`                                | Local user | Specifies the email address where job notifications are sent. |
 | `--x11`                                      | `all` | Enable forwarding of graphical applications from the job to your computer. It's required that you have either connected using the `ssh -X` option or you have set the `ForwardX11 yes` option in your [SSH config file](../access/ssh.md#ssh-config-file). For `salloc` or `srun` only. [Details here](https://slurm.schedmd.com/archive/slurm-24.11.4/srun.html#OPT_x11). |
+| `--wrap` | | For `sbatch` only. Submit a command string as a batch script. [Details here](https://slurm.schedmd.com/archive/slurm-24.11.4/sbatch.html#OPT_wrap). |
