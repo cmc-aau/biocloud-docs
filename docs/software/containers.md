@@ -63,6 +63,3 @@ For additional guidance see the [Apptainer usage guide](https://apptainer.org/do
 
 ## Docker containers
 Docker itself is not supported directly for non-admin users due to security and compatibility issues with our user authentication mechanism, but you can instead just run them through apptainer by prepending `docker://` to the container path, see [this page](https://apptainer.org/docs/user/main/docker_and_oci.html).
-
-## pyxis SLURM plugin
-The NVIDIA [pyxis](https://github.com/NVIDIA/pyxis?tab=readme-ov-file#usage) SLURM spank plugin are also installed and configured, allowing individual SLURM jobs to run inside a container easily by simply using the `--container-image` option to the `srun`, `sbatch`, and `salloc` commands, see [examples here](https://github.com/NVIDIA/pyxis?tab=readme-ov-file#examples).
