@@ -20,7 +20,7 @@ When you have inspected the DAG or output from the dry run and you are ready to 
 #SBATCH --cpus-per-task=1
 #SBATCH --time=1-00:00:00
 #SBATCH --mem=1G
-#SBATCH --mail-type=END,FAIL
+#SBATCH --mail-type=END,FAIL,TIME_LIMIT_90
 #SBATCH --mail-user=abc@bio.aau.dk
 
 # Exit on first error and if any variables are unset

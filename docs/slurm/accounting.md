@@ -82,7 +82,7 @@ root                                          0.000000   699456285      1.000000
 For more details about job prioritization see the [SLURM documentation](https://slurm.schedmd.com/archive/slurm-24.11.4/priority_multifactor.html) and this [presentation](https://slurm.schedmd.com/SLUG19/Priority_and_Fair_Trees.pdf).
 
 ## Usage limits and QOS
-Currently, usage limits are only set at the QOS level, where the following two QOS's are present in the cluster. Only the `normal` QOS is available by default for all users, and the `highprio` QOS is only available to users who have been granted permission by an administrator for a limited period of time to get a higher priority than everyone else.
+Currently, usage limits are only set at the QOS level, where the following two QOS's are present in the cluster. Only the `normal` QOS is available by default for all users, and the `highprio` QOS is only available to users who have been granted permission by an administrator for a limited period of time to get a higher priority than everyone else and higher usage limits.
 
 | | `normal` | `highprio` |
 | ---: | :---: | :---: |

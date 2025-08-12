@@ -73,7 +73,7 @@ A simple example SLURM `sbatch` script for a single task could look like this:
 #SBATCH --cpus-per-task=10
 #SBATCH --mem=10G
 #SBATCH --time=0-04:00:00
-#SBATCH --mail-type=END,FAIL
+#SBATCH --mail-type=END,FAIL,TIME_LIMIT_90
 #SBATCH --mail-user=abc@bio.aau.dk
 
 # Exit script on the first error
@@ -100,7 +100,7 @@ If you need to run the same command or script multiple times with different inpu
 #SBATCH --cpus-per-task=10
 #SBATCH --mem=10G
 #SBATCH --time=0-04:00:00
-#SBATCH --mail-type=END,FAIL,ARRAY_TASKS
+#SBATCH --mail-type=END,FAIL,TIME_LIMIT_90,ARRAY_TASKS
 #SBATCH --mail-user=abc@bio.aau.dk
 #SBATCH --array=0-8
 
