@@ -19,6 +19,3 @@ CLC is licensed software tied to specific machines and is only available through
 [AlphaFold](https://github.com/google-deepmind/alphafold) is quite complex to install and run. It runs through containers, but through a python wrapper script. Copy the SLURM sbatch script from `/shared_software/biocloud-software/alphafold_singularity/sbatch_example.sh` and adjust to suit your needs. `AlphaFold` benefits from GPU-accelerated servers, but can also run on regular CPUs. So submit to the appropriate partition.
 
 To make folders available inside the container you need to bind/mount them, as described [here](containers.md#binding-mounting-folders-from-the-host-to-the-container).
-
-## usearch11
-`usearch11` is made available on all servers by simply running `usearch11` or `usearch`.
