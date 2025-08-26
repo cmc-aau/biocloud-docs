@@ -42,7 +42,8 @@ sbatch --cpus-per-task 2 --mem 4G --time 0-01:00:00 --wrap "mycommand myoptions"
 #### From the command line
 In order to run graphical applications, simply append the [`--x11` option](https://slurm.schedmd.com/archive/slurm-24.11.4/srun.html#OPT_x11) to `salloc` or `srun` and run the program. The graphical app will then show up in a window on your own computer, while running inside a SLURM job on the cluster:
 ```
-$ srun --cpus-per-task 2 --mem 4G --time 0-3:00:00 --x11 /path/to/gui/app
+$ salloc --cpus-per-task 2 --mem 4G --time 0-3:00:00 --x11
+$ command_to_start_graphical_app
 ```
 
 It's important to mention that in order for this to work properly, you must first ensure that you have connected to the particular login node using either the `ssh -X` option, or that you have set the `ForwardX11 yes` option in your SSH config file, [see example here](../access/ssh.md#ssh-config-file).
