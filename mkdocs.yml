@@ -22,24 +22,29 @@ nav:
     - software/conda.md
     - software/containers.md
     - software/other.md
+  - Storage:
+    - storage/intro.md
+    - storage/bestpractices.md
+    - storage/local.md
+    - storage/sharedfolders.md
+    - storage/policy.md
   - Guides:
     - Interactive Web portal (OpenOndemand):
       - guides/webportal/files.md
       - guides/webportal/jobqueue.md
       #- guides/webportal/jobcomposer.md
       - guides/webportal/shell.md
-      - Interactive apps:
-        - guides/webportal/apps/virtualdesktop.md
-        - guides/webportal/apps/jupyter.md
-        - guides/webportal/apps/rstudio.md
-        - guides/webportal/apps/coder.md
+    - Interactive apps:
+      - guides/webportal/apps/virtualdesktop.md
+      - guides/webportal/apps/jupyter.md
+      - guides/webportal/apps/rstudio.md
+      - guides/webportal/apps/coder.md
     - Snakemake:
       - guides/snakemake/intro.md
       - guides/snakemake/tutorial.md
       - guides/snakemake/biocloud.md
-    - guides/sshdslurm.md
-    - guides/git.md
-  - storage.md
+      - guides/sshdslurm.md
+      - guides/git.md
 theme:
   name: material
   palette: 
