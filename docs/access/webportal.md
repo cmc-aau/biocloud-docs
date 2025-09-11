@@ -6,7 +6,7 @@ This page only describes briefly how to connect to the web portal. Guides detail
 ## Getting access
 In order to access the web portal you must first be connected to the local AAU campus network, or [through VPN](ssh.md#vpn). Then go to [https://biocloud.bio.aau.dk](https://biocloud.bio.aau.dk) and log in using your usual AAU credentials if you aren't already (for example if you've already signed in to your AAU webmail, etc).
 
-If this is the first time you ever log in to any of the BioCloud resources, your home directory does not yet exist on the [network storage](../storage.md) and you will likely see an error. To create your home directory you must log in just once either [through SSH](ssh.md) as described on the previous page or using the web portal shell, which is available [here](https://biocloud.bio.aau.dk/pun/sys/shell). You can also just contact an admin. Now you should be greeted by the front page:
+If this is the first time you ever log in to any of the BioCloud resources, your home directory does not yet exist on the [storage](../storage/intro.md) and you will likely see an error. To create your home directory you must log in just once either [through SSH](ssh.md) as described on the previous page or using the web portal shell, which is available [here](https://biocloud.bio.aau.dk/pun/sys/shell). You can also just contact an admin. Now you should be greeted by the front page:
 
 ![web portal front page](img/frontpage.png)
 

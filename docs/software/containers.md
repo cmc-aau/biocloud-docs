@@ -1,5 +1,5 @@
 # Containers
-[Containers](https://www.docker.com/resources/what-container/) provide a convenient and portable way to package and run applications in a completely isolated and self-contained environment, making it easy to manage dependencies and ensure complete reproducibility and portability. Compared to [conda environments](conda.md) or [software modules](modules.md) containers are always based on a base operating system image, usually Linux, ensuring that even the operating system is under control. Once a container is built and working as intended, it will run exactly the same forever, whereever, and is therefore the best way to bundle and distribute production-level workflows. By containerizing the application platform and its dependencies, differences in OS distributions and underlying infrastructure are abstracted away completely. Linux containers allow users to:
+[Containers](https://www.docker.com/resources/what-container/) provide a convenient and portable way to package and run applications in a completely isolated and self-contained environment, making it easy to manage dependencies and ensure complete reproducibility and portability. Compared to [conda environments](conda.md) or software modules containers are always based on a base operating system image, usually Linux, ensuring that even the operating system is under control. Once a container is built and working as intended, it will run exactly the same forever, whereever, and is therefore the best way to bundle and distribute production-level workflows. By containerizing the application platform and its dependencies, differences in OS distributions and underlying infrastructure are abstracted away completely. Linux containers allow users to:
 
  - Use software with complicated dependencies and environment requirements
  - Run an application container from the Sylabs Container Library, Docker Hub, or from self-made images from the GitHub container registry
@@ -45,6 +45,8 @@ $ apptainer run ubuntu_22.04.sif yourcommand --someoption somefile
 # start an interactive shell within a container
 $ apptainer shell ubuntu_22.04.sif
 ```
+
+`--no-home` can be useful
 
 ### Binding (mounting) folders from the host to the container
 You almost always need to bind/mount a folder from the host machine to the container, so that it's available inside the container for input/output to the particular tool you need to use. With Singularity/Apptainer the `/tmp` folder, the current folder, and your home folder are always mounted by default. To mount additional folders use `-B`, for example:

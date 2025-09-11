@@ -1,13 +1,15 @@
 # Best practices with Ceph storage
 
 ### Moving large amounts of data around
-If you need to move large amounts of data (or numerous files at once regardless of size) it will happen in an instant regardless of the size if you make sure you are doing it on the same filesystem/mount, for example from `/projects/xxx` to `/projects/yyy`. However, if you need to move things across mount points, for example from `/home/xxx` to `/projects/yyy` please ask an administrator to do it for you, since moving between mount points will happen over the network and cause unneccessary traffic and load on the storage cluster, let alone be very slow. An administrator can move anything instantly anywhere on the storage cluster, but if you need to transfer external files there is no way around it, it will be limited by the network speed.
+If you need to move large amounts of data (or numerous files at once regardless of size) it will happen in an instant regardless of the size if you make sure you are doing it within the same [mount point](intro.md), for example from `/projects/xxx` to `/projects/yyy`. However, if you need to move things across mount points, for example from `/home/xxx` to `/projects/yyy` please ask an administrator to do it for you, since moving between mount points will happen over the network and cause unneccessary traffic and load on the storage cluster, let alone be very slow. An administrator can move anything instantly anywhere on the storage cluster.
 
-symbolic links
+
+???+ info "Use symbolic links instead of copying data"
+      To avoid data duplication and unnecessary use of storage space, please use symbolic links (using the `ln -s` command) instead of copying data (using the `cp` command) whenever possible. This is especially important when working with large files. Symbolic links are simply pointers to the original file.
 
 
 ### Avoid numerous small files at all costs
-**Whereever possible always try to write fewer but larger files instead of many small ones**. The Ceph storage cluster uses a file metadata cache server that holds an entry for every single open file, so the cache memory usage is directly proportional to the number of open files (meaning being accessed in any way). If there are too many open files (across **ALL** connected clients/nodes at once) the metadata server will ask clients to release some pressure on the cache and if they fail to do so in time they will simply be [evicted](https://docs.ceph.com/en/reef/cephfs/eviction/) without notice (meaning the Ceph cluster will force an unmount). This will happen on any node that tips the iceberg and is thus not a result of the exact storage actions of individual clients but rather that of all nodes connected to the Ceph cluster across the whole university at any one time. See [Ceph best usage practices](https://docs.ceph.com/en/reef/cephfs/app-best-practices/) for additional details.
+**Whereever possible always try to write fewer but larger files instead of many small ones**. The Ceph storage cluster uses a file metadata cache server (MDS server) that holds an entry for every single open file, so the cache memory usage is directly proportional to the number of open files (being accessed in any way). If there are too many open files (across **ALL** connected clients/nodes at once) the metadata server will ask clients to release some pressure on the cache and if they fail to do so in time they will simply be [evicted](https://docs.ceph.com/en/reef/cephfs/eviction/) without notice (meaning the Ceph cluster will force an unmount to protect itself). This will happen on any node that tips the iceberg and is thus not a result of the exact storage actions of individual clients, but rather that of all nodes connected to the Ceph cluster at any one time. See [Ceph best usage practices](https://docs.ceph.com/en/reef/cephfs/app-best-practices/) for additional details.
 
 ### Avoid using `ls -l`
 When listing directories, it's common to use `ls -l` to list things vertically, however this will also request various other information like permissions, file size, owner, group, access time etc. This will burden the metadata servers, especially if used in loops in scripts on many files, so if you don't need all this extra information and just want to list the contents vertically instead of horizontally, just use `ls -1` instead and make that a habit. Likewise, don't use `stat` on many files if not neccessary.
@@ -43,7 +45,7 @@ ceph.dir.rfiles="219203126"
 ```
 
 ??? "Additional Ceph attributes"
-      | Attribute | Explaination |
+      | Attribute | Explanation |
       | --- | --- |
       | ceph.dir.entries | |
       | ceph.dir.files | Number of files in folder (non-recursive) |

@@ -43,8 +43,8 @@ nav:
       - guides/snakemake/intro.md
       - guides/snakemake/tutorial.md
       - guides/snakemake/biocloud.md
-      - guides/sshdslurm.md
-      - guides/git.md
+    - guides/sshdslurm.md
+    - guides/git.md
 theme:
   name: material
   palette: 
