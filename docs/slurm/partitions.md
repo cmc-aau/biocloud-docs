@@ -12,10 +12,10 @@ Below is a brief overview of all CPU partitions. Details about the exact CPU mod
 | Partition | Nodes | Total CPUs | Total memory | Billing factor |
 | ---: | :--: | :--: | :--: | :--- |
 | `interactive` | 2 | 352T | 1.5 TB | 0.5x |
-| `slim-zen3` | 5 | 960T | 5.0 TB | 1.0x |
-| `slim-zen5` | 3 | 864T | 4.5 TB | 1.5x |
-| `fat-zen3` | 2 | 448T | 4.0 TB | 1.5x |
-| `fat-zen5` | 2 | 576T | 4.6 TB | 2.0x |
+| `zen3` | 5 | 960T | 5.0 TB | 1.0x |
+| `zen5` | 3 | 864T | 4.5 TB | 1.5x |
+| `zen3x` | 2 | 448T | 4.0 TB | 1.5x |
+| `zen5x` | 2 | 576T | 4.6 TB | 2.0x |
 | **TOTAL** | **14** | **3264** | **19.6 TB** | |
 
 ### The `interactive` partition
@@ -29,27 +29,27 @@ This partition is reserved for short and small interactive jobs, where users can
 ### Batch job partitions
 These partitions are dedicated to non-interactive and efficient batch jobs that can potentially run for a long time. The `slim-*` nodes generally have less memory per CPU, while the `fat-*` nodes have more memory per CPU, which is useful for jobs that require a lot of memory. The `zen3` and `zen5` features indicate the generation of AMD EPYC CPUs used in the nodes.
 
-**`slim-zen3`**
+**`zen3`**
 
 | Hostname | CPU model | CPUs | Memory | Scratch space | Features |
 | ---: | :---: | :---: | :---: | :---: | :---: |
 | `bio-node[03-06]` | 2x AMD EPYC 7643 | 96C / 192T | 1.0 TB | | `zen3` |
 | `bio-node07` | 2x AMD EPYC 7643 | 96C / 192T | 1.0 TB | 18 TB NVMe | `zen3`<br>`scratch` |
 
-**`slim-zen5`**
+**`zen5`**
 
 | Hostname | CPU model | CPUs | Memory | Scratch space | Features |
 | ---: | :---: | :---: | :---: | :---: | :---: |
 | `bio-node08` | 2x AMD EPYC 9565 | 144C / 288T | 1.5 TB | | `zen5` |
 
-**`fat-zen3`**
+**`zen3x`**
 
 | Hostname | CPU model | CPUs | Memory | Scratch space | Features |
 | ---: | :---: | :---: | :---: | :---: | :---: |
 | `bio-node09` | 2x AMD EPYC 7643 | 96C / 192T | 2.0 TB | | `zen3` |
 | `bio-node10` | 2x AMD EPYC 7713 | 128C / 256T | 2.0 TB | 12.8 TB NVMe | `zen3`<br>`scratch` |
 
-**`fat-zen5`**
+**`zen5x`**
 
 | Hostname | CPU model | CPUs | Memory | Scratch space | Features |
 | ---: | :---: | :---: | :---: | :---: | :---: |
