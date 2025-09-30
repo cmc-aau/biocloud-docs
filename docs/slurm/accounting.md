@@ -1,5 +1,5 @@
 # Usage accounting and priority
-All users belong to an account (usually their PI) where all usage is tracked on a per-user basis, which directly impact the priority of future jobs. Additionally, limitations and extra high priorities can be obtained by submitting jobs to different SLURM "Quality of Service"s (QOS). By default, all users are only allowed to submit jobs to the `normal` QOS with equal resource limits and base priority for everyone. Periodically users may submit to the `highprio` QOS instead, which has higher resource [usage limits](#usage-limits-and-qos) and a base priority higher than everyone else (and therefore the usage is also billed 3x), however this must first be discussed among the owners of the hardware (PI's), and then you can contact an administrator to grant your user permission to submit jobs to it for a limited period of time.
+All users belong to an account (usually their PI) where all usage is tracked on a per-user basis, which directly impact the priority of future jobs. Additionally, limitations and extra high priorities can be obtained by submitting jobs to different SLURM "Quality of Service"s (QOS). By default, all users are only allowed to submit jobs to the `normal` QOS with equal resource limits and base priority for everyone. Periodically users may submit to the `fastq` QOS instead, which has higher resource [usage limits](#usage-limits-and-qos) and a base priority higher than everyone else (and therefore the usage is also billed 3x), however this must first be discussed among the owners of the hardware (PI's), and then you can contact an administrator to grant your user permission to submit jobs to it for a limited period of time.
 
 ## Job scheduling
 BioCloud uses the first-in-first-out (FIFO) scheduling algorithm with **backfilling enabled**, which means that occasionally lower priority jobs may start before higher priority jobs to maximize the utilization of the cluster, since smaller (usually shorter) jobs may be able to finish before the larger jobs are scheduled to start. To increase the chance of backfilling, it is therefore important to set a realistic timelimit for your jobs that is as short as possible, but long enough for it to finish.
@@ -87,9 +87,9 @@ root                                          0.000000  2113260049      0.000000
 For more details about job prioritization see the [SLURM documentation](https://slurm.schedmd.com/archive/slurm-24.11.4/priority_multifactor.html) and this [presentation](https://slurm.schedmd.com/SLUG19/Priority_and_Fair_Trees.pdf).
 
 ## Usage limits and QOS
-Currently, usage limits are only set at the QOS level, where the following two QOS's are present in the cluster. Only the `normal` QOS is available by default for all users, and the `highprio` QOS is only available to users who have been granted permission by an administrator for a limited period of time to get a higher priority than everyone else and higher usage limits.
+Currently, usage limits are only set at the QOS level, where the following two QOS's are present in the cluster. Only the `normal` QOS is available by default for all users, and the `fastq` QOS is only available to users who have been granted permission by an administrator for a limited period of time to get a higher priority than everyone else and higher usage limits.
 
-| | `normal` | `highprio` |
+| | `normal` | `fastq` |
 | ---: | :---: | :---: |
 | [UsageFactor](https://slurm.schedmd.com/archive/slurm-24.11.4/sacctmgr.html#OPT_UsageFactor) <br> *Usage accounting will be multiplied by this value* | 1.0 | 3.0 |
 | [Priority](https://slurm.schedmd.com/archive/slurm-24.11.4/sacctmgr.html#OPT_Priority_2) <br> *Add this number to the calculated [job priority](#job-priority)* | +0 | +1000 |
@@ -107,7 +107,7 @@ To see details about account associations, allowed QOS's, limits set at the user
 $ sacctmgr show user withassoc where name=$USER
       User   Def Acct     Admin    Cluster    Account  Partition     Share   Priority MaxJobs MaxNodes  MaxCPUs MaxSubmit     MaxWall  MaxCPUMins                  QOS   Def QOS
 ---------- ---------- --------- ---------- ---------- ---------- --------- ---------- ------- -------- -------- --------- ----------- ----------- -------------------- ---------
-abc@bio.a+       root      None   biocloud       root                    1          1                                                                  highprio,normal    normal
+abc@bio.a+       root      None   biocloud       root                    1          1                                                                  fastq,normal    normal
 
 # all users
 $ sacctmgr show user withassoc | less
