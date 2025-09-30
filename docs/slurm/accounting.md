@@ -87,19 +87,19 @@ root                                          0.000000  2113260049      0.000000
 For more details about job prioritization see the [SLURM documentation](https://slurm.schedmd.com/archive/slurm-24.11.4/priority_multifactor.html) and this [presentation](https://slurm.schedmd.com/SLUG19/Priority_and_Fair_Trees.pdf).
 
 ## Usage limits and QOS
-Currently, usage limits are only set at the QOS level, where the following two QOS's are present in the cluster. Only the `normal` QOS is available by default for all users, and the `fastq` QOS is only available to users who have been granted permission by an administrator for a limited period of time to get a higher priority than everyone else and higher usage limits.
+Currently, usage limits are only set at the QOS level, where the following QOS's are present in the cluster. The `normal` QOS is the default, and the `fastq` QOS is only available to users who have been granted permission by an administrator for a limited period of time to get a higher priority than everyone else and higher usage limits. The `interactive` QOS is only available on the `interactive` partition and will be enforced on all jobs submitted to the [`interactive` partition](partitions.md#the-interactive-partition).
 
-| | `normal` | `fastq` |
-| ---: | :---: | :---: |
-| [UsageFactor](https://slurm.schedmd.com/archive/slurm-24.11.4/sacctmgr.html#OPT_UsageFactor) <br> *Usage accounting will be multiplied by this value* | 1.0 | 3.0 |
-| [Priority](https://slurm.schedmd.com/archive/slurm-24.11.4/sacctmgr.html#OPT_Priority_2) <br> *Add this number to the calculated [job priority](#job-priority)* | +0 | +1000 |
-| [MinPrioThres](https://slurm.schedmd.com/archive/slurm-24.11.4/sacctmgr.html#OPT_MinPrioThreshold) <br> *Minimum priority required for the job to be scheduled* | 100 |  |
-| [MaxTRESPU](https://slurm.schedmd.com/archive/slurm-24.11.4/sacctmgr.html#OPT_MaxTRESPerUser) <br> *Maximum number of [TRES](https://slurm.schedmd.com/archive/slurm-24.11.4/tres.html) (trackable resources) each* **user** *is able to use at once* | cpu=576 |  |
-| [MaxJobsPU](https://slurm.schedmd.com/archive/slurm-24.11.4/sacctmgr.html#OPT_MaxJobsPerUser) <br> *Maximum number of jobs each* **user** *is able to have running at once* | 100 | 100 |
-| [MaxSubmitPU](https://slurm.schedmd.com/archive/slurm-24.11.4/sacctmgr.html#OPT_MaxSubmitJobsPerUser) <br> *Maximum number of jobs each* **user** *is able to submit at once (running+pending)* | 200 | 200 |
-| [MaxTRESPA](https://slurm.schedmd.com/archive/slurm-24.11.4/sacctmgr.html#OPT_MaxTRESPerAccount) <br> *Maximum number of [TRES](https://slurm.schedmd.com/archive/slurm-24.11.4/tres.html) (trackable resources) each* **account** *is able to use at once* | cpu=1728 | cpu=1728 |
-| [MaxTRESRunMinsPA](https://slurm.schedmd.com/archive/slurm-24.11.4/sacctmgr.html#OPT_MaxTRESRunMinsPerAccount) <br> *Maximum number of TRES\*minutes each* **account** *is able to have running at once (e.g. 100CPU's for 1 hour corresponds to 6000 CPU minutes)* | cpu=17500000 | cpu=30000000 |
-| [MaxTRESRunMinsPU](https://slurm.schedmd.com/archive/slurm-24.11.4/sacctmgr.html#OPT_MaxTRESRunMinsPerUser) <br> *Maximum number of TRES\*minutes each* **user** *is able to have running at once (e.g. 100CPU's for 1 hour corresponds to 6000 CPU minutes)* | cpu=6000000 |  |
+| | `interactive` | `normal` | `fastq` |
+| ---: | :---: | :---: | :---: |
+| [UsageFactor](https://slurm.schedmd.com/archive/slurm-24.11.4/sacctmgr.html#OPT_UsageFactor) <br> *Usage accounting will be multiplied by this value* | 1.0 | 1.0 | 3.0 |
+| [Priority](https://slurm.schedmd.com/archive/slurm-24.11.4/sacctmgr.html#OPT_Priority_2) <br> *Add this number to the calculated [job priority](#job-priority)* | | | +1000 |
+| [MinPrioThres](https://slurm.schedmd.com/archive/slurm-24.11.4/sacctmgr.html#OPT_MinPrioThreshold) <br> *Minimum priority required for the job to be scheduled* | | 100 |  |
+| [MaxTRESPU](https://slurm.schedmd.com/archive/slurm-24.11.4/sacctmgr.html#OPT_MaxTRESPerUser) <br> *Maximum number of [TRES](https://slurm.schedmd.com/archive/slurm-24.11.4/tres.html) (trackable resources) each* **user** *is able to use at once* | cpu=32 | cpu=576 |  |
+| [MaxJobsPU](https://slurm.schedmd.com/archive/slurm-24.11.4/sacctmgr.html#OPT_MaxJobsPerUser) <br> *Maximum number of jobs each* **user** *is able to have running at once* | 10 | 100 | 100 |
+| [MaxSubmitPU](https://slurm.schedmd.com/archive/slurm-24.11.4/sacctmgr.html#OPT_MaxSubmitJobsPerUser) <br> *Maximum number of jobs each* **user** *is able to submit at once (running+pending)* | 20 | 200 | 200 |
+| [MaxTRESPA](https://slurm.schedmd.com/archive/slurm-24.11.4/sacctmgr.html#OPT_MaxTRESPerAccount) <br> *Maximum number of [TRES](https://slurm.schedmd.com/archive/slurm-24.11.4/tres.html) (trackable resources) each* **account** *is able to use at once* | | cpu=1728 | cpu=1728 |
+| [MaxTRESRunMinsPA](https://slurm.schedmd.com/archive/slurm-24.11.4/sacctmgr.html#OPT_MaxTRESRunMinsPerAccount) <br> *Maximum number of TRES\*minutes each* **account** *is able to have running at once (e.g. 100CPU's for 1 hour corresponds to 6000 CPU minutes)* | | cpu=17500000 | cpu=30000000 |
+| [MaxTRESRunMinsPU](https://slurm.schedmd.com/archive/slurm-24.11.4/sacctmgr.html#OPT_MaxTRESRunMinsPerUser) <br> *Maximum number of TRES\*minutes each* **user** *is able to have running at once (e.g. 100CPU's for 1 hour corresponds to 6000 CPU minutes)* | | cpu=6000000 |  |
 
 To see details about account associations, allowed QOS's, limits set at the user level, and more, for your user, use the following command:
 ```
