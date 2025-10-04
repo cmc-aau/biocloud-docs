@@ -4,3 +4,6 @@ Welcome to the documentation website for the BioCloud HPC cluster at the Section
 The current cluster consists of data center-grade servers equipped with dual-socket AMD EPYC CPUs of various sizes and generations. These servers have been contributed by individual research groups through their own research grants. In total, the cluster provides **3264** CPU cores and **20 TB** of shared memory, all connected to a **2 PB** [CephFS](https://ceph.com/) networked storage cluster.
 
 To gain access, you must first contact an administrator to grant access to your AAU user account. Then, please read everything on this website before starting to use the cluster.
+
+## Old documentation website
+**This is the documentation website for the new cluster only**. The old cluster is planned to be shut down some time in October/November 2025, and then all compute nodes will be moved to the new cluster, but until then we will be running two separate clusters, and the documentation for the old cluster is available at [https://cmc-aau.github.io/biocloud-docs-old/](https://cmc-aau.github.io/biocloud-docs-old/).
