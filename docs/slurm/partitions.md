@@ -12,10 +12,10 @@ Below is a brief overview of all CPU partitions. Details about the exact CPU mod
 | Partition | Nodes | Total CPUs | Total memory | Billing factor |
 | ---: | :--: | :--: | :--: | :--- |
 | `interactive` | 1 | 288T | 1.5 TB | 0.5x |
-| `zen3` | 7 | 1312T | 6.5 TB | 1.0x |
-| `zen3x` | 2 | 448T | 4.0 TB | 1.5x |
-| `zen5` | 2 | 576T | 3.0 TB | 1.5x |
-| `zen5x` | 2 | 576T | 4.6 TB | 2.0x |
+| `zen3` | 7 | 1312T | 6.5 TB | 0.5x |
+| `zen3x` | 2 | 448T | 4.0 TB | 1.0x |
+| `zen5` | 2 | 576T | 3.0 TB | 1.0x |
+| `zen5x` | 2 | 576T | 4.6 TB | 1.5x |
 | **TOTAL** | **14** | **3200** | **19.6 TB** | |
 
 ### The `interactive` partition
