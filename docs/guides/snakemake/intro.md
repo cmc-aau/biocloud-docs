@@ -47,7 +47,7 @@ At first it might seem like a lot of files and folders, but workflows can grow q
 
 ## Installation
 To setup Snakemake use the [`environment.yaml`](https://github.com/cmc-aau/snakemake_project_template/blob/main/environment.yml) file provided in the template repository to create a [conda environment from a file](../../software/conda.md#creating-an-environment) for the project with `conda env create -f environment.yml`. It's always best practice to note software dependencies down somewhere in a file, but alternatively you can also load the prebuilt [software module](../../software/modules.md) using:
-```bash
+```
 module load snakemake/7.18.2-foss-2020b
 ```
 

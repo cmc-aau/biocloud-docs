@@ -1,0 +1,6 @@
+# Storage policy
+The Ceph network storage is **NOT** a long-term storage or backup solution. The storage cluster is to be considered a temporary working storage only, so please clean up after yourself immediately after each job! You will likely forget about it very quickly after you've done your work, so make it a habit to cleanup shortly after every job. Once studies are published, delete all the data and ensure that for example raw DNA sequencing data is uploaded to public archives and that the corresponding code to produce results in the studies is available somewhere, preferably in a GitHub repository.
+
+Furthermore, if you are no longer employed or studying at AAU, you have the sole responsibility to pass on any data that should be saved for longer to other users, for example your PI, **before you leave**. Any data that is left behind where it is impossible to identify who is responsible for it will be deleted without notice, so please ensure that everything is organized properly under `/projects/PI/project/(sub-project)` as described [here](intro.md#organization-and-naming-of-data).
+
+Lastly: **Your data - your responsibility!**

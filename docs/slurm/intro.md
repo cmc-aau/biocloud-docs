@@ -1,13 +1,13 @@
 # Introduction to SLURM
-SLURM (Simple Linux Utility for Resource Management) is a highly flexible and powerful job scheduler for managing and scheduling computational workloads on high-performance computing (HPC) clusters. SLURM is designed to efficiently allocate resources and manage job execution on clusters of any size, from a single server to tens of thousands. SLURM manages resources on an HPC cluster by dividing compute nodes into partitions. Users submit jobs with specified resource requirements to these partitions from a login-node, and then the SLURM controller schedules and allocates resources to those jobs based on available resources. SLURM also stores detailed usage information of all jobs in a usage accounting database, which allows enforcement of fair-share policies and priorities for job scheduling for each partition. For an up-to-date list see the [hardware overview](../index.md).
+SLURM (Simple Linux Utility for Resource Management) is a highly flexible and powerful job scheduler for managing and scheduling computational workloads on high-performance computing (HPC) clusters. SLURM is designed to efficiently allocate resources and manage job execution on clusters of any size, from a single server to tens of thousands. SLURM manages resources on an HPC cluster by dividing similar compute nodes into [partitions](partitions.md). Users submit jobs with specified resource requirements to these partitions from a login-node, and then the SLURM controller schedules and allocates resources to those jobs based on available resources. SLURM also stores detailed usage information of all jobs in a usage accounting database, which allows enforcement of fair-share policies and priorities for job scheduling for each partition.
 
 ## BioCloud SLURM cluster overview
 ![SLURM overview](img/slurm-overview-inverted.png)
 
-(Note, the exact partitions in the figure may be outdated, but the setup is the same)
+(Note: the exact partitions in the figure may be outdated, but the setup is the same)
 
 ## Getting started
-Start with obtaining shell access to either of the 3 login nodes `bio-ospikachu[01-03].srv.aau.dk` as described in [Getting access](../access/ssh.md). To start with it's always nice to get an overview of the cluster, it's partitions, and how many resources that are currently allocated. This is achieved with the `sinfo` command, example output:
+Start with obtaining shell access to one of the login nodes `bio-fe[01-02].srv.aau.dk`, as described on the [SSH access](../access/ssh.md) page. To start with it's always nice to get an overview of the cluster, it's partitions, and how many resources that are currently allocated. This is achieved with the `sinfo` command, example output:
 
 ```
 $ sinfo
@@ -41,19 +41,23 @@ $ squeue --me
   3333 as-predictio user07@bio 2-19:42:49   6-04:17:11   5    16G  R       gpu bio-oscloud09
 ```
 
-Or get a more detailed overview per compute node of current resource allocations and which jobs are running etc with the wrapper script from [slurm_tools](https://github.com/OleHolmNielsen/Slurm_tools) `pestat`:
+Or get a more detailed overview per compute node of current resource allocations and which jobs are running etc. This will normally show some colored bars, but they are not visible here.
 ```
-$ pestat
-Hostname            Partition     Node Num_CPU  CPUload  Memsize  Freemem  Joblist
-                                 State Use/Tot  (15min)     (MB)     (MB)  JobID User ...
-bio-oscloud02        general*     mix  157 192   78.53*   957078   714399  2380 user01@bio.aau.dk 2389 user02@bio.aau.dk 3366 user04@bio.aau.dk 3430 user06@bio.aau.dk  
-bio-oscloud03        general*     mix  138 192   99.74*   957078   737701  3352 user03@cs.aau.dk 3359 user02@bio.aau.dk 3426 user05@bio.aau.dk  
-bio-oscloud04        general*     mix   32 192    3.86*   957078   712866  3361 user02@bio.aau.dk  
-bio-oscloud05        general*    idle    0 192    0.00    957078  1000920   
-bio-oscloud06        general*    idle    0 192    0.07    957078   968067   
-bio-oscloud07        high-mem    idle    0 240    0.00   1914660  2011251   
-bio-oscloud08        high-mem   alloc  192 192  126.01*  1914680  1843547  3372 user02@bio.aau.dk  
-bio-oscloud09             gpu     mix    5  64    2.36*   214195   206950  3333 user07@bio.aau.dk  
-```
+$ sstatus
+Cluster allocation summary per partition or individual nodes (-n).
+(Numbers are reported in free/allocated/total(OS factor)).
 
-See `pestat -h` for more options.
+Partition    |                CPUs                 |           Memory (GB)           |       GPUs        |
+==========================================================================================================
+shared       |  838 218                 /1056 (3x) | 1056 368                 /1424  |
+general      |  715 245                 /960       | 3870 765                 /4635  |
+high-mem     |  190 242                 /432       | 1608 2131                /3739  |
+gpu          |   44 20                  /64        |   84 125                 /209   |    1 1         /2
+----------------------------------------------------------------------------------------------------------
+Total:       | 1787 725                 /2512      | 6620 3389                /10009 |    1 1         /2
+
+Jobs running/pending/total:
+  23 / 1 / 24
+
+Use sinfo or squeue to obtain more details.
+```
