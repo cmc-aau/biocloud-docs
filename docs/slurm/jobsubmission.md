@@ -30,12 +30,7 @@ $ srun --cpus-per-task 8 --mem 16G --time 1-00:00:00 mycommand myoptions
 The terminal will be blocked for the entire duration, hence for longer running jobs it's much more convenient to instead write the commands in a script and [submit a non-interactive batch job](#batch-jobs-non-interactive-jobs) using `sbatch`, which will run in the background. For shorter commands, you can also instead of `srun <options> <command>` use the [`--wrap` option](https://slurm.schedmd.com/archive/slurm-24.11.4/sbatch.html#OPT_wrap) to `sbatch` to submit it as a non-interactive batch job, for example:
 
 ```
-<<<<<<< HEAD
-$ salloc --cpus-per-task 2 --mem 4G --time 0-3:00:00 --x11
-$ command_to_start_graphical_app
-=======
 sbatch --cpus-per-task 2 --mem 4G --time 0-01:00:00 --wrap "mycommand myoptions"
->>>>>>> 014ce4605c085d853417943f63f9b41cecf3e2f4
 ```
 
 [`srun`](https://slurm.schedmd.com/archive/slurm-24.11.4/srun.html) is sometimes also used to run multiple tasks/steps (parallel processes) from within batch scripts, which can then span multiple compute nodes and run concurrently.
