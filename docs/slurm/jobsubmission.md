@@ -137,7 +137,7 @@ If you simply want to prefer nodes with the later `zen5` CPU generation, but don
 $ sbatch --prefer=zen5 batchscript.sh
 ```
 
-Of course these options can be written in the `#SBATCH` section of the batch script as well.
+Of course these options can be written in the `#SBATCH` section of batch scripts as well.
 
 ## How to check up on the resource utilization of running jobs
 As the `srun` command can be used to run commands within job allocations you have already been granted, it can also be used to monitor the resource usage of running jobs from the inside in real time. This is possible by obtaining an interactive shell within the job allocation using `srun --jobid <jobid> --pty bash`, and then run `htop` or `top` to inspect CPU and memory usage of processes run by your user on a particular compute node. You can hit `u` to filter processes by your user, and then `t` for tree view to see all processes running within the process tree started from your slurm job. To inspect GPU usage use `nvidia-smi` or `nvtop`. Note that only a single interactive shell can be active within the same job allocation at any one time.

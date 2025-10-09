@@ -36,7 +36,7 @@ fi
 
 # start sshd server on the available port
 echo "Starting sshd on port $PORT"
-/usr/sbin/sshd -D -p "${PORT}" -h -o "UsePAM no" "${HOME}/.ssh/ssh_host_ed25519_key"
+/usr/sbin/sshd -D -p "${PORT}" -o "UsePAM no" -h "${HOME}/.ssh/ssh_host_ed25519_key"
 
 ```
 
