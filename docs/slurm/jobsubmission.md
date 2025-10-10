@@ -119,7 +119,7 @@ ARGS=(0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9)
 ```
 
 ???+ Important
-      The `bash -l` in the top "shebang" line is required for the compute nodes to be able to load software modules and conda environments correctly.
+      The `bash -l` in the top "shebang" line is required for the compute nodes to be able to load conda environments correctly.
 
 ## Requesting one or more GPUs
 If you need to use one or more GPUs you need to add `--gres=gpu:x` (where `x` refers to the number of GPUs you need) to your `sbatch`, `salloc`, or `srun` commands. Please don't do CPU work on the `gpu` partition unless you also need a GPU. Additional details [here](https://slurm.schedmd.com/archive/slurm-24.11.4/gres.html).

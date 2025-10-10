@@ -7,8 +7,8 @@ BioCloud is **only** available while connected to the local campus network. To c
 
 The hostnames of the login nodes are:
  
- - `bio-fe1.srv.aau.dk`
- - `bio-fe2.srv.aau.dk`
+ - `bio-fe01.srv.aau.dk`
+ - `bio-fe02.srv.aau.dk`
 
 After successfully logging in to one of the login nodes using any of the SSH clients mentioned below, please consult and carefully read the [Resource management](../slurm/intro.md) section to learn how to submit computing jobs correctly from a login node.
 
@@ -69,7 +69,7 @@ The SSH gateway is simply a server hosted at AAU whose only purpose is to bridge
 ## Additional configuration (optional)
 
 ### SSH config file
-To avoid typing hostnames and user names constantly here's a template SSH config file that includes all current servers. The file must be saved at certain locations depending on your OS. On Windows it's [here](https://learn.microsoft.com/en-us/windows-server/administration/openssh/openssh_server_configuration#openssh-configuration-files), and on macOS and Linux it's usually under `~/.ssh/config`. Hostnames in the file will then be auto-completed and if you've set up [SSH public key authentication](#ssh-public-key-authentication) you won't need to type anything else than for example `ssh bio-fe1.srv.aau.dk` and you're in.
+To avoid typing hostnames and user names constantly here's a template SSH config file that includes all current servers. The file must be saved at certain locations depending on your OS. On Windows it's [here](https://learn.microsoft.com/en-us/windows-server/administration/openssh/openssh_server_configuration#openssh-configuration-files), and on macOS and Linux it's usually under `~/.ssh/config`. Hostnames in the file will then be auto-completed and if you've set up [SSH public key authentication](#ssh-public-key-authentication) you won't need to type anything else than for example `ssh bio-fe01.srv.aau.dk` and you're in.
 
 #### SSH config file template
 ```plaintext
