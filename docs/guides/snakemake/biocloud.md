@@ -27,7 +27,7 @@ When you have inspected the DAG or output from the dry run and you are ready to 
 set -eu
 
 # Activate conda environment with only snakemake
-conda activate <snakemake_template>
+mamba activate <snakemake_template>
 
 # Start workflow using resources defined in the profile. Snakemake itself 
 # requires nothing, 1CPU + 1G mem is enough

@@ -49,8 +49,8 @@ If the exact Python version isn't important to you, you can install packages fro
 You can use [conda environments]() to manage software and python packages and make them available for Jupyter notebooks by installing `ipykernel` into any environment as a separate [kernel](https://docs.jupyter.org/en/latest/projects/kernels.html):
 
 ```
-conda activate myproject
-conda install ipykernel
+mamba activate myproject
+mamba install ipykernel
 python -m ipykernel install --user --name myproject --display-name myproject
 ```
 
@@ -64,8 +64,8 @@ or when already working on a notebook by changing kernel from the menus:
 
 In a similar way you can also run R code in Jupyter notebooks by installing the [IRkernel](https://irkernel.github.io/) into an environment:
 ```
-conda activate myproject
-conda install r-irkernel
+mamba activate myproject
+mamba install r-irkernel
 R -e "IRkernel::installspec(name = 'myproject-Rkernel', displayname = 'myproject-Rkernel')"
 ```
 

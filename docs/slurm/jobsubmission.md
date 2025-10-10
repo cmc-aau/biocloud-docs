@@ -85,7 +85,7 @@ A simple example SLURM `sbatch` script for a single task could look like this:
 set -euo pipefail
 
 # Load conda environment to make required software available
-conda activate minimap2
+mamba activate minimap2
 
 # Obtain number of CPUs available from the SLURM allocation itself
 # (It's best practice to use the same variable everywhere from here and onwards. If you fx change the resource requirements above it's easy to forget to update it everywhere)

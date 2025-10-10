@@ -5,22 +5,28 @@ Conda was initially created for Python packages but it can package and distribut
 
 [Cheatsheet here](https://docs.conda.io/projects/conda/en/latest/_downloads/843d9e0198f2a193a3484886fa28163c/conda-cheatsheet.pdf)
 
+???+ info "It is recommended to use mamba instead of conda"
+      As `conda` is notoriously slow, it is recommended to instead use the `mamba` command, which is written in C++ and is generally much faster. `mamba` is a drop-in replacement with identical sub-commands, so the syntax and usage remains the same. While recent versions of `conda` have adopted the much faster `libmamba` environment solver from `mamba` by default, many other functions can still be slow, for example the shell initialization which happens on login. Note that `conda` and `mamba` both use the same package cache, which can result in [permission issues](https://github.com/conda-forge/miniforge/issues/495) if you use both, so it's best to stick to one of them.
+
+???+ info "Activating conda environments in non-interactive batch jobs"
+      In non-interactive batch scripts it is important to remember to set `bash -l` in the top "shebang" line for the compute nodes to be able to load conda environments correctly, see example [here](../slurm/jobsubmission.md#single-node-single-task-example).
+
 ## Creating an environment
 To install software through conda, it must always be done in an environment. Conda itself is already installed and configured on BioCloud, so you don't need to install it first. To create an environment and install some software in it, run for example:
 
 ```
 # create+activate+install
-conda create -n myproject
-conda activate myproject
-conda install -c bioconda somepkg1=1.0 somepkg2=2.0
+mamba create -n myproject
+mamba activate myproject
+mamba install -c bioconda somepkg1=1.0 somepkg2=2.0
 
 # or in one command
-conda create -n myproject -c bioconda somepkg1 somepkg2
+mamba create -n myproject -c bioconda somepkg1 somepkg2
 ```
 
 Make sure to add the required [conda channels](https://docs.anaconda.com/psm-cloud/channels/) using `-c <channel>` from which to install the software. Usually the `bioconda` and `conda-forge` channels are all you need.
 
-The best practice is to always note down all packages including versions used in projects before you forget things to ensure reproducibility. You can always export an **activated** environment created previously and dump the exact versions used into a YAML file with `conda env export > requirements.yml`. The file could for example look like this:
+The best practice is to always note down all packages including versions used in projects before you forget things to ensure reproducibility. You can always export an **activated** environment created previously and dump the exact versions used into a YAML file with `mamba env export > requirements.yml`. The file could for example look like this:
 
 **requirements.yml**
 ```
@@ -32,19 +38,19 @@ dependencies:
  - samtools=1.18
 ```
 
-To create an environment from the file in the future simply run `conda env create -f requirements.yml`.
+To create an environment from the file in the future simply run `mamba env create -f requirements.yml`.
 
 ???+ "Note"
       When you export a conda environment to a file the file may also contain a host-specific `prefix` line, which should be removed if you or someone else need to run it elsewhere.
 
 To use the software installed in the environment remember to activate the environment first using
 ```
-conda activate myproject
+mamba activate myproject
 ```
 
 List available environments with
 ```
-conda env list
+mamba env list
 ```
 
 ## Installing packages using pip within conda environments
@@ -60,7 +66,7 @@ After activating the conda environment an install command would look like the fo
 $ python3 -m pip install <package> --no-cache-dir
 ```
 
-If you then export the conda environment to a YAML file using `conda env export > requirements.yml`, software dependencies installed using pip should show under a separate `- pip:` field, for example:
+If you then export the conda environment to a YAML file using `mamba env export > requirements.yml`, software dependencies installed using pip should show under a separate `- pip:` field, for example:
 ```
 name: myproject
 channels:
