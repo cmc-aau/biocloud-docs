@@ -8,7 +8,7 @@ Conda was initially created for Python packages but it can package and distribut
 ???+ info "It is recommended to use mamba instead of conda"
       As `conda` is notoriously slow, it is recommended to instead use the `mamba` command, which is written in C++ and is generally much faster. `mamba` is a drop-in replacement with identical sub-commands, so the syntax and usage remains the same. While recent versions of `conda` have adopted the much faster `libmamba` environment solver from `mamba` by default, many other functions can still be slow, for example the shell initialization which happens on login. Note that `conda` and `mamba` both use the same package cache, which can result in [permission issues](https://github.com/conda-forge/miniforge/issues/495) if you use both, so it's best to stick to one of them.
 
-???+ info "Activating conda environments in non-interactive batch jobs"
+???+ important "Activating conda environments in non-interactive batch jobs"
       In non-interactive batch scripts it is important to remember to set `bash -l` in the top "shebang" line for the compute nodes to be able to load conda environments correctly, see example [here](../slurm/jobsubmission.md#single-node-single-task-example).
 
 ## Creating an environment
