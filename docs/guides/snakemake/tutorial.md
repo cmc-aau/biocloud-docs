@@ -195,8 +195,5 @@ Snakemake will then create the environment(s) the first time the workflow is run
 ### Containers
 To use apptainer/singularity containers you just supply the name of the container in a container registry, for example `container: docker://biocontainers/minimap2`. If you need a container with multiple tools at once see [multi-package containers](https://github.com/BioContainers/multi-package-containers).
 
-### Software modules
-[Software environment modules](../../software/modules.md) are also supported by supplying the module name to `envmodules` in the rule definition. Modules are not as declarative and portable in nature as Conda environments or containers, however, and is therefore not recommended. See additional details [here](https://snakemake.readthedocs.io/en/stable/snakefiles/deployment.html#using-environment-modules).
-
 ## Snakemake wrappers
 The above example is rather simple and is only made for demonstrating the basics of Snakemake workflows. But if this was part of a real workflow, however, it would not be the proper way to achieve our particular goals, because someone has of course already used minimap2 in a Snakemake workflow before. So we could have saved some time and effort and instead used one of the many community-made [Snakemake wrappers](https://snakemake-wrappers.readthedocs.io/en/stable/index.html) for each rule. The format is exactly the same as a normal rule where you define `input`'s and `output`'s etc, but the exact command(s) that the rule would normally run is replaced with fx `wrapper: "v3.3.4/bio/minimap2/aligner"`. If rules for a certain tool isn't available already - you can [contribute](https://snakemake-wrappers.readthedocs.io/en/stable/contributing.html) too!
