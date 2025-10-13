@@ -1,22 +1,18 @@
 # Compute node partitions
-The compute nodes are divided into separate partitions based on their hardware configuration. This is to allow that for example CPU's from different manufacturer generations can be set up with a different [billing factor](https://slurm.schedmd.com/archive/slurm-24.11.4/slurm.conf.html#OPT_TRESBillingWeights) to ensure fair usage accounting (newer CPU's are faster), nodes with more memory (per CPU) are only used for jobs that actually require more memory, and GPU nodes are only used for jobs that require GPU's, etc. BioCloud is a quite **heterogeneous cluster** because nodes are purchased at different times, hence their hardware configuration is also different. Furthermore, the number of partitions will only increase in the future as more nodes are added to the cluster at different times, which increases complexity, making it difficult or confusing to submit jobs to the most appropriate partition(s). This can result in an inefficient cluster with longer queue times and wasted computing resources.
-
-
-???+ info "Partition selection is automatic"
-      To both make it as simple as possible for you, and to increase the overall cluster efficiency by ensuring that the most appropriate hardware is used for each job, the partition for your job(s) is assigned automatically by the SLURM scheduler. The resulting partition is selected based on several factors, where the most important are the requested **memory per CPU ratio** and any required [**node features**](jobsubmission.md#requesting-compute-nodes-with-special-features). Therefore, submitting jobs to specific partitions using the `--partition` option will have no effect, as it will be overwritten. In very specific scenarios the automatically assigned partition may not be ideal, in which case exceptions can be made, just contact an administrator.
+The compute nodes are divided into separate partitions based on their hardware configuration. This is to allow that for example CPU's from different manufacturer generations can be set up with a different [billing factor](https://slurm.schedmd.com/archive/slurm-24.11.4/slurm.conf.html#OPT_TRESBillingWeights) to ensure fair usage accounting (newer CPU's are faster), nodes with more memory (per CPU) are only used for jobs that actually require more memory, and GPU nodes are only used for jobs that require GPU's, etc. BioCloud is a quite **heterogeneous cluster** because nodes are purchased at different times, hence their hardware configuration is also different. Furthermore, the number of partitions will only increase in the future as more nodes are added to the cluster at different times, which increases complexity, making it difficult or confusing to submit jobs to the most appropriate partition(s). This can result in an inefficient cluster with longer queue times and wasted computing resources. Therefore, the most appropriate partition for each job is automatically assigned by the SLURM scheduler. Manually specifying a partition using the `--partition` option will have no effect, as it will be overridden. The partition is determined by several factors, with the most significant being the requested **memory per CPU ratio** and any specified [**node features**](jobsubmission.md#requesting-compute-nodes-with-special-features). Partitions are then allocated according to the [priority tiers](https://slurm.schedmd.com/archive/slurm-24.11.4/slurm.conf.html#OPT_PriorityTier) shown in the table below, ensuring that newer (and faster) compute nodes are always allocated first before older nodes. In certain cases, the automatically assigned partition may not be optimal, in which case manual intervention by an administrator may be necessary.
 
 ## CPU partitions
 Below is a brief overview of all CPU partitions. Details about the exact CPU model, scratch space and special features for each compute node are listed further down.
 
 ### Overview
-| Partition | Nodes | Total CPUs | Total memory | Billing factor |
-| ---: | :--: | :--: | :--: | :--- |
-| `interactive` | 1 | 288T | 1.5 TB | 0.5x |
-| `zen3` | 7 | 1312T | 6.5 TB | 0.5x |
-| `zen3x` | 2 | 448T | 4.0 TB | 1.0x |
-| `zen5` | 2 | 576T | 3.0 TB | 1.0x |
-| `zen5x` | 2 | 576T | 4.6 TB | 1.5x |
-| **TOTAL** | **14** | **3200** | **19.6 TB** | |
+| Partition | Nodes | Total CPUs | Total memory | Billing factor | Priority tier |
+| ---: | :--: | :--: | :--: | :--: | :--: |
+| `interactive` | 1 | 288T | 1.5 TB | 0.5x | - |
+| `zen3` | 7 | 1312T | 6.5 TB | 0.5x | 2nd |
+| `zen3x` | 2 | 448T | 4.0 TB | 1.0x | 4th |
+| `zen5` | 2 | 576T | 3.0 TB | 1.0x | 1st |
+| `zen5x` | 2 | 576T | 4.6 TB | 1.5x | 3rd |
+| **TOTAL** | **14** | **3200** | **19.6 TB** | | |
 
 ### The `interactive` partition
 This partition is reserved for short and small interactive jobs, where users can do data analysis, quick testing, and day-to-day work without having to wait for hours or even days due to queue time. Therefore, no batch jobs will be able to run here, and there is a max CPUs per job limit of `32` to ensure high availability. Ideally, the `interactive` partition should never be fully utilized. Furthermore, it is optimized for interactive jobs, which are usually very inefficient (e.i. the allocated CPU's do absolutely nothing when you are just typing or clicking around).
