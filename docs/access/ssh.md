@@ -77,28 +77,27 @@ To avoid typing hostnames and user names constantly here's a template SSH config
 # prevents disconnects on network glitches and wifi reconnects,
 # allows forwarding GUI apps to the client desktop etc
 Host *
-  ServerAliveInterval 60
-  ServerAliveCountMax 2
-  ExitOnForwardFailure yes
-  ForwardX11 yes
-  ForwardX11Trusted yes
-  ForwardAgent yes
+    ServerAliveInterval 60
+    ServerAliveCountMax 2
+    ExitOnForwardFailure yes
+    ForwardX11 yes
+    ForwardX11Trusted yes
 
-# use the same user name (and optionally SSH key) everywhere
-Host bio-*.srv.aau.dk sshgw.aau.dk
-  User abc@bio.aau.dk
-  Port 22
-  IdentityFile ~/.ssh/biocloud
-
-# login nodes
-Host bio-fe01.srv.aau.dk
-Host bio-fe02.srv.aau.dk
-
-# jump host for external access (to avoid using VPN)
-# uncomment the ProxyJump line to enable
-Host sshgw.aau.dk
-Host bio-*.srv.aau.dk
-#  ProxyJump sshgw.aau.dk
+# Options for all BioCloud hosts, e.g. use the same user name (and optionally SSH key) everywhere
+Host bio-* bio-*.srv.aau.dk sshgw.aau.dk
+    User abc@bio.aau.dk
+    Port 22
+    IdentityFile ~/.ssh/biocloud
+    ForwardAgent yes
+  
+# BioCloud login nodes
+# uncomment the ProxyJump line to enable connecting through sshgw.aau.dk for external access (to avoid using VPN)
+Host bio-fe*
+    #ProxyJump sshgw.aau.dk
+Host bio-fe01
+    HostName bio-fe01.srv.aau.dk
+Host bio-fe02
+    HostName bio-fe02.srv.aau.dk
 
 # authenticate with GitHub using an SSH key if needed (check guides section)
 Host github.com
