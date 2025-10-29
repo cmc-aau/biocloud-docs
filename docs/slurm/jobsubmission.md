@@ -159,7 +159,7 @@ When using `htop` you can hit `u` to filter processes to only show those running
 
 ![htop example](img/htop.png)
 
-In this example I have allocated 64 CPUs and 32GB memory for the job and currently keeping about 58 CPUs busy. That is great, but I'm barely using any memory, so the next time I should probably ask for less memory if it stays at this level for the entire duration of the job.
+In this example I have allocated 64 CPUs and 32GB memory for the job and currently keeping about 58 CPUs busy. That is great, but I'm barely using any memory, so the next time I should probably ask for less memory if it stays at this level for the entire duration of the job. Memory is only a maximum though, only peak memory usage matters.
 
 Note that if the job spans multiple nodes you have to specify which node to connect to using the `--nodelist` option. Secondly, only a single interactive shell can be active within the same job allocation at any one time.
 
