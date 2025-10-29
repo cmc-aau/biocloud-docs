@@ -140,7 +140,28 @@ $ sbatch --prefer=zen5 batchscript.sh
 Of course these options can be written in the `#SBATCH` section of batch scripts as well.
 
 ## How to check up on the resource utilization of running jobs
-As the `srun` command can be used to run commands within job allocations you have already been granted, it can also be used to monitor the resource usage of running jobs from the inside in real time. This is possible by obtaining an interactive shell within the job allocation using `srun --jobid <jobid> --pty bash`, and then run `htop` or `top` to inspect CPU and memory usage of processes run by your user on a particular compute node. You can hit `u` to filter processes by your user, and then `t` for tree view to see all processes running within the process tree started from your slurm job. To inspect GPU usage use `nvidia-smi` or `nvtop`. Note that only a single interactive shell can be active within the same job allocation at any one time.
+When jobs start running, it's important to check up on them once in a while to ensure that they run as intended before potentially wasting resources for a long time (especially CPUs). This can be done by starting an interactive shell session within running (non-interactive batch) jobs using the `srun` command. First, obtain the job ID from the queue using `sq` (convenient alias for `squeue --me`):
+
+```
+$ sq
+  JOBID   NAME       USER ACCOUNT  TIME  TIME_LEFT CPU MIN_MEM ST PRIO PARTITION NODELIST(REASON)
+2015364 dorado ksa@bio.aa     phn 32:00    2:28:00  64     32G  R  265      zen5 bio-node13
+```
+
+The job ID is also printed to the terminal when submitting jobs. Then, you can monitor the resource usage of all processes running within the job from the inside in real time using `htop` or `top` (and `nvidia-smi` or `nvtop` for GPU jobs).
+
+```
+$ srun --jobid <jobid> --pty bash
+$ htop
+```
+
+When using `htop` you can hit `u` to filter processes to only show those running by your user, and `t` for tree view to see the process tree started from each slurm job on the node.
+
+![htop example](img/htop.png)
+
+In this example I have allocated 64 CPUs and 32GB memory for the job and currently keeping about 58 CPUs busy. That is great, but I'm barely using any memory, so the next time I should probably ask for less memory if it stays at this level for the entire duration of the job.
+
+Note that if the job spans multiple nodes you have to specify which node to connect to using the `--nodelist` option. Secondly, only a single interactive shell can be active within the same job allocation at any one time.
 
 ## Most essential options
 There are plenty of options with the SLURM job submission commands. Below are the most important ones for our current setup and common use-cases. If you need anything else you can start with the [SLURM cheatsheet](https://slurm.schedmd.com/pdfs/summary.pdf), or refer to the SLURM documentation for the individual commands [`srun`](https://slurm.schedmd.com/archive/slurm-24.11.4/srun.html), [`salloc`](https://slurm.schedmd.com/archive/slurm-24.11.4/salloc.html), and [`sbatch`](https://slurm.schedmd.com/archive/slurm-24.11.4/sbatch.html).
