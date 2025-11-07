@@ -7,17 +7,17 @@ BioCloud is a quite **heterogeneous cluster** because nodes are purchased at dif
 The most appropriate partition is determined by several factors, the most significant of which are the requested **memory per CPU ratio** and any specified [**node features**](jobsubmission.md#requesting-compute-nodes-with-special-features). Partitions are allocated according to the defined [priority tiers](https://slurm.schedmd.com/archive/slurm-24.11.4/slurm.conf.html#OPT_PriorityTier) shown in the table below, ensuring that newer (and faster) compute nodes are always selected first before older nodes. Secondly, if all general compute nodes happen to be fully allocated, jobs with only modest memory requirements will still be able to run on compute nodes with extra memory instead, if available. Conversely, jobs that require extra memory per CPU will not be able to run on a general compute node as this can result in unavailable CPUs due to fully allocated memory. In certain situations, the automatically assigned partition may not be optimal, in which case manual intervention by an administrator may be necessary and exceptions can be made if it makes sense depending on the situation.
 
 ## CPU partitions
-Below is a brief overview of all CPU partitions. Details about the exact CPU model, scratch space and special features for each compute node are listed further down.
+Below is a brief overview of all CPU partitions. Details about the exact CPU model, scratch space and node features for each compute node are listed further down.
 
 ### Overview
 | Partition | Nodes | Total CPUs | Total memory | Billing factor | Priority tier |
 | ---: | :--: | :--: | :--: | :--: | :--: |
 | `interactive` | 1 | 288T | 1.5 TB | 0.5x | - |
-| `zen3` | 7 | 1312T | 6.5 TB | 0.5x | 2nd |
-| `zen3x` | 2 | 448T | 4.0 TB | 1.0x | 4th |
-| `zen5` | 2 | 576T | 3.0 TB | 1.0x | 1st |
+| `zen5` | 4 | 1088T | 6.0 TB | 1.0x | 1st |
+| `zen3` | 8 | 1312T | 6.5 TB | 0.5x | 2nd |
 | `zen5x` | 2 | 576T | 4.6 TB | 1.5x | 3rd |
-| **TOTAL** | **14** | **3200** | **19.6 TB** | | |
+| `zen3x` | 2 | 448T | 4.0 TB | 1.0x | 4th |
+| **TOTAL** | **17** | **3712** | **19.6 TB** | | |
 
 ### The `interactive` partition
 This partition is reserved for short and small interactive jobs, where users can do data analysis, quick testing, and day-to-day work without having to wait for hours or even days due to queue time. Therefore, no batch jobs will be able to run here, and there is a max CPUs per job limit of `32` to ensure high availability. Ideally, the `interactive` partition should never be fully utilized. Furthermore, it is optimized for interactive jobs, which are usually very inefficient (e.i. the allocated CPU's do absolutely nothing when you are just typing or clicking around).
@@ -33,29 +33,30 @@ These partitions are dedicated to non-interactive and efficient batch jobs that 
 
 | Hostname | CPU model | CPUs | Memory | Scratch space | Features |
 | ---: | :---: | :---: | :---: | :---: | :---: |
-| `bio-node01`| 2x AMD EPYC 7713 | 128C / 256T | 1.0 TB | 3.5 TB NVMe | `zen3` <br>`scratch` |
-| `bio-node02` | 1x AMD EPYC 7552P | 48C / 96T | 0.5 TB | | `zen3` |
-| `bio-node[03-06]` | 2x AMD EPYC 7643 | 96C / 192T | 1.0 TB | | `zen3` |
-| `bio-node07` | 2x AMD EPYC 7643 | 96C / 192T | 1.0 TB | 18 TB NVMe | `zen3`<br>`scratch` |
+| `bio-node01`| 2x AMD EPYC 7713 | 128C / 256T | 1.0 TB | 3.5 TB NVMe | `zen3`<br>`epyc7713`<br>`scratch` |
+| `bio-node02` | 1x AMD EPYC 7552P | 48C / 96T | 0.5 TB | | `zen3`<br>`epyc7552p` |
+| `bio-node[03-06]` | 2x AMD EPYC 7643 | 96C / 192T | 1.0 TB | | `zen3`<br>`epyc7643` |
+| `bio-node07` | 2x AMD EPYC 7643 | 96C / 192T | 1.0 TB | 18 TB NVMe | `zen3`<br>`epyc7643`<br>`scratch` |
 
 **`zen3x`**
 
 | Hostname | CPU model | CPUs | Memory | Scratch space | Features |
 | ---: | :---: | :---: | :---: | :---: | :---: |
-| `bio-node08` | 2x AMD EPYC 7643 | 96C / 192T | 2.0 TB | | `zen3` |
-| `bio-node09` | 2x AMD EPYC 7713 | 128C / 256T | 2.0 TB | 12.8 TB NVMe | `zen3`<br>`scratch` |
+| `bio-node08` | 2x AMD EPYC 7643 | 96C / 192T | 2.0 TB | | `zen3`<br>`epyc7643` |
+| `bio-node09` | 2x AMD EPYC 7713 | 128C / 256T | 2.0 TB | 12.8 TB NVMe | `zen3`<br>`epyc7713`<br>`scratch` |
 
 **`zen5`**
 
 | Hostname | CPU model | CPUs | Memory | Scratch space | Features |
 | ---: | :---: | :---: | :---: | :---: | :---: |
-| `bio-node[12-13]` | 2x AMD EPYC 9565 | 144C / 288T | 1.5 TB | | `zen5` |
+| `bio-node[12-13]` | 2x AMD EPYC 9565 | 144C / 288T | 1.5 TB | | `zen5`<br>`epyc9565` |
+| `bio-node[16-17]` | 2x AMD EPYC 9535 | 128C / 256T | 1.5 TB | | `zen5`<br>`epyc9535` |
 
 **`zen5x`**
 
 | Hostname | CPU model | CPUs | Memory | Scratch space | Features |
 | ---: | :---: | :---: | :---: | :---: | :---: |
-| `node[14-15]` | 2x AMD EPYC 9565 | 144C / 288T | 2.3 TB | 12.8 TB NVMe | `zen5`<br>`scratch` |
+| `node[14-15]` | 2x AMD EPYC 9565 | 144C / 288T | 2.3 TB | 12.8 TB NVMe | `zen5`<br>`epyc9565`<br>`scratch` |
 
 ## GPU partitions
 
@@ -63,4 +64,4 @@ These partitions are dedicated to non-interactive and efficient batch jobs that 
 
 | Hostname | CPU model | CPUs | Memory | Scratch space | GPU | Features |
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: |
-| `bio-node10`| 2x AMD EPYC 7313 | 32C / 64T | 256 GB | 3.0 TB NVMe | NVIDIA A10 | `zen3`<br>`scratch`<br>`a10` |
+| `bio-node10`| 2x AMD EPYC 7313 | 32C / 64T | 256 GB | 3.0 TB NVMe | NVIDIA A10 | `zen3`<br>`epyc7313`<br>`scratch`<br>`a10` |
