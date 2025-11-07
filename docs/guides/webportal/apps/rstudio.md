@@ -44,3 +44,6 @@ Then stop the job by clicking the red **Cancel** button under **My Interactive S
 The RStudio server runs in the SLURM job from within a [singularity/apptainer container](../../../software/containers.md#singularityapptainer), that is based on [Rocker](https://rocker-project.org/) container images. This means that R packages installed from the RStudio app may not work with other R installations due to different base operating system packages, so the RStudio app uses a different R library location by default, which is located under `$HOME/R/rstudio-server/R_MAJOR_VERSION`.
 
 Furthermore, because RStudio is running in an isolated Linux container, you cannot for example load your usual conda environments or issue SLURM commands from the integrated terminal, etc. Only the Ceph network storage mount points are available at their usual locations, but everything else is otherwise completely isolated from the host on which the container runs.
+
+## Known issues
+If you just see a gray background when starting the RStudio Server, you may have a stuck R session if it was abruptly terminated due to job time limit or it ran out of memory etc. Delete the `~/.local/share/rstudio` folder to reset everything. This will also delete any unsaved files you've had open recently, to save a back up just rename the folder instead to fx `rstudio_backup`.
