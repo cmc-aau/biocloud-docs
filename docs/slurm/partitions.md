@@ -43,7 +43,7 @@ These partitions are dedicated to non-interactive and efficient batch jobs that 
 | Hostname | CPU model | CPUs | Memory | Scratch space | Features |
 | ---: | :---: | :---: | :---: | :---: | :---: |
 | `bio-node08` | 2x AMD EPYC 7643 | 96C / 192T | 2.0 TB | | `zen3`<br>`epyc7643` |
-| `bio-node09` | 2x AMD EPYC 7713 | 128C / 256T | 2.0 TB | 12.8 TB NVMe | `zen3`<br>`epyc7713`<br>`scratch` |
+| `bio-node09` | 2x AMD EPYC 7713 | 128C / 256T | 2.0 TB | 12.8 TB NVMe | `zen3`<br>`epyc7713` |
 
 **`zen5`**
 
