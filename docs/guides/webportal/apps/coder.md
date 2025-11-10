@@ -27,6 +27,8 @@ You can now start working:
 
 ![code inside](img/code_inside.png)
 
+Hit ctrl+j to launch a terminal
+
 ???+ info "Closing the window"
     If you close the window or browser tab while something is running in the terminal, it will NOT continue to run in the background.
     
@@ -34,4 +36,4 @@ You can now start working:
 When you are done with your work, it's important to stop the app to free up resources for other users. You can do that by clicking the red **Cancel** button under **My Interactive Sessions**, see the screenshots above.
 
 !!! warning "Always inspect and optimize efficiency for next time!"
-    When the job completes, **!!!ALWAYS!!!** inspect the CPU and memory usage of the job in either the notification email received or using [these commands](../../../slurm/accounting.md#job-efficiency-summary) and adjust the next job accordingly! This is essential to avoid wasting resources which other people could used, and to reduce queue time.
+    When the job completes, **!!!ALWAYS!!!** inspect the CPU and memory usage of the job in either the notification email received or using [these commands](../../../slurm/accounting.md#job-efficiency-summary) and adjust the next job accordingly! This is essential to avoid wasting resources which other people could have used, and to reduce queue time.

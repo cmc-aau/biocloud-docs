@@ -38,7 +38,7 @@ When you are done with your work, it's important to stop the app to free up reso
 or click the red **Cancel** button under **My Interactive Sessions**, see the screenshots above.
 
 !!! warning "Always inspect and optimize efficiency for next time!"
-    When the job completes, **!!!ALWAYS!!!** inspect the CPU and memory usage of the job in either the notification email received or using [these commands](../../../slurm/accounting.md#job-efficiency-summary) and adjust the next job accordingly! This is essential to avoid wasting resources which other people could used, and to reduce queue time.
+    When the job completes, **!!!ALWAYS!!!** inspect the CPU and memory usage of the job in either the notification email received or using [these commands](../../../slurm/accounting.md#job-efficiency-summary) and adjust the next job accordingly! This is essential to avoid wasting resources which other people could have used, and to reduce queue time.
 
 ## Installing Python packages for Jupyter
 
