@@ -12,8 +12,8 @@ Below is a brief overview of all CPU partitions. Details about the exact CPU mod
 ### Overview
 | Partition | Nodes | Total CPUs | Total memory | Billing factor | Priority tier |
 | ---: | :--: | :--: | :--: | :--: | :--: |
-| `interactive` | 1 | 288T | 1.5 TB | 0.5x | - |
-| `zen5` | 4 | 1088T | 6.0 TB | 1.0x | 1st |
+| `interactive` | 2 | 512T | 3.0 TB | 0.5x | - |
+| `zen5` | 3 | 864T | 4.5 TB | 1.0x | 1st |
 | `zen3` | 8 | 1312T | 6.5 TB | 0.5x | 2nd |
 | `zen5x` | 2 | 576T | 4.6 TB | 1.5x | 3rd |
 | `zen3x` | 2 | 448T | 4.0 TB | 1.0x | 4th |
@@ -24,7 +24,7 @@ This partition is reserved for short and small interactive jobs, where users can
 
 | Hostname | CPU model | CPUs | Memory | Scratch space | Features |
 | ---: | :---: | :---: | :---: | :---: | :---: |
-| `bio-node11` | 2x AMD EPYC 9565 | 144C / 288T | 1.5 TB | | `zen5` |
+| `bio-node[16-17]` | 2x AMD EPYC 9535 | 128C / 256T | 1.5 TB | | `zen5`<br>`epyc9535` |
 
 ### Batch job partitions
 These partitions are dedicated to non-interactive and efficient batch jobs that can potentially run for a long time. The `slim-*` nodes generally have less memory per CPU, while the `fat-*` nodes have more memory per CPU, which is useful for jobs that require a lot of memory. The `zen3` and `zen5` features indicate the generation of AMD EPYC CPUs used in the nodes.
@@ -49,8 +49,7 @@ These partitions are dedicated to non-interactive and efficient batch jobs that 
 
 | Hostname | CPU model | CPUs | Memory | Scratch space | Features |
 | ---: | :---: | :---: | :---: | :---: | :---: |
-| `bio-node[12-13]` | 2x AMD EPYC 9565 | 144C / 288T | 1.5 TB | | `zen5`<br>`epyc9565` |
-| `bio-node[16-17]` | 2x AMD EPYC 9535 | 128C / 256T | 1.5 TB | | `zen5`<br>`epyc9535` |
+| `bio-node[11-13]` | 2x AMD EPYC 9565 | 144C / 288T | 1.5 TB | | `zen5`<br>`epyc9565` |
 
 **`zen5x`**
 
