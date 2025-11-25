@@ -16,11 +16,12 @@
  - Ability to run workflows that require MPI and GPU support
 
 ### Building container images
-Building your own containers using native `apptainer build` or `docker build` commands are not possible on BioCloud due to the specific user authentication and security configuration used. Instead you can build containers using either [cotainr](https://cotainr.readthedocs.io/en/stable/user_guide) or [enroot](https://github.com/nvidia/enroot). Other alternative ways for building containers are:
+You can build containers using `apptainer build`, which will produce a `.sif` file with everything included. You can also build containers externally by:
+ - using your own system (laptop/workstation) where you have root/elevated privileges to install Singularity or Docker and build containers
+ - using a free cloud container build service like [https://cloud.sylabs.io](https://cloud.sylabs.io) or [https://hub.docker.com/](https://hub.docker.com/)
+ - by publishing a `Dockerfile` to a GitHub repository and use GitHub actions to build and publish the container to the GitHub container registry
 
- - Using your own system (laptop/workstation) where you have root/elevated privileges to install Singularity or Docker and build containers, then transfer the container image file(s) to the BioCloud or publish it to a public container registry
- - Use a free cloud container build service like [https://cloud.sylabs.io](https://cloud.sylabs.io) or [https://hub.docker.com/](https://hub.docker.com/)
- - Publish a `Dockerfile` to a GitHub repository and use GitHub actions to build and publish the container to the GitHub container registry
+Then transfer the container image file(s) to BioCloud or publish it to a public container registry and pull it using `apptainer pull`.
 
 #### Bundling conda environments in a container
 cotainr is perhaps the easiest way to [bundle conda environments inside an apptainer container](https://cotainr.readthedocs.io/en/stable/user_guide/conda_env.html) by simply giving a path to an environment yaml file (see the [conda page](conda.md#creating-an-environment)) and choosing a base image from for example [docker hub](https://hub.docker.com/):
@@ -29,10 +30,10 @@ cotainr is perhaps the easiest way to [bundle conda environments inside an appta
 cotainr build --base-image docker://ubuntu:22.04 --conda-env condaenv.yml myproject.sif
 ```
 
-This will produce a single file anyone can use anywhere, regardless of platform and local differences in setup, etc.
+This will produce a single file anyone can use anywhere apptainer is installed, regardless of platform and local differences in setup, etc.
 
 ### Pre-built container images
-Usually it's not needed to build a container yourself unless you want to customize things in detail, since there are plenty of pre-built images already available that work straight of the box. For bioinformatic software the community-driven project [biocontainers.pro](https://biocontainers.pro/) should have anything you need, and if not - you can contribute! If you need a container with multiple tools installed see [multi-package containers](https://github.com/BioContainers/multi-package-containers).
+Usually it's not necessary to build a container yourself unless you want to customize things in detail, since there are plenty of pre-built images already available that work straight of the box. For bioinformatic software the community-driven project [biocontainers.pro](https://biocontainers.pro/) should have anything you need, and if not - you can contribute! If you need a container with multiple tools installed see [multi-package containers](https://github.com/BioContainers/multi-package-containers).
 
 ### Running a container
 ```
@@ -47,7 +48,7 @@ $ apptainer shell ubuntu_22.04.sif
 ```
 
 ### Binding (mounting) folders from the host to the container
-You almost always need to bind/mount a folder from the host machine to the container, so that it's available inside the container for input/output to the particular tool you need to use. With Singularity/Apptainer the `/tmp` folder, the current folder, and your home folder are always mounted by default. To mount additional folders use `-B`, for example:
+You almost always need to bind/mount a folder from the host machine to the container, so that it's available inside the container for input/output to the particular tool you need to use. With Singularity/Apptainer the `/tmp` folder, the current folder, and your home folder are **always** mounted by default. Sometimes personal configuration files within your home folder may interfere with whatever is installed and configured within the container (for example conda), so it can sometimes be necessary to avoid mounting your home folder by using `--no-home`. To mount additional folders use `-B`, for example:
 ```
 # Bind with the same path inside the container as on the host
 apptainer run -B /databases ubuntu_22.04.sif yourcommand --someoption somefile

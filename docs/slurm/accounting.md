@@ -99,8 +99,8 @@ Please note that the following limits may occasionally be adjusted without furth
 | [MaxTRESPU](https://slurm.schedmd.com/archive/slurm-24.11.4/sacctmgr.html#OPT_MaxTRESPerUser) <br> *Maximum number of [TRES](https://slurm.schedmd.com/archive/slurm-24.11.4/tres.html) (trackable resources) each* **user** *is able to use at once* | cpu=32,mem=128G | cpu=576 |  |
 | [MaxJobsPU](https://slurm.schedmd.com/archive/slurm-24.11.4/sacctmgr.html#OPT_MaxJobsPerUser) <br> *Maximum number of jobs each* **user** *is able to have running at once* | 10 | 200 | 500 |
 | [MaxSubmitPU](https://slurm.schedmd.com/archive/slurm-24.11.4/sacctmgr.html#OPT_MaxSubmitJobsPerUser) <br> *Maximum number of jobs each* **user** *is able to submit at once (running+pending)* | 20 | 500 | 1000 |
-| [MaxTRESPA](https://slurm.schedmd.com/archive/slurm-24.11.4/sacctmgr.html#OPT_MaxTRESPerAccount) <br> *Maximum number of [TRES](https://slurm.schedmd.com/archive/slurm-24.11.4/tres.html) (trackable resources) each* **account** *is able to use at once* | | cpu=1728 | cpu=1728 |
-| [MaxTRESRunMinsPA](https://slurm.schedmd.com/archive/slurm-24.11.4/sacctmgr.html#OPT_MaxTRESRunMinsPerAccount) <br> *Maximum number of TRES\*minutes each* **account** *is able to have running at once (e.g. 100CPU's for 1 hour corresponds to 6000 CPU minutes)* | | cpu=17500000 | cpu=30000000 |
+| [MaxTRESPA](https://slurm.schedmd.com/archive/slurm-24.11.4/sacctmgr.html#OPT_MaxTRESPerAccount) <br> *Maximum number of [TRES](https://slurm.schedmd.com/archive/slurm-24.11.4/tres.html) (trackable resources) each* **account** *is able to use at once* | | cpu=1152 | cpu=1152 |
+| [MaxTRESRunMinsPA](https://slurm.schedmd.com/archive/slurm-24.11.4/sacctmgr.html#OPT_MaxTRESRunMinsPerAccount) <br> *Maximum number of TRES\*minutes each* **account** *is able to have running at once (e.g. 100CPU's for 1 hour corresponds to 6000 CPU minutes)* | | cpu=18000000 | cpu=30000000 |
 | [MaxTRESRunMinsPU](https://slurm.schedmd.com/archive/slurm-24.11.4/sacctmgr.html#OPT_MaxTRESRunMinsPerUser) <br> *Maximum number of TRES\*minutes each* **user** *is able to have running at once (e.g. 100CPU's for 1 hour corresponds to 6000 CPU minutes)* | | cpu=6000000 |  |
 
 To see details about account associations, allowed QOS's, limits set at the user level, and more, for your user, use the following command:
@@ -113,14 +113,4 @@ abc@bio.a+       root      None   biocloud       root                    1      
 
 # all users
 $ sacctmgr show user withassoc | less
-```
-
-### Undergraduate students
-Undergraduate students (up to but NOT including master students) share resources within the `students` account and only their combined usage is limited. View current limitations with for example:
-
-```
-$ sacctmgr list account students -s format="account,priority,MaxCPUs,grpcpus,qos" | head -n 3
-   Account   Priority  MaxCPUs  GrpCPUs                  QOS 
----------- ---------- -------- -------- -------------------- 
-  students                          192               normal
 ```
