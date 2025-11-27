@@ -63,4 +63,4 @@ These partitions are dedicated to non-interactive and efficient batch jobs that 
 
 | Hostname | CPU model | CPUs | Memory | Scratch space | GPU | Features |
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: |
-| `bio-node10`| 2x AMD EPYC 7313 | 32C / 64T | 256 GB | 3.0 TB NVMe | NVIDIA A10 | `zen3`<br>`epyc7313`<br>`scratch`<br>`a10` |
+| `bio-node10`| 2x AMD EPYC 7313 | 32C / 64T | 256 GB | 3.0 TB NVMe | 2xNVIDIA A10 | `zen3`<br>`epyc7313`<br>`scratch`<br>`a10` |
