@@ -35,8 +35,8 @@ These partitions are dedicated to non-interactive and efficient batch jobs that 
 | ---: | :---: | :---: | :---: | :---: | :---: |
 | `bio-node01`| 2x AMD EPYC 7713 | 128C / 256T | 1.0 TB | 3.5 TB NVMe | `zen3`<br>`epyc7713`<br>`scratch` |
 | `bio-node02` | 1x AMD EPYC 7552P | 48C / 96T | 0.5 TB | | `zen3`<br>`epyc7552p` |
-| `bio-node[03-06]` | 2x AMD EPYC 7643 | 96C / 192T | 1.0 TB | | `zen3`<br>`epyc7643` |
-| `bio-node07` | 2x AMD EPYC 7643 | 96C / 192T | 1.0 TB | 18 TB NVMe | `zen3`<br>`epyc7643`<br>`scratch` |
+| `bio-node[03,04,06,07]` | 2x AMD EPYC 7643 | 96C / 192T | 1.0 TB | | `zen3`<br>`epyc7643` |
+| `bio-node05` | 2x AMD EPYC 7643 | 96C / 192T | 1.0 TB | 18 TB NVMe | `zen3`<br>`epyc7643`<br>`scratch` |
 
 **`zen3x`**
 
@@ -63,4 +63,4 @@ These partitions are dedicated to non-interactive and efficient batch jobs that 
 
 | Hostname | CPU model | CPUs | Memory | Scratch space | GPU | Features |
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: |
-| `bio-node10`| 2x AMD EPYC 7313 | 32C / 64T | 256 GB | 3.0 TB NVMe | 2xNVIDIA A10 | `zen3`<br>`epyc7313`<br>`scratch`<br>`a10` |
+| `bio-node10`| 2x AMD EPYC 7313 | 32C / 64T | 256 GB | 3.0 TB NVMe | NVIDIA A10 | `zen3`<br>`epyc7313`<br>`scratch`<br>`a10` |
