@@ -14,10 +14,10 @@ Below is a brief overview of all CPU partitions. Details about the exact CPU mod
 | ---: | :--: | :--: | :--: | :--: | :--: |
 | `interactive` | 2 | 512T | 3.0 TB | 0.5x | - |
 | `zen5` | 3 | 864T | 4.5 TB | 1.0x | 1st |
-| `zen3` | 8 | 1312T | 6.5 TB | 0.5x | 2nd |
+| `zen3` | 8 | 1408T | 6.5 TB | 0.5x | 2nd |
 | `zen5x` | 2 | 576T | 4.6 TB | 1.5x | 3rd |
 | `zen3x` | 2 | 448T | 4.0 TB | 1.0x | 4th |
-| **TOTAL** | **17** | **3712** | **19.6 TB** | | |
+| **TOTAL** | **17** | **3808** | **19.6 TB** | | |
 
 ### The `interactive` partition
 This partition is reserved for short and small interactive jobs, where users can do data analysis, quick testing, and day-to-day work without having to wait for hours or even days due to queue time. Therefore, no batch jobs will be able to run here, and there is a max CPUs per job limit of `32` to ensure high availability. Ideally, the `interactive` partition should never be fully utilized. Furthermore, it is optimized for interactive jobs, which are usually very inefficient (e.i. the allocated CPU's do absolutely nothing when you are just typing or clicking around).
@@ -34,7 +34,7 @@ These partitions are dedicated to non-interactive and efficient batch jobs that 
 | Hostname | CPU model | CPUs | Memory | Scratch space | Features |
 | ---: | :---: | :---: | :---: | :---: | :---: |
 | `bio-node01`| 2x AMD EPYC 7713 | 128C / 256T | 1.0 TB | 3.5 TB NVMe | `zen3`<br>`epyc7713`<br>`scratch` |
-| `bio-node02` | 1x AMD EPYC 7552P | 48C / 96T | 0.5 TB | | `zen3`<br>`epyc7552p` |
+| `bio-node02` | 2x AMD EPYC 7552 | 96C / 192T | 0.5 TB | | `zen3`<br>`epyc7552` |
 | `bio-node[03,04,06,07]` | 2x AMD EPYC 7643 | 96C / 192T | 1.0 TB | | `zen3`<br>`epyc7643` |
 | `bio-node05` | 2x AMD EPYC 7643 | 96C / 192T | 1.0 TB | 18 TB NVMe | `zen3`<br>`epyc7643`<br>`scratch` |
 
