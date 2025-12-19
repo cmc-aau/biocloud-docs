@@ -20,14 +20,14 @@ Below is a brief overview of all CPU partitions. Details about the exact CPU mod
 | **TOTAL** | **17** | **3808** | **19.6 TB** | | |
 
 ### The `interactive` partition
-This partition is reserved for short and small interactive jobs, where users can do data analysis, quick testing, and day-to-day work without having to wait for hours or even days due to queue time. Therefore, no batch jobs will be able to run here, and there is a max CPUs per job limit of `32` to ensure high availability. Ideally, the `interactive` partition should never be fully utilized. Furthermore, it is optimized for interactive jobs, which are usually very inefficient (e.i. the allocated CPU's do absolutely nothing when you are just typing or clicking around).
+This partition is reserved for short and small interactive jobs, where users can do data analysis, quick testing, and day-to-day work without having to wait for hours or even days due to queue time. Therefore, no batch jobs will be able to run here, and there is a [limited amount of resources](accounting.md#usage-limits-and-qos) available to ensure high availability. Ideally, the `interactive` partition should never be fully utilized. Furthermore, it is optimized for interactive jobs, which are usually very inefficient (e.i. the allocated CPU's do absolutely nothing when you are just typing or clicking around).
 
 | Hostname | CPU model | CPUs | Memory | Scratch space | Features |
 | ---: | :---: | :---: | :---: | :---: | :---: |
 | `bio-node[16-17]` | 2x AMD EPYC 9535 | 128C / 256T | 1.5 TB | | `zen5`<br>`epyc9535` |
 
 ### Batch job partitions
-These partitions are dedicated to non-interactive and efficient batch jobs that can potentially run for a long time. The `slim-*` nodes generally have less memory per CPU, while the `fat-*` nodes have more memory per CPU, which is useful for jobs that require a lot of memory. The `zen3` and `zen5` features indicate the generation of AMD EPYC CPUs used in the nodes.
+These partitions are dedicated to non-interactive and efficient batch jobs that can potentially run for a long time. Some nodes have a higher memory per CPU ratio than others, hence they are separated into different partitions, where those with more memory are prefixed with `x`. The partitions are otherwise named appropriately according to the generation of AMD EPYC CPUs installed in the nodes.
 
 **`zen3`**
 
@@ -58,6 +58,7 @@ These partitions are dedicated to non-interactive and efficient batch jobs that 
 | `node[14-15]` | 2x AMD EPYC 9565 | 144C / 288T | 2.3 TB | 12.8 TB NVMe | `zen5`<br>`epyc9565`<br>`scratch` |
 
 ## GPU partitions
+Nodes in this partition have GPUs installed and should ONLY be used when a GPU is needed for the job. The partition is chosen depending on the GPU model requested using the `--gres` option to `salloc`, `srun`, and `sbatch` job submission commands. Instructions on how to request a GPU node can be found in the [job submission](jobsubmission.md#requesting-one-or-more-gpus) page.
 
 **`gpu-a10`**
 
