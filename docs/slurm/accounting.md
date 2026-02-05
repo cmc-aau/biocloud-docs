@@ -16,61 +16,61 @@ Different weights are given to the individual priority factors, where the most s
 
 ```
 Job_priority =
-	(PriorityWeightQOS) * (QOS_factor)
 	(PriorityWeightAge) * (age_factor) +
 	(PriorityWeightFairshare) * (fair-share_factor) +
 	(PriorityWeightJobSize) * (job_size_factor) -
 	- nice_factor
 ```
 
-To obtain the current configured weights use `sprio -w`:
+To see the currently configured priority factor weights use `sprio -w`:
 ```
 $ sprio -w
-  JOBID PARTITION   PRIORITY       SITE        AGE  FAIRSHARE    JOBSIZE        QOS
-Weights                               1        100        800       904        1000
+  JOBID PARTITION   PRIORITY       SITE        AGE  FAIRSHARE    JOBSIZE
+Weights                               1        200        700       1920
 ```
 
 The priority of pending jobs will be shown in the job queue when running `squeue`. To see the exact contributions of each factor to the priority of a pending job use `sprio -j <jobid>`:
 ```
-$ sprio -j 1282256
-  JOBID PARTITION   PRIORITY       SITE        AGE  FAIRSHARE    JOBSIZE        QOS
-1282256 general          586          0        129        619        138          0
+$ sprio -j 2282256
+  JOBID PARTITION   PRIORITY       SITE        AGE  FAIRSHARE    JOBSIZE
+2282256 zen3,zen5        586          0        129        619        138
 ```
 
-The job **age** and **size** factors are important to avoid the situation where large jobs can get stuck in the queue for a long time because smaller jobs will always fit in everywhere much more easily. The age factor will max out to `1.0` when 3 days of queue time has been accrued for any job. The job size factor is directly proportional to the number of CPUs requested, regardless of the time limit, and is normalized to the total number of CPUs in the cluster. Therefore the weight of it will always be configured to be equal to the total number of (physical) CPUs available in the cluster.
+The job **age** and **size** factors are important to avoid the situation where large jobs can get stuck in the queue for a long time because smaller jobs will always fit in everywhere much more easily. The age factor will max out to `1.0` when 3 days of queue time has been accrued for any job. The job size factor is directly proportional to the number of CPUs requested, regardless of the time limit, and is normalized to the total number of CPUs in the cluster. Therefore `PriorityWeightJobSize` is configured to be equal to the total number of (physical) CPU cores available in the cluster.
 
 ### The fair-share factor
 As the name implies, the fair-share factor is used to ensure that users within each account have their fair share of computing resources made available to them over time. Because the individual research groups have contributed with different amounts of hardware to the cluster, the overall share of computing resources made available to them should match accordingly. Secondly, the resource usage of individual users within each account is important to consider as well, so that users who may recently have vastly overused their shares within each account will not have the highest priority. The goal of the fair-share factor is to balance the usage of all users by adjusting job priorities, so that it's possible for everyone to use their fair share of computing resources over time. The fair-share factor is calculated according to the [fair-tree algorithm](https://slurm.schedmd.com/archive/slurm-24.11.4/fair_tree.html), which is an integrated part of the SLURM scheduler. At the time of writing, it has been configured with a **usage decay half-life of 2 weeks**, and the usage data is never reset.
 
-To see the current fair-share factor for your user and the amount of shares available for each account, you can run `sshare`:
+To see the current fair-share factor for your user and the amount of shares available for each account etc, you can run `sshare`:
 
 ```
 $ sshare
-Account                    User  RawShares  NormShares    RawUsage  EffectvUsage  FairShare 
--------------------- ---------- ---------- ----------- ----------- ------------- ---------- 
-root                                          0.000000  2113260049      0.000000            
- ao                                  20000    0.007035      678087      0.000321            
- cms                                134195    0.047205           0      0.000000            
- jln                                464042    0.163233   159497849      0.075475            
- kln                                 20000    0.007035   127893108      0.060520            
- kt                                 136788    0.048117   620619813      0.293680            
- ma                                 747468    0.262932   547028231      0.258856            
- md                                 321172    0.112977    38170820      0.018063            
- ml                                  20000    0.007035     1786141      0.000845            
- mms                                136788    0.048117   205651655      0.097312            
- mrr                                145084    0.051035           1      0.000000            
- mto                                 20000    0.007035           0      0.000000            
- ndj                                 20000    0.007035     2512949      0.001189            
- pc                                 290168    0.102070           0      0.000000            
- phn                                214114    0.075317   406460415      0.192339            
-  phn                abc@bio.a+          1    0.062500     7130776      0.017544   0.072072 
- pk                                  20000    0.007035           0      0.000000            
- rw                                  20000    0.007035       28203      0.000013            
- sb                                  20000    0.007035      660663      0.000313            
- sss                                 33000    0.011608      527458      0.000250            
- students                            20000    0.007035      128587      0.000061            
- tnk                                 20000    0.007035           0      0.000000            
- ts                                  20000    0.007035       45927      0.000022            
+Account                    User  RawShares  NormShares    RawUsage  EffectvUsage  FairShare
+-------------------- ---------- ---------- ----------- ----------- ------------- ----------
+root                                          0.000000  2837264594      1.000000
+ ao                                  20000    0.006428      304293      0.000107
+ cms                                330985    0.106381    12136550      0.004278
+ cv                                  20000    0.006428        3557      0.000001
+ jln                                464042    0.149146   402995207      0.142037
+ kln                                 20000    0.006428     4674172      0.001647
+ kt                                 235183    0.075590   339372940      0.119613
+ ma                                 602384    0.193611  1134841454      0.399977
+ md                                 321172    0.103227   510724111      0.180006
+ ml                                  20000    0.006428     8882888      0.003131
+ mms                                235183    0.075590    83145730      0.029304
+ mrr                                145084    0.046631       26658      0.000009
+ mto                                 20000    0.006428           0      0.000000
+ ndj                                 20000    0.006428      493385      0.000174
+ pc                                 290168    0.093262   274092835      0.096605
+ phn                                214114    0.068818    54880782      0.019343
+  phn                abc@bio.a+          1    0.058824      903589      0.016465   0.298701
+ pk                                  20000    0.006428          48      0.000000
+ rw                                  20000    0.006428           0      0.000000
+ sb                                  20000    0.006428         207      0.000000
+ sss                                 33000    0.010606     7714721      0.002719
+ students                            20000    0.006428     2917466      0.001028
+ tnk                                 20000    0.006428           0      0.000000
+ ts                                  20000    0.006428        2633      0.000001     
 ```
 
   - `RawShares`: the amount of "shares" assigned to each account (in our setup simply the number of CPUs each account has contributed with)
@@ -95,13 +95,13 @@ Please note that the following limits may occasionally be adjusted without furth
 | ---: | :---: | :---: | :---: |
 | [UsageFactor](https://slurm.schedmd.com/archive/slurm-24.11.4/sacctmgr.html#OPT_UsageFactor) <br> *Usage accounting will be multiplied by this value* | 1.0 | 1.0 | 3.0 |
 | [Priority](https://slurm.schedmd.com/archive/slurm-24.11.4/sacctmgr.html#OPT_Priority_2) <br> *Add this number to the calculated [job priority](#job-priority)* | | | +1000 |
-| [MinPrioThres](https://slurm.schedmd.com/archive/slurm-24.11.4/sacctmgr.html#OPT_MinPrioThreshold) <br> *Minimum priority required for the job to be scheduled* | | 100 |  |
-| [MaxTRESPU](https://slurm.schedmd.com/archive/slurm-24.11.4/sacctmgr.html#OPT_MaxTRESPerUser) <br> *Maximum number of [TRES](https://slurm.schedmd.com/archive/slurm-24.11.4/tres.html) (trackable resources) each* **user** *is able to use at once* | cpu=64,mem=256G | cpu=576 |  |
+| [MinPrioThres](https://slurm.schedmd.com/archive/slurm-24.11.4/sacctmgr.html#OPT_MinPrioThreshold) <br> *Minimum priority required for the job to be scheduled* | | | |
+| [MaxTRESPU](https://slurm.schedmd.com/archive/slurm-24.11.4/sacctmgr.html#OPT_MaxTRESPerUser) <br> *Maximum number of [TRES](https://slurm.schedmd.com/archive/slurm-24.11.4/tres.html) (trackable resources) each* **user** *is able to use at once* | cpu=64,mem=256G | cpu=864 |  |
 | [MaxJobsPU](https://slurm.schedmd.com/archive/slurm-24.11.4/sacctmgr.html#OPT_MaxJobsPerUser) <br> *Maximum number of jobs each* **user** *is able to have running at once* | 10 | 200 | 500 |
 | [MaxSubmitPU](https://slurm.schedmd.com/archive/slurm-24.11.4/sacctmgr.html#OPT_MaxSubmitJobsPerUser) <br> *Maximum number of jobs each* **user** *is able to submit at once (running+pending)* | 20 | 500 | 1000 |
-| [MaxTRESPA](https://slurm.schedmd.com/archive/slurm-24.11.4/sacctmgr.html#OPT_MaxTRESPerAccount) <br> *Maximum number of [TRES](https://slurm.schedmd.com/archive/slurm-24.11.4/tres.html) (trackable resources) each* **account** *is able to use at once* | | cpu=1152 | cpu=1152 |
+| [MaxTRESPA](https://slurm.schedmd.com/archive/slurm-24.11.4/sacctmgr.html#OPT_MaxTRESPerAccount) <br> *Maximum number of [TRES](https://slurm.schedmd.com/archive/slurm-24.11.4/tres.html) (trackable resources) each* **account** *is able to use at once* | | cpu=1760 | cpu=1760 |
 | [MaxTRESRunMinsPA](https://slurm.schedmd.com/archive/slurm-24.11.4/sacctmgr.html#OPT_MaxTRESRunMinsPerAccount) <br> *Maximum number of TRES\*minutes each* **account** *is able to have running at once (e.g. 100CPU's for 1 hour corresponds to 6000 CPU minutes)* | | cpu=18000000 | cpu=30000000 |
-| [MaxTRESRunMinsPU](https://slurm.schedmd.com/archive/slurm-24.11.4/sacctmgr.html#OPT_MaxTRESRunMinsPerUser) <br> *Maximum number of TRES\*minutes each* **user** *is able to have running at once (e.g. 100CPU's for 1 hour corresponds to 6000 CPU minutes)* | | cpu=6000000 |  |
+| [MaxTRESRunMinsPU](https://slurm.schedmd.com/archive/slurm-24.11.4/sacctmgr.html#OPT_MaxTRESRunMinsPerUser) <br> *Maximum number of TRES\*minutes each* **user** *is able to have running at once (e.g. 100CPU's for 1 hour corresponds to 6000 CPU minutes)* | | cpu=8000000 |  |
 
 To see details about account associations, allowed QOS's, limits set at the user level, and more, for your user, use the following command:
 ```
