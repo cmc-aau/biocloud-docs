@@ -95,25 +95,25 @@ Perhaps a more useful way to use `sacct` is through the [reportseff](https://git
 $ reportseff -u $(whoami) --format partition,jobid,state,jobname,alloccpus,reqmem,elapsed,cputime,CPUEff,MemEff,TimeEff -S r,pd,s --since d=4
    Partition     JobID        State                       JobName                    AllocCPUS     ReqMem   Elapsed        CPUTime      CPUEff   MemEff   TimeEff 
 interactive      306282     COMPLETED                     midasok                        2         8G       00:13:07       00:26:14      4.1%    15.4%     10.9%  
-    general      306290     COMPLETED           smk-map2db-sample=barcode46             16         24G      00:01:38       00:26:08     90.6%    18.7%     2.7%   
-    general      306291     COMPLETED           smk-map2db-sample=barcode47             16         24G      00:02:14       00:35:44     92.8%    18.4%     3.7%   
-    general      306292     COMPLETED           smk-map2db-sample=barcode58             16         24G      00:02:32       00:40:32     80.3%    19.0%     4.2%   
-    general      306293     COMPLETED           smk-map2db-sample=barcode34             16         24G      00:02:16       00:36:16     78.1%    18.7%     3.8%   
-    general      306294     COMPLETED           smk-map2db-sample=barcode22             16         24G      00:02:38       00:42:08     81.1%    19.0%     4.4%   
-    general      306295     COMPLETED           smk-map2db-sample=barcode35             16         24G      00:02:26       00:38:56     79.0%    19.0%     4.1%   
-    general      306296     COMPLETED           smk-map2db-sample=barcode82             16         24G      00:01:39       00:26:24     68.9%    17.8%     2.8%   
-    general      306297     COMPLETED           smk-map2db-sample=barcode70             16         24G      00:02:04       00:33:04     76.0%    19.5%     3.4%   
-    general      306298     COMPLETED           smk-map2db-sample=barcode94             16         24G      00:01:44       00:27:44     70.1%    17.9%     2.9%   
-    general      306331     COMPLETED           smk-map2db-sample=barcode59             16         24G      00:04:00       01:04:00     87.2%    19.6%     6.7%   
-    general      306332     COMPLETED           smk-map2db-sample=barcode83             16         24G      00:02:13       00:35:28     76.3%    19.0%     3.7%   
-    general      306333     COMPLETED           smk-map2db-sample=barcode11             16         24G      00:02:49       00:45:04     81.6%    19.4%     4.7%   
-    general      306334     COMPLETED           smk-map2db-sample=barcode23             16         24G      00:03:33       00:56:48     61.6%    19.0%     5.9%   
-    general      306598     COMPLETED      smk-mapping_overview-sample=barcode46         1         4G       00:00:09       00:00:09     77.8%     0.0%     1.5%   
-    general      306601     COMPLETED      smk-mapping_overview-sample=barcode82         1         4G       00:00:09       00:00:09     77.8%     0.0%     1.5%   
-    general      306625     COMPLETED      smk-mapping_overview-sample=barcode94         1         4G       00:00:07       00:00:07     71.4%     0.0%     1.2%   
-    general      306628     COMPLETED      smk-concatenate_fastq-sample=barcode71        1         1G       00:00:07       00:00:07     71.4%     0.0%     1.2%   
-    general      306629     COMPLETED      smk-concatenate_fastq-sample=barcode70        1         1G       00:00:07       00:00:07     71.4%     0.0%     1.2%   
-    general      306630     COMPLETED      smk-concatenate_fastq-sample=barcode34        1         1G       00:00:07       00:00:07     57.1%     0.0%     1.2%   
+       zen3      306290     COMPLETED           smk-map2db-sample=barcode46             16         24G      00:01:38       00:26:08     90.6%    18.7%     2.7%   
+       zen3      306291     COMPLETED           smk-map2db-sample=barcode47             16         24G      00:02:14       00:35:44     92.8%    18.4%     3.7%   
+       zen3      306292     COMPLETED           smk-map2db-sample=barcode58             16         24G      00:02:32       00:40:32     80.3%    19.0%     4.2%   
+       zen3      306293     COMPLETED           smk-map2db-sample=barcode34             16         24G      00:02:16       00:36:16     78.1%    18.7%     3.8%   
+       zen3      306294     COMPLETED           smk-map2db-sample=barcode22             16         24G      00:02:38       00:42:08     81.1%    19.0%     4.4%   
+       zen3      306295     COMPLETED           smk-map2db-sample=barcode35             16         24G      00:02:26       00:38:56     79.0%    19.0%     4.1%   
+       zen3      306296     COMPLETED           smk-map2db-sample=barcode82             16         24G      00:01:39       00:26:24     68.9%    17.8%     2.8%   
+       zen3      306297     COMPLETED           smk-map2db-sample=barcode70             16         24G      00:02:04       00:33:04     76.0%    19.5%     3.4%   
+       zen3      306298     COMPLETED           smk-map2db-sample=barcode94             16         24G      00:01:44       00:27:44     70.1%    17.9%     2.9%   
+       zen3      306331     COMPLETED           smk-map2db-sample=barcode59             16         24G      00:04:00       01:04:00     87.2%    19.6%     6.7%   
+       zen3      306332     COMPLETED           smk-map2db-sample=barcode83             16         24G      00:02:13       00:35:28     76.3%    19.0%     3.7%   
+       zen3      306333     COMPLETED           smk-map2db-sample=barcode11             16         24G      00:02:49       00:45:04     81.6%    19.4%     4.7%   
+       zen3      306334     COMPLETED           smk-map2db-sample=barcode23             16         24G      00:03:33       00:56:48     61.6%    19.0%     5.9%   
+       zen3      306598     COMPLETED      smk-mapping_overview-sample=barcode46         1         4G       00:00:09       00:00:09     77.8%     0.0%     1.5%   
+       zen3      306601     COMPLETED      smk-mapping_overview-sample=barcode82         1         4G       00:00:09       00:00:09     77.8%     0.0%     1.5%   
+       zen3      306625     COMPLETED      smk-mapping_overview-sample=barcode94         1         4G       00:00:07       00:00:07     71.4%     0.0%     1.2%   
+       zen3      306628     COMPLETED      smk-concatenate_fastq-sample=barcode71        1         1G       00:00:07       00:00:07     71.4%     0.0%     1.2%   
+       zen3      306629     COMPLETED      smk-concatenate_fastq-sample=barcode70        1         1G       00:00:07       00:00:07     71.4%     0.0%     1.2%   
+       zen3      306630     COMPLETED      smk-concatenate_fastq-sample=barcode34        1         1G       00:00:07       00:00:07     57.1%     0.0%     1.2%   
 ```
 
 In the example above, way too much memory was requested for all the jobs in general, and also the time limits were way too long. The most important is the CPU efficiency, however, which was generally good except for one job, but it was a very small job.

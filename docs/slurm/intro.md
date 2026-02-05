@@ -11,53 +11,71 @@ Start with obtaining shell access to one of the login nodes `bio-fe[01-02].srv.a
 
 ```
 $ sinfo
-PARTITION AVAIL  TIMELIMIT  NODES  STATE NODELIST
-general*     up 14-00:00:0      3    mix bio-oscloud[02-04]
-general*     up 14-00:00:0      2   idle bio-oscloud[05-06]
-high-mem     up 28-00:00:0      1  boot^ bio-oscloud07
-high-mem     up 28-00:00:0      1  alloc bio-oscloud08
-gpu          up 14-00:00:0      1    mix bio-oscloud09
+  PARTITION AVAIL  TIMELIMIT  CPUS(A/I/O/T)     STATE       REASON  NODES        NODELIST AVAIL_FEATURES
+interactive    up 1-00:00:00   70/218/0/288     mixed         none      1      bio-node11 zen5,epyc9565
+       zen5    up 14-00:00:0  456/120/0/576     mixed         none      2 bio-node[12-13] zen5,epyc9565
+       zen5    up 14-00:00:0  106/150/0/256     mixed         none      1      bio-node17 zen5,epyc9535
+       zen5    up 14-00:00:0    0/256/0/256      idle         none      1      bio-node16 zen5,epyc9535
+      zen3*    up 14-00:00:0   164/92/0/256     mixed         none      1      bio-node01 scratch,zen3,epyc7713
+      zen3*    up 14-00:00:0   46/146/0/192     mixed         none      1      bio-node02 zen3,epyc7552
+      zen3*    up 14-00:00:0  270/306/0/576     mixed         none      3 bio-node[03,06- zen3,epyc7643
+      zen3*    up 14-00:00:0   90/102/0/192     mixed         none      1      bio-node05 scratch,zen3,epyc7643
+      zen3*    up 14-00:00:0    192/0/0/192 allocated         none      1      bio-node04 zen3,epyc7643
+      zen5x    up 14-00:00:0  276/300/0/576     mixed         none      2 bio-node[14-15] scratch,zen5,epyc9565
+      zen3x    up 14-00:00:0   164/28/0/192     mixed         none      1      bio-node08 zen3,epyc7643
+      zen3x    up 14-00:00:0  100/156/0/256     mixed         none      1      bio-node09 zen3,epyc7713
+    gpu-a10    up 14-00:00:0      0/64/0/64      idle         none      1      bio-node10 scratch,zen3,epyc7313,a10
 ```
 
 To get an overview of running jobs use `squeue`, example output:
 ```
 # everything
 $ squeue
- JOBID         NAME       USER       TIME    TIME_LEFT CPU MIN_ME ST PARTITION NODELIST(REASON)
-  2380         dRep user01@bio 9-00:31:24   4-23:28:36  80   300G  R   general bio-oscloud02
-  2389        dramv user02@bio 8-16:14:07   5-07:45:53  16   300G  R   general bio-oscloud02
-  3352       METAGE user03@cs. 1-13:00:45     10:59:15  10   125G  R   general bio-oscloud03
-  3359      ar-gtdb user02@bio 1-00:04:32   5-23:55:28  32   300G  R   general bio-oscloud03
-  3361     bac_gtdb user02@bio 1-00:03:05   5-23:56:55  32   500G  R   general bio-oscloud04
-  3366  interactive user04@bio    2:03:42   2-00:56:18  60   128G  R   general bio-oscloud02
-  3426       blastn user05@bio      41:56   3-23:18:04  96   200G  R   general bio-oscloud03
-  3430  interactive user06@bio       7:23      3:52:37   1     2G  R   general bio-oscloud02
-  3333 as-predictio user07@bio 2-19:42:49   6-04:17:11   5    16G  R       gpu bio-oscloud09
-  3372      checkm2 user02@bio   21:37:50   6-02:22:10 192  1800G  R  high-mem bio-oscloud08
+  JOBID              NAME       USER  ACCOUNT        TIME   TIME_LEFT CPU MIN_MEM ST PRIO   PARTITION NODELIST(REASON)
+2144804 OOD-RStudioServer user01@stu students     4:13:59     4:46:01  10     64G  R  340 interactive bio-node11
+2144803 OOD-VirtualDeskto user02@bio      kln     5:07:40     6:52:20  12     24G  R  325 interactive bio-node11
+2144808 OOD-RStudioServer user03@bio      phn     3:14:15     1:45:45  20    100G  R  270 interactive bio-node11
+2144913    OOD-CodeServer user04@bio       md       46:11     7:13:49  10     20G  R  142 interactive bio-node11
+2144912 OOD-RStudioServer user04@bio       md       46:21     7:13:39   4     25G  R  141 interactive bio-node11
+2144807 OOD-RStudioServer user05@bio       ma     3:31:15     8:28:45   1     12G  R   78 interactive bio-node11
+2144806    OOD-CodeServer user05@bio       ma     3:31:28     8:28:32   1      8G  R   78 interactive bio-node11
+2144816 OOD-RStudioServer user06@bio       ma     2:51:17     5:08:43  10     50G  R   75 interactive bio-node11
+2141338       semibin.S16 user07@bio       md  3-00:49:43 10-07:10:17  64    300G  R  351        zen3 bio-node04
+2141351       concoct.S16 user07@bio       md  2-23:31:34 10-08:28:26  32    300G  R  342        zen3 bio-node01
+2141299 817356b7-2ccc-4b9 user08@bio       ma  1-04:52:39  6-19:07:21  90    900G  R  284        zen3 bio-node03
+2141298 817356b7-2ccc-4b9 user08@bio       ma  1-05:47:55  6-18:12:05  90    900G  R  284        zen3 bio-node07
+2141297 817356b7-2ccc-4b9 user08@bio       ma  1-08:20:52  6-15:39:08  90    900G  R  284        zen3 bio-node05
+2141290 817356b7-2ccc-4b9 user08@bio       ma  1-13:22:11  6-10:37:49  90    900G  R  284        zen3 bio-node06
+2141259           mmlong2 user08@bio       ma  3-08:33:36  5-15:26:24  65    300G  R  278        zen3 bio-node01
 
 # your own jobs only
 $ squeue --me
  JOBID         NAME       USER       TIME    TIME_LEFT CPU MIN_ME ST PARTITION NODELIST(REASON)
-  3333 as-predictio user07@bio 2-19:42:49   6-04:17:11   5    16G  R       gpu bio-oscloud09
+  3333 as-predictio user09@bio 2-19:42:49   6-04:17:11   5    16G  R   gpu-a10 bio-node10
 ```
 
 Or get a more detailed overview per compute node of current resource allocations and which jobs are running etc. This will normally show some colored bars, but they are not visible here.
 ```
 $ sstatus
 Cluster allocation summary per partition or individual nodes (-n).
-(Numbers are reported in free/allocated/total(OS factor)).
+(Numbers are reported in free/allocated/total).
 
-Partition    |                CPUs                 |           Memory (GB)           |       GPUs        |
-==========================================================================================================
-shared       |  838 218                 /1056 (3x) | 1056 368                 /1424  |
-general      |  715 245                 /960       | 3870 765                 /4635  |
-high-mem     |  190 242                 /432       | 1608 2131                /3739  |
-gpu          |   44 20                  /64        |   84 125                 /209   |    1 1         /2
-----------------------------------------------------------------------------------------------------------
-Total:       | 1787 725                 /2512      | 6620 3389                /10009 |    1 1         /2
+Partition   |              CPUs               |           Memory (GB)            |       GPUs        |
+=====================================================================================================
+interactive |  220 68                  /288   | 1198 303                 /1501   |           
+zen5        |  537 551                 /1088  | 2572 3433                /6005   |           
+zen3        |  649 759                 /1408  |  967 5512                /6479   |           
+zen5x       |  300 276                 /576   |  942 3572                /4514   |           
+zen3x       |  184 264                 /448   |  604 3383                /3987   |           
+gpu-a10     |   64 0                   /64    |  241 0                   /241    |    2 0         /2    
+-----------------------------------------------------------------------------------------------------
+Total:      | 1954 1918                /3872  | 6525 16204               /22729  |    2 0         /2    
 
-Jobs running/pending/total:
-  23 / 1 / 24
+Total resources requested from queued jobs:
+  CPUs: 74 (3.6K CPU hours)
+
+Jobs running/queued/total:
+  42 / 1 / 43
 
 Use sinfo or squeue to obtain more details.
 ```

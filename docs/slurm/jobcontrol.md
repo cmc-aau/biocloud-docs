@@ -4,23 +4,36 @@ Below are some nice-to-know commands for controlling and checking up on running 
 ## Overall cluster status
 This will normally show some colored bars for each partition, which unfortunately doesn't render here.
 ```
+$ sstatus -n
 Cluster allocation summary per partition or individual nodes (-n).
 (Numbers are reported in free/allocated/total(OS factor)).
 
-Partition    |                CPUs                 |           Memory (GB)           |       GPUs        |
-========================================================================================================
-shared       | 1436 196                 /1632 (3x) | 2091 268                 /2359  |           
-general      |  395 373                 /768       | 2970 731                 /3701  |           
-high-mem     |  233 199                 /432       | 1803 1936                /3739  |           
-gpu          |   24 40                  /64        |   29 180                 /209   |    1 1         /2    
---------------------------------------------------------------------------------------------------------
-Total:       | 2088 808                 /2896      | 6894 3115                /10009 |    1 1         /2    
+Node       | Partition   |              CPUs               |           Memory (GB)            |      GPUs       |
+================================================================================================================
+bio-node11 | interactive |  220 68                  /288   | 1198 303                 /1501   |           
+bio-node12 | zen5        |  120 168                 /288   |   14 1487                /1501   |           
+bio-node13 | zen5        |    3 285                 /288   |  487 1014                /1501   |           
+bio-node16 | zen5        |  182 74                  /256   |  418 1083                /1501   |           
+bio-node17 | zen5        |  158 98                  /256   |  569 932                 /1501   |           
+bio-node01 | zen3        |   94 162                 /256   |   97 900                 /997    |           
+bio-node02 | zen3        |  147 45                  /192   |  293 200                 /493    |           
+bio-node03 | zen3        |  102 90                  /192   |   97 900                 /997    |           
+bio-node04 | zen3        |    0 192                 /192   |  185 812                 /997    |           
+bio-node05 | zen3        |  102 90                  /192   |   97 900                 /997    |           
+bio-node06 | zen3        |  102 90                  /192   |   97 900                 /997    |           
+bio-node07 | zen3        |  102 90                  /192   |   97 900                 /997    |           
+bio-node14 | zen5x       |  186 102                 /288   |  807 1450                /2257   |           
+bio-node15 | zen5x       |  114 174                 /288   |  135 2122                /2257   |           
+bio-node08 | zen3x       |   28 164                 /192   |   10 1983                /1993   |           
+bio-node09 | zen3x       |  156 100                 /256   |  593 1400                /1993   |           
+bio-node10 | gpu-a10     |   64 0                   /64    |  241 0                   /241    |    2 0         /2    
+-----------------------------------------------------------------------------------------------------------------
+Total:                   | 1880 1992                /3872  | 5441 17288               /22729  |    2 0         /2    
 
-Jobs running/pending/total:
-  26 / 1 / 27
+Jobs running/queued/total:
+  43 / 0 / 43
 
 Use sinfo or squeue to obtain more details.
-
 ```
 
 ## Get job status info
@@ -29,9 +42,9 @@ Use [`squeue`](https://slurm.schedmd.com/archive/slurm-24.11.4/squeue.html), for
 $ squeue
 squeue
       JOBID             NAME       USER ACCOUNT        TIME   TIME_LEFT CPU MIN_ME ST PRIO  PARTITION NODELIST(REASON)
-    1275175    RStudioServer user01@bio     acc1       0:00  3-00:00:00  32     5G PD    4    general (QOSMaxCpuPerUserLimit)
-    1275180       sshdbridge user02@bio     acc2       7:14     7:52:46   8    40G  R    6    general bio-oscloud03
-    1275170   VirtualDesktop user03@bio     acc2      35:54     5:24:06   2    10G  R    6    general bio-oscloud05
+    1275175    RStudioServer user01@bio     acc1       0:00  3-00:00:00  32     5G PD    4       zen3 (QOSMaxCpuPerUserLimit)
+    1275180       sshdbridge user02@bio     acc2       7:14     7:52:46   8    40G  R    6       zen3 bio-node03
+    1275170   VirtualDesktop user03@bio     acc2      35:54     5:24:06   2    10G  R    6       zen3 bio-node05
 ```
 
 To show only your own jobs use `squeue --me`. This is used quite often so `sq` has been made an alias of `squeue --me`. You can for example also append `--partition`, `--nodelist`, `--reservation`, and more, to only show the queue for those select partitions, nodes, or reservations.
@@ -41,12 +54,12 @@ You can also get an estimated start time for pending jobs by using `squeue --sta
 ```
 $ squeue --start
     JOBID PARTITION     NAME     USER ST          START_TIME  NODES SCHEDNODES           NODELIST(REASON)
-  1306529   general smk-mapp user01@b PD 2025-01-24T12:25:15      1 bio-oscloud02        (Resources)
-  1306530   general smk-mapp user01@b PD 2025-01-24T12:25:15      1 bio-oscloud04        (Priority)
-  1309386   general cq_EV_me user02@b PD 2025-01-24T12:25:15      1 bio-oscloud05        (Priority)
-  1306531   general smk-mapp user01@b PD 2025-01-24T12:27:02      1 bio-oscloud03        (Priority)
-  1306532   general smk-mapp user01@b PD 2025-01-25T14:46:56      1 (null)               (Priority)
-  1306533   general smk-mapp user01@b PD 2025-01-25T14:46:56      1 (null)               (Priority)
+  1306529      zen3 smk-mapp user01@b PD 2025-01-24T12:25:15      1 bio-node02        (Resources)
+  1306530      zen3 smk-mapp user01@b PD 2025-01-24T12:25:15      1 bio-node04        (Priority)
+  1309386      zen3 cq_EV_me user02@b PD 2025-01-24T12:25:15      1 bio-node05        (Priority)
+  1306531      zen3 smk-mapp user01@b PD 2025-01-24T12:27:02      1 bio-node03        (Priority)
+  1306532      zen3 smk-mapp user01@b PD 2025-01-25T14:46:56      1 (null)               (Priority)
+  1306533      zen3 smk-mapp user01@b PD 2025-01-25T14:46:56      1 (null)               (Priority)
 ...
 ```
 
@@ -152,7 +165,7 @@ Only a few job attributes can be changed after a job is submitted and **NOT** ru
 For example:
 ```
 $ scontrol update JobId=<jobid> timelimit=<new timelimit>
-$ scontrol update JobId=<jobid> partition=high-mem
+$ scontrol update JobId=<jobid> partition=zen3
 ```
 
 If the job is already running, adjusting the time limit must be done by an administrator.

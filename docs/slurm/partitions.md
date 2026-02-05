@@ -12,19 +12,19 @@ Below is a brief overview of all CPU partitions. Details about the exact CPU mod
 ### Overview
 | Partition | Nodes | Total CPUs | Total memory | Billing factor | Priority tier |
 | ---: | :--: | :--: | :--: | :--: | :--: |
-| `interactive` | 2 | 512T | 3.0 TB | 0.5x | - |
-| `zen5` | 3 | 864T | 4.5 TB | 1.0x | 1st |
+| `interactive` | 1 | 288T | 1.5 TB | 0.5x | - |
+| `zen5` | 4 | 1088T | 6.0 TB | 1.0x | 1st |
 | `zen3` | 8 | 1408T | 6.5 TB | 0.5x | 2nd |
 | `zen5x` | 2 | 576T | 4.6 TB | 1.5x | 3rd |
 | `zen3x` | 2 | 448T | 4.0 TB | 1.0x | 4th |
-| **TOTAL** | **17** | **3808** | **19.6 TB** | | |
+| **TOTAL** | **17** | **3872** | **22.6 TB** | | |
 
 ### The `interactive` partition
 This partition is reserved for short and small interactive jobs, where users can do data analysis, quick testing, and day-to-day work without having to wait for hours or even days due to queue time. Therefore, no batch jobs will be able to run here, and there is a [limited amount of resources](accounting.md#usage-limits-and-qos) available to ensure high availability. Ideally, the `interactive` partition should never be fully utilized. Furthermore, it is optimized for interactive jobs, which are usually very inefficient (e.i. the allocated CPU's do absolutely nothing when you are just typing or clicking around).
 
 | Hostname | CPU model | CPUs | Memory | Scratch space | Features |
 | ---: | :---: | :---: | :---: | :---: | :---: |
-| `bio-node[16-17]` | 2x AMD EPYC 9535 | 128C / 256T | 1.5 TB | | `zen5`<br>`epyc9535` |
+| `bio-node11` | 2x AMD EPYC 9565 | 144C / 288T | 1.5 TB | | `zen5`<br>`epyc9565` |
 
 ### Batch job partitions
 These partitions are dedicated to non-interactive and efficient batch jobs that can potentially run for a long time. Some nodes have a higher memory per CPU ratio than others, hence they are separated into different partitions, where those with more memory are prefixed with `x`. The partitions are otherwise named appropriately according to the generation of AMD EPYC CPUs installed in the nodes.
@@ -49,7 +49,8 @@ These partitions are dedicated to non-interactive and efficient batch jobs that 
 
 | Hostname | CPU model | CPUs | Memory | Scratch space | Features |
 | ---: | :---: | :---: | :---: | :---: | :---: |
-| `bio-node[11-13]` | 2x AMD EPYC 9565 | 144C / 288T | 1.5 TB | | `zen5`<br>`epyc9565` |
+| `bio-node[12-13]` | 2x AMD EPYC 9565 | 144C / 288T | 1.5 TB | | `zen5`<br>`epyc9565` |
+| `bio-node[16-17]` | 2x AMD EPYC 9535 | 128C / 256T | 1.5 TB | | `zen5`<br>`epyc9535` |
 
 **`zen5x`**
 
