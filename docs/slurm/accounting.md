@@ -39,7 +39,7 @@ $ sprio -j 2282256
 The job **age** and **size** factors are important to avoid the situation where large jobs can get stuck in the queue for a long time because smaller jobs will always fit in everywhere much more easily. The age factor will max out to `1.0` when 3 days of queue time has been accrued for any job. The job size factor is directly proportional to the number of CPUs requested, regardless of the time limit, and is normalized to the total number of CPUs in the cluster. Therefore `PriorityWeightJobSize` is configured to be equal to the total number of (physical) CPU cores available in the cluster.
 
 ### The fair-share factor
-As the name implies, the fair-share factor is used to ensure that users within each account have their fair share of computing resources made available to them over time. Because the individual research groups have contributed with different amounts of hardware to the cluster, the overall share of computing resources made available to them should match accordingly. Secondly, the resource usage of individual users within each account is important to consider as well, so that users who may recently have vastly overused their shares within each account will not have the highest priority. The goal of the fair-share factor is to balance the usage of all users by adjusting job priorities, so that it's possible for everyone to use their fair share of computing resources over time. The fair-share factor is calculated according to the [fair-tree algorithm](https://slurm.schedmd.com/archive/slurm-24.11.4/fair_tree.html), which is an integrated part of the SLURM scheduler. At the time of writing, it has been configured with a **usage decay half-life of 2 weeks**, and the usage data is never reset.
+As the name implies, the fair-share factor is used to ensure that users within each account have their fair share of computing resources made available to them over time. Because the individual research groups have contributed with different amounts of hardware to the cluster, the overall share of computing resources made available to them should match accordingly. Secondly, the resource usage of individual users within each account is important to consider as well, so that users who may recently have vastly overused their shares within each account will not have the highest priority. The goal of the fair-share factor is to balance the usage of all users by adjusting job priorities, so that it's possible for everyone to use their fair share of computing resources over time. The fair-share factor is calculated according to the [fair-tree algorithm](https://slurm.schedmd.com/archive/slurm-24.11.4/fair_tree.html), which is an integrated part of the SLURM scheduler. At the time of writing, it has been configured with a **usage decay half-life of 7 days**, and the usage data is never reset.
 
 To see the current fair-share factor for your user and the amount of shares available for each account etc, you can run `sshare`:
 
@@ -47,30 +47,32 @@ To see the current fair-share factor for your user and the amount of shares avai
 $ sshare
 Account                    User  RawShares  NormShares    RawUsage  EffectvUsage  FairShare
 -------------------- ---------- ---------- ----------- ----------- ------------- ----------
-root                                          0.000000  2837264594      1.000000
- ao                                  20000    0.006428      304293      0.000107
- cms                                330985    0.106381    12136550      0.004278
- cv                                  20000    0.006428        3557      0.000001
- jln                                464042    0.149146   402995207      0.142037
- kln                                 20000    0.006428     4674172      0.001647
- kt                                 235183    0.075590   339372940      0.119613
- ma                                 602384    0.193611  1134841454      0.399977
- md                                 321172    0.103227   510724111      0.180006
- ml                                  20000    0.006428     8882888      0.003131
- mms                                235183    0.075590    83145730      0.029304
- mrr                                145084    0.046631       26658      0.000009
+root                                          0.000000  3212978594      1.000000
+ root                abc@bio.a+          1    0.000000      327282      0.000102   0.004132
+ ao                                  20000    0.006428     1378647      0.000429
+ chem                               503366    0.161786   953637796      0.296808
+  kt                                     1    0.333333   854815349      0.896373
+  mms                                    1    0.333333    97239289      0.101967
+  sss                                    1    0.333333     1583157      0.001660
+ cms                                330985    0.106381     6550491      0.002039
+ cv                                  20000    0.006428         730      0.000000
+ jln                                464042    0.149146   270892070      0.084312
+ kln                                 20000    0.006428     9039955      0.002814
+ ma                                 602384    0.193611  1624161172      0.505500
+ md                                 321172    0.103227   245458219      0.076396
+ ml                                  20000    0.006428     3957589      0.001232
+ mrr                                145084    0.046631    16753729      0.005214
  mto                                 20000    0.006428           0      0.000000
- ndj                                 20000    0.006428      493385      0.000174
- pc                                 290168    0.093262   274092835      0.096605
- phn                                214114    0.068818    54880782      0.019343
-  phn                abc@bio.a+          1    0.058824      903589      0.016465   0.298701
- pk                                  20000    0.006428          48      0.000000
- rw                                  20000    0.006428           0      0.000000
- sb                                  20000    0.006428         207      0.000000
- sss                                 33000    0.010606     7714721      0.002719
- students                            20000    0.006428     2917466      0.001028
+ mø                                 20000    0.006428           0      0.000000
+ ndj                                 20000    0.006428      979752      0.000305
+ pc                                 290168    0.093262    56765903      0.017668
+ phn                                214114    0.068818    21357140      0.006647
+  phn                abc@bio.a+          1    0.058824     2046071      0.095803   0.322314
+ pk                                  20000    0.006428          10      0.000000
+ sb                                  20000    0.006428          42      0.000000
+ students                            20000    0.006428     1560908      0.000486
  tnk                                 20000    0.006428           0      0.000000
- ts                                  20000    0.006428        2633      0.000001     
+ ts                                  20000    0.006428      157151      0.000049
 ```
 
   - `RawShares`: the amount of "shares" assigned to each account (in our setup simply the number of CPUs each account has contributed with)
