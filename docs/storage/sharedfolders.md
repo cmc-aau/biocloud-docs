@@ -15,9 +15,6 @@ chown -R :bio_server_users@bio.aau.dk "$folder"
 # If there are already files with weak permissions, correct them with:
 chmod -R o-x "$folder"
 
-# Set correct permissions on all subfolders:
-find "$folder" -type d -exec chmod 775 {} \;
-
-# set the setGID sticky bit to ensure new files and folders inherit group ownership
-chmod 2775 "$folder"
+# Set the setGID "sticky bit" on all subfolders to ensure new files and folders will inherit group ownership:
+find "$folder" -type d -exec chmod 2775 {} \;
 ```
