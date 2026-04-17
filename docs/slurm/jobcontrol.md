@@ -157,7 +157,6 @@ scontrol write batch_script <jobid>
 Only a few job attributes can be changed after a job is submitted and **NOT** running yet. These attributes include:
 
  - time limit
- - mail options
  - job name
  - job dependency
  - QOS
@@ -169,4 +168,4 @@ $ scontrol update JobId=<jobid> timelimit=<new timelimit>
 $ scontrol update JobId=<jobid> mailtype+=TIME_LIMIT_90
 ```
 
-If the job is already running, adjusting the time limit must be done by an administrator.
+If the job is already running, adjusting the time limit must be done by an administrator, but some things are still adjustable by the user, for example `mailtype` and possibly others. For a full list see [`scontrol update job`](https://slurm.schedmd.com/archive/slurm-24.11.4/scontrol.html#SECTION_JOBS---SPECIFICATIONS-FOR-UPDATE-COMMAND).
