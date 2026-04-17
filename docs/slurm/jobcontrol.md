@@ -157,15 +157,16 @@ scontrol write batch_script <jobid>
 Only a few job attributes can be changed after a job is submitted and **NOT** running yet. These attributes include:
 
  - time limit
+ - mail options
  - job name
  - job dependency
- - partition or QOS
+ - QOS
  - nice value
 
 For example:
 ```
 $ scontrol update JobId=<jobid> timelimit=<new timelimit>
-$ scontrol update JobId=<jobid> partition=zen3
+$ scontrol update JobId=<jobid> mailtype+=TIME_LIMIT_90
 ```
 
 If the job is already running, adjusting the time limit must be done by an administrator.
