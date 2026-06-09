@@ -54,16 +54,20 @@ mamba env list
 ```
 
 ## Installing packages using pip within conda environments
-Software that can only be installed with pip have to be installed in a Conda environment by using pip inside the environment. While issues can arise, per the [Conda guide for using pip in a Conda environment](https://www.anaconda.com/blog/using-pip-in-a-conda-environment), there are some best practices to follow to reduce their likelihood:
+Software that can only be installed with pip have to be installed within a Conda environment by using pip inside the environment. While issues can arise, per the [Conda guide for using pip in a Conda environment](https://www.anaconda.com/blog/using-pip-in-a-conda-environment), there are some best practices to follow to reduce their likelihood:
 
- - Use pip only after conda package installs
+ - Ensure you have installed `pip` within the conda environment before anything, so that you are not accidentally using the system-wide installation, which will likely give you the common error `error: externally-managed-environment`
+ - Ensure the python version itself is compatible with the package you are trying to install
+ - Only use `pip` as a last resort after conda package installs (many pip packages are already available from conda repositories)
  - Use conda environments for isolation (Don't perform pip installs in the `base` environment)
  - Recreate the entire environment if changes are needed after pip packages have been installed
  - Use `--no-cache-dir` with any `pip install` commands
 
-After activating the conda environment an install command would look like the following:
+For example:
 ```
-$ python3 -m pip install <package> --no-cache-dir
+conda create -n myenv python=3.12 pip
+conda activate myenv
+python3 -m pip install <package> --no-cache-dir
 ```
 
 If you then export the conda environment to a YAML file using `mamba env export > requirements.yml`, software dependencies installed using pip should show under a separate `- pip:` field, for example:
