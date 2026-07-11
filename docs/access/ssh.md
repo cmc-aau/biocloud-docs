@@ -58,13 +58,13 @@ For a simple terminal you can on Windows use for example [PuTTY](https://www.put
 Both VS Code and MobaXterm support file transfers, but you can also use other GUI apps like [FileZilla](https://filezilla-project.org/download.php) or [WinSCP](https://winscp.net/eng/index.php). When just using a terminal there are several tools like `scp`, `rsync`, `rclone`, or `sftp`, all of which connect through the SSH protocol. You can also browse and transfer smaller files through the [interactive web portal](webportal.md) described on the next page.
 
 ## External access
-To access the servers while not directly connected to any AAU or [eduroam](https://eduroam.dk/) network there are two options. Either you connect through VPN, which will route all your traffic through AAU, or you can use the SSH gateway through `sshgw.aau.dk` for SSH connections only. If you need virtual desktop access only VPN will work (for now).
+To access the servers while not directly connected to any AAU or [eduroam](https://eduroam.dk/) network there are two options. Either you connect through VPN, which will route **all** your traffic through AAU, or you can use the SSH gateway through `sshgw.aau.dk` for SSH connections only (recommended). If you need virtual desktop access only VPN will work (for now).
 
 ### VPN
 The simplest way is to connect to the AAU VPN using the guide provided by ITS [here](https://www.its.aau.dk/vejledninger/vpn). After you connect everything should work as though you were at AAU.
 
 ### Using an SSH jump host
-The SSH gateway is simply a server hosted at AAU whose only purpose is to bridge SSH connections from the outside (open port 22 ingress) to something else on the internal AAU network. Setting up [2-factor authentication](https://www.its.aau.dk/vejledninger/mfa) is required in order to connect. To enable the "proxy jumping" you need to adjust the [SSH config file](#ssh-config-file) by uncommenting the `ProxyJump sshgw.aau.dk` line under the `*.srv.aau.dk` host, see the [SSH config template file](#ssh-config-file-template). Keep in mind that as long as it's enabled it will always connect through `sshgw.aau.dk` regardless of which network you are connected to, including the AAU network, which is not always ideal.
+The SSH gateway is simply a server hosted at AAU whose only purpose is to bridge SSH connections from the outside (open port 22 ingress) to something else on the internal AAU network. Setting up [2-factor authentication](https://www.its.aau.dk/vejledninger/mfa) is required in order to connect. To enable the "proxy jumping" you need to adjust the [SSH config file](#ssh-config-file) by uncommenting the `ProxyJump sshgw.aau.dk` line under the `*.srv.aau.dk` host, see the [SSH config template file](#ssh-config-file-template), or when just using a terminal add the `-J` option, fx `ssh -J email@sshgw.aau.dk email@bio-fe01.srv.aau.dk`. Keep in mind that as long as it's enabled it will always connect through `sshgw.aau.dk` regardless of which network you are connected to, including the AAU network, which is not always ideal, so remember to turn it off again when back at campus.
 
 ## Additional configuration (optional)
 
@@ -91,7 +91,8 @@ Host bio-* bio-*.srv.aau.dk sshgw.aau.dk
     ForwardAgent yes
   
 # BioCloud login nodes
-# uncomment the ProxyJump line to enable connecting through sshgw.aau.dk for external access (to avoid using VPN)
+# uncomment the ProxyJump line to enable a proxy connection through sshgw.aau.dk for external access (to avoid using VPN).
+# Alternatively, if just using the terminal, use the -J option, fx "ssh -J sshgw.aau.dk bio-fe01"
 Host bio-fe*
     #ProxyJump sshgw.aau.dk
 Host bio-fe01
