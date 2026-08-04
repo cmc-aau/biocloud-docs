@@ -1,5 +1,5 @@
 # Containers
-[Containers](https://www.docker.com/resources/what-container/) provide a convenient and portable way to package and run applications in a completely isolated and self-contained environment, making it easy to manage dependencies and ensure complete reproducibility and portability. Compared to [conda environments](conda.md) or software modules containers are always based on a base operating system image, usually Linux, ensuring that even the operating system is under control. Once a container is built and working as intended, it will run exactly the same forever, whereever, and is therefore the best way to bundle and distribute production-level workflows. By containerizing the application platform and its dependencies, differences in OS distributions and underlying infrastructure are abstracted away completely. Linux containers allow users to:
+[Containers](https://www.docker.com/resources/what-container/) provide a convenient and portable way to package and run applications in a completely isolated and self-contained environment, making it easy to manage dependencies and ensure complete reproducibility and portability. Compared to [conda environments](conda.md) or software modules containers are always based on a base operating system image, usually Linux, ensuring that even the operating system is under control. Once a container is built and working as intended, it will run exactly the same forever, wherever, and is therefore the best way to bundle and distribute production-level workflows. By containerizing the application platform and its dependencies, differences in OS distributions and underlying infrastructure are abstracted away completely. Linux containers allow users to:
 
  - Use software with complicated dependencies and environment requirements
  - Run an application container from the Sylabs Container Library, Docker Hub, or from self-made images from the GitHub container registry
@@ -16,12 +16,13 @@
  - Ability to run workflows that require MPI and GPU support
 
 ### Building container images
-You can build containers using `apptainer build`, which will produce a `.sif` file with everything included. You can also build containers externally by:
+You can [build an apptainer container image](https://apptainer.org/docs/user/main/build_a_container.html) from a definition file using `apptainer build`, which will produce a `.sif` file with everything included. You can also build containers externally by:
+
  - using your own system (laptop/workstation) where you have root/elevated privileges to install Singularity or Docker and build containers
  - using a free cloud container build service like [https://cloud.sylabs.io](https://cloud.sylabs.io) or [https://hub.docker.com/](https://hub.docker.com/)
  - by publishing a `Dockerfile` to a GitHub repository and use GitHub actions to build and publish the container to the GitHub container registry
 
-Then transfer the container image file(s) to BioCloud or publish it to a public container registry and pull it using `apptainer pull`.
+Then transfer the container image file(s) to BioCloud or publish it to a public container registry and pull it using `apptainer pull`. This is ideal if your code needs to be publicly available too as part of a study, enabling complete reproducibility for anyone.
 
 #### Bundling conda environments in a container
 cotainr is perhaps the easiest way to [bundle conda environments inside an apptainer container](https://cotainr.readthedocs.io/en/stable/user_guide/conda_env.html) by simply giving a path to an environment yaml file (see the [conda page](conda.md#creating-an-environment)) and choosing a base image from for example [docker hub](https://hub.docker.com/):
@@ -31,6 +32,19 @@ cotainr build --base-image docker://ubuntu:22.04 --conda-env condaenv.yml myproj
 ```
 
 This will produce a single file anyone can use anywhere apptainer is installed, regardless of platform and local differences in setup, etc.
+
+If you need to run a tool from within a conda environment that has been packaged into a docker image by someone else, depending on how the container image has been designed and built, apptainer may not be able to detect and load the conda environment first and the tool will not be available. The solution is simple though. Start a shell to figure out where conda is installed, then rebuild the apptainer image by adding 
+
+```
+Bootstrap: docker
+From: user/image:tag
+
+%environment
+  source /opt/conda/etc/profile.d/conda.sh
+  conda activate myenv
+```
+
+`apptainer build myimage.sif myimage.def`. Apptainer should now correctly activate the environment first before running any commands. Or run `apptainer exec myimage.sif conda run -n myenv yourcommand --someoption somefile`.
 
 ### Pre-built container images
 Usually it's not necessary to build a container yourself unless you want to customize things in detail, since there are plenty of pre-built images already available that work straight of the box. For bioinformatic software the community-driven project [biocontainers.pro](https://biocontainers.pro/) should have anything you need, and if not - you can contribute! If you need a container with multiple tools installed see [multi-package containers](https://github.com/BioContainers/multi-package-containers).
