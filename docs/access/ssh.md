@@ -64,7 +64,7 @@ Both VS Code and MobaXterm support file transfers, but you can also use other GU
 #SBATCH --cpus-per-task=1
 #SBATCH --mem=1G
 #SBATCH --time=2-00:00:00
-#SBATCH --mail-type=END,FAIL,TIME_LIMIT_90
+#SBATCH --mail-type=END,FAIL,TIME_LIMIT_80
 #SBATCH --mail-user=abc@bio.aau.dk
 
 rsync -avP user@externalsrc:/path/to/src/folder/ local/biocloud/destination
