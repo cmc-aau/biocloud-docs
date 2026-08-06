@@ -55,7 +55,24 @@ If you add the servers to your [SSH config file](#ssh-config-file) the server ho
 For a simple terminal you can on Windows use for example [PuTTY](https://www.putty.org/) or [msys2](https://www.msys2.org/), and the integrated terminal and the `ssh` command itself directly if on Linux or macOS (also Windows). Type `ssh email@hostname` like above to connect immediately or just the hostname if you've added them to the [SSH config file](#ssh-config-file).
 
 ## Transferring files
-Both VS Code and MobaXterm support file transfers, but you can also use other GUI apps like [FileZilla](https://filezilla-project.org/download.php) or [WinSCP](https://winscp.net/eng/index.php). When just using a terminal there are several tools like `scp`, `rsync`, `rclone`, or `sftp`, all of which connect through the SSH protocol. You can also browse and transfer smaller files through the [interactive web portal](webportal.md) described on the next page.
+Both VS Code and MobaXterm support file transfers, but you can also use other GUI apps like [FileZilla](https://filezilla-project.org/download.php) or [WinSCP](https://winscp.net/eng/index.php). When just using a terminal there are several tools like `scp`, `rsync`, `rclone`, or `sftp`, all of which connect through the SSH protocol. You can also browse and transfer smaller files through the [interactive web portal](webportal.md) described on the next page. For larger/longer transfer you can either start a virtual terminal using `tmux` on a login node, which you can detach from to keep it running when you log out, or you can submit a simple 1 CPU slurm job, which will help distribute the network load across more network interfaces instead of only the two login nodes. An example `rsync` command could look like this:
+
+```
+#!/usr/bin/bash -l
+#SBATCH --job-name=transfer
+#SBATCH --output=job_%j_%x.out
+#SBATCH --cpus-per-task=1
+#SBATCH --mem=1G
+#SBATCH --time=2-00:00:00
+#SBATCH --mail-type=END,FAIL,TIME_LIMIT_90
+#SBATCH --mail-user=abc@bio.aau.dk
+
+rsync -avP user@externalsrc:/path/to/src/folder/ local/biocloud/destination
+```
+
+Please note that the trailing `/` in both `src` and `dest` is important, because it will affect whether the folder to be transferred will be either **synchronized with** the target folder (i.e. `rsync` will ensure `src` and `dest` are identical and contain the same files and folders, though `-a` will ensure nothing is deleted at `dest`), or **copied into** the target folder. The above example command will copy the folder **into** the target folder. Remove the trailing `/` both places to **synchronize** the two places instead.
+
+`rsync` can also act as a middleman/proxy to transfer between the two places, however that is not recommended, because it will just be an extra network jump, which can result in slower transfer speed and unnecessary network load. The best is always to run `rsync` at one of either `src` and `dest`, so that the transfer is direct, not with a third host involved. BioCloud is not exposed to the internet, so you will most likely always have to run it here, when the external host is publicly exposed.
 
 ## External access
 To access the servers while not directly connected to any AAU or [eduroam](https://eduroam.dk/) network there are two options. Either you connect through VPN, which will route **all** your traffic through AAU, or you can use the SSH gateway through `sshgw.aau.dk` for SSH connections only (recommended). If you need virtual desktop access only VPN will work (for now).
