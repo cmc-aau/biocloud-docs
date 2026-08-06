@@ -54,7 +54,7 @@ If you add the servers to your [SSH config file](#ssh-config-file) the server ho
 ### Just a terminal
 For a simple terminal you can on Windows use for example [PuTTY](https://www.putty.org/) or [msys2](https://www.msys2.org/), and the integrated terminal and the `ssh` command itself directly if on Linux or macOS (also Windows). Type `ssh email@hostname` like above to connect immediately or just the hostname if you've added them to the [SSH config file](#ssh-config-file).
 
-## Transferring files
+## Transferring data to/from BioCloud
 Both VS Code and MobaXterm support file transfers, but you can also use other GUI apps like [FileZilla](https://filezilla-project.org/download.php) or [WinSCP](https://winscp.net/eng/index.php). When just using a terminal there are several tools like `scp`, `rsync`, `rclone`, or `sftp`, all of which connect through the SSH protocol. You can also browse and transfer smaller files through the [interactive web portal](webportal.md) described on the next page. For larger/longer transfer you can either start a virtual terminal using `tmux` on a login node, which you can detach from to keep it running when you log out, or you can submit a simple 1 CPU slurm job, which will help distribute the network load across more network interfaces instead of only the two login nodes. An example `rsync` command could look like this:
 
 ```
