@@ -59,7 +59,7 @@ To move files between your personal computer and BioCloud, you can use the file 
 
 For smaller transfers, the [interactive web portal](webportal.md) is another convenient option.
 
-For larger or longer transfers, especially from external sources like another HPC system, you can use either a persistent session on a login node or a non-interactive SLURM job in which to run the transfer. On a login node, use [`tmux`](https://github.com/tmux/tmux/wiki/Getting-Started) or [`screen`](https://linuxize.com/post/how-to-use-linux-screen/#starting-a-screen-session) to keep the transfer running after you disconnect. For a compute node, submit a simple 1-CPU SLURM job like the example below. Running the transfer on a compute node also helps spread the network load across more interfaces than the login nodes alone.
+For larger or longer transfers, especially from external sources like another HPC system, you can use either a persistent session on a login node or a non-interactive SLURM job to run the transfer on a compute node. On a login node, use [`tmux`](https://github.com/tmux/tmux/wiki/Getting-Started) or [`screen`](https://linuxize.com/post/how-to-use-linux-screen/#starting-a-screen-session) to keep the transfer running after you disconnect. For transferring through a compute node, submit a simple 1-CPU SLURM job like the example below. Running the transfer on a compute node also helps spread the network load across more interfaces than the login nodes alone.
 
 Example `rsync` batch script:
 
