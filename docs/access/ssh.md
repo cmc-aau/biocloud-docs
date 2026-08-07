@@ -78,6 +78,8 @@ rsync -avP user@externalsrc:/path/to/src/folder/ local/biocloud/destination
 
 Note the trailing `/` in both `src` and `dest`: it changes the behavior of `rsync`. With the trailing slash, `rsync` copies the contents of the source folder into the target folder. Without the trailing slash, it copies the source folder itself into the target location. If you want the two directories to be synchronized, omit the trailing slash on both paths.
 
+Note that a non-interactive SLURM job cannot prompt for a password, so it will likely fail unless you configure public-key authentication for the external host, just as you would do for BioCloud logins, [see below](#ssh-public-key-authentication).
+
 Avoid using `rsync` as a proxy through a third host whenever possible. A proxy transfer adds an extra network hop, which usually makes the transfer slower and increases load. Because BioCloud is not directly exposed to the internet, you will normally need to run transfers from BioCloud itself when the external source is publicly reachable.
 
 ## External access
