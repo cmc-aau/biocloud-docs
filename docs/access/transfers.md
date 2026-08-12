@@ -1,7 +1,7 @@
 # Transferring data to/from BioCloud
 To move files between your personal computer and BioCloud, you can use the file transfer support built into VS Code or MobaXterm. Other GUI tools such as [FileZilla](https://filezilla-project.org/download.php) or [WinSCP](https://winscp.net/eng/index.php) also work well. From a terminal, common SSH-based tools include `scp`, `rsync`, `rclone`, and `sftp`.
 
-For smaller transfers, the [interactive web portal](webportal.md) is another convenient option.
+For transferring less than 10GB, the [interactive web portal](webportal.md) is another convenient option.
 
 For larger or longer transfers, especially from external sources like another HPC system, you can use either a persistent session on a login node through a [`tmux`](https://github.com/tmux/tmux/wiki/Getting-Started) or [`screen`](https://linuxize.com/post/how-to-use-linux-screen/#starting-a-screen-session) session to keep the transfer running after you disconnect, or submit a non-interactive SLURM job to run the transfer on a compute node. For transferring through a compute node, submit a simple 1-CPU SLURM job like the example below. Running the transfer on a compute node also helps spread the network load across more interfaces than the login nodes alone, and you will also get an email when it's done.
 
