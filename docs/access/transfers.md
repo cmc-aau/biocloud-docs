@@ -1,4 +1,4 @@
-## Transferring data to/from BioCloud
+# Transferring data to/from BioCloud
 To move files between your personal computer and BioCloud, you can use the file transfer support built into VS Code or MobaXterm. Other GUI tools such as [FileZilla](https://filezilla-project.org/download.php) or [WinSCP](https://winscp.net/eng/index.php) also work well. From a terminal, common SSH-based tools include `scp`, `rsync`, `rclone`, and `sftp`.
 
 For smaller transfers, the [interactive web portal](webportal.md) is another convenient option.
