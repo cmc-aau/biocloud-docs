@@ -1,5 +1,12 @@
 # Transferring data to/from BioCloud
-To move files between your personal computer and BioCloud, you can use the file transfer support built into VS Code or MobaXterm. Other GUI tools such as [FileZilla](https://filezilla-project.org/download.php) or [WinSCP](https://winscp.net/eng/index.php) also work well. From a terminal, common SSH-based tools include `scp`, `rsync`, `rclone`, and `sftp`.
+To move files between your personal computer and BioCloud, you can use the file transfer support built into VS Code or MobaXterm. Other GUI tools such as [FileZilla](https://filezilla-project.org/download.php) or [WinSCP](https://winscp.net/eng/index.php) also work well. From a terminal, common SSH-based tools include `scp`, `rsync`, `rclone`, and `sftp`. An example `rsync` command could look like this:
+
+```
+rsync -avP /path/to/local/folder abc@bio.aau.dk@bio-fe02.srv.aau.dk:path/to/destination/
+```
+
+???+ "Pay attention to trailing slashes `/` when using `rsync`"
+      Note the trailing `/` in both `src` and `dest`: it changes the behavior of `rsync`. With the trailing slash, `rsync` copies the contents of the source folder into the target folder. Without the trailing slash, it copies the source folder itself into the target location. If you want the two directories to be synchronized, omit the trailing slash on both paths. You can think of a trailing `/` on a source as meaning "copy the contents of this directory" as opposed to "copy the directory by name".
 
 For transferring less than 10GB, the [interactive web portal](webportal.md) is another convenient option.
 
@@ -20,9 +27,7 @@ Example `rsync` batch script:
 rsync -avP user@externalsrc:/path/to/src/folder/ local/biocloud/destination
 ```
 
-Note the trailing `/` in both `src` and `dest`: it changes the behavior of `rsync`. With the trailing slash, `rsync` copies the contents of the source folder into the target folder. Without the trailing slash, it copies the source folder itself into the target location. If you want the two directories to be synchronized, omit the trailing slash on both paths.
-
-Avoid using `rsync` as a proxy through a third host whenever possible. A proxy transfer adds an extra network hop, which usually makes the transfer slower and increases load. Because BioCloud is not directly exposed to the internet, you will normally need to run transfers from BioCloud itself when the external source is publicly reachable.
+Avoid using `rsync` as a proxy through a third host whenever possible. A proxy transfer adds an extra network hop, which usually makes the transfer slower and increases load unnecessarily. Because BioCloud is not directly exposed to the internet, you will normally need to run transfers from BioCloud itself when the external source is publicly reachable.
 
 ???+ "Batch jobs are non-interactive"
       Note that a non-interactive SLURM job cannot prompt for a password, so it will likely fail unless you configure public-key authentication for the external host, just as you would do for BioCloud logins, refer to the section in [Shell access through SSH](ssh.md#ssh-public-key-authentication).
