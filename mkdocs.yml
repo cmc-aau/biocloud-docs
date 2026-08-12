@@ -9,6 +9,7 @@ nav:
   - Access:
     - access/ssh.md
     - access/webportal.md
+    - access/transfers.md
   - Resource management:
     - slurm/intro.md
     - slurm/jobsubmission.md
