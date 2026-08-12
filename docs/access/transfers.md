@@ -25,7 +25,7 @@ Note the trailing `/` in both `src` and `dest`: it changes the behavior of `rsyn
 Avoid using `rsync` as a proxy through a third host whenever possible. A proxy transfer adds an extra network hop, which usually makes the transfer slower and increases load. Because BioCloud is not directly exposed to the internet, you will normally need to run transfers from BioCloud itself when the external source is publicly reachable.
 
 ???+
-    Note that a non-interactive SLURM job cannot prompt for a password, so it will likely fail unless you configure public-key authentication for the external host, just as you would do for BioCloud logins, refer to the section in [Shell access through SSH](#ssh-public-key-authentication).
+        Note that a non-interactive SLURM job cannot prompt for a password, so it will likely fail unless you configure public-key authentication for the external host, just as you would do for BioCloud logins, refer to the section in [Shell access through SSH](#ssh-public-key-authentication).
 
 ## Transferring DNA sequencing data from lab workstations to biocloud
 The DNA lab has several workstations for DNA sequencing and basecalling on ONT platforms. A transfer script is installed on those workstations. Start it from the desktop menu or by typing `biocloudtransfer` in a terminal. The script then guides you through copying the data into the correct PI/project folder under `/raw_data` with the proper write-protected permissions.
