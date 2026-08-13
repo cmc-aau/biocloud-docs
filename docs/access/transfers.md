@@ -2,11 +2,20 @@
 To move files between your personal computer and BioCloud, you can use the file transfer support built into VS Code or MobaXterm. Other GUI tools such as [FileZilla](https://filezilla-project.org/download.php) or [WinSCP](https://winscp.net/eng/index.php) also work well. From a terminal, common SSH-based tools include `scp`, `rsync`, `rclone`, and `sftp`. An example `rsync` command could look like this:
 
 ```
-rsync -avP /path/to/local/folder abc@bio.aau.dk@bio-fe02.srv.aau.dk:path/to/destination/
+# always use -a or archive mode to ensure no files will be deleted at the destination when rsync tries to synchronize the two (i.e. ensure contents are identical)
+rsync -avP /path/to/local/folder/ abc@bio.aau.dk@bio-fe02.srv.aau.dk:path/to/destination/folder/
 ```
 
 ???+ "Pay attention to trailing slashes `/` when using `rsync`"
-      Note the trailing `/` in both `src` and `dest`: it changes the behavior of `rsync`. With the trailing slash, `rsync` copies the contents of the source folder into the target folder. Without the trailing slash, it copies the source folder itself into the target location. If you want the two directories to be synchronized, omit the trailing slash on both paths. You can think of a trailing `/` on a source as meaning "copy the contents of this directory" as opposed to "copy the directory by name".
+      Note the trailing `/` in `src` and `dest`: it changes the behavior of `rsync`. With the trailing slash on the source path, `rsync` copies the contents of the source folder into the target folder. Without the trailing slash, it copies the source folder itself into the target location. If you want the two directories to be synchronized, keep the slash on the source and use the same basename for the two folders. You can think of a trailing `/` on a source as meaning "copy the contents of this directory" as opposed to "copy the directory by name". For example:
+      ```      
+      1. rsync -avP test  login@remote:/home/login/test   "test" directory is copied inside of existing "test" on remote (structure is then test/test/...)
+      2. rsync -avP test  login@remote:/home/login/test/  same as above
+      3. rsync -avP test/ login@remote:/home/login/test   content of "test" directory is synchronized with the remote "test" directory
+      4. rsync -avP test/ login@remote:/home/login/test/  same as above
+      5. rsync -avP test  login@remote:/home/login/       same as above
+      6. rsync -avP test  login@remote:/home/login        same as above
+      ```
 
 For transferring less than 10GB, the [interactive web portal](webportal.md) is another convenient option.
 
