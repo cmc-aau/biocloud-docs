@@ -22,9 +22,12 @@ Similar to [conda packages](conda.md), usually it's not necessary to build a con
 
 ![minimap2 container section on bioconda](img/bioconda_container_section.png)
 
-Container images are always tagged for each version or release, so you have to **pick a specific tag, otherwise you will likely get an error**. But that's perfect, because it **enforces reproducibility**! Using specific tags ensures that the container image never (EVER) changes, and thus will continue to run even decades from now on any system. **NEVER use a "`latest`" tag** if it's available, because you will get different versions depending on when the container image is pulled every time you run your code (though individual image tags are of course cached locally). This can cause downstream trouble, inconsistent output, and code that used to work just fine can suddenly break - all impacting reproducibility significantly. To obtain a tag name for a particular container image, pick a tag from the list and copy it's name. For example to run `minimap2` you would likely choose the most recent tag `2.31--h118bc1c_0`:
+Container images are always tagged for each version or release, so you have to **pick a specific tag, otherwise you will likely get an error**. But that's perfect, because it **enforces reproducibility**! Using specific tags ensures that the container image never (EVER) changes, and thus will continue to run even decades from now on any system. Pick a tag from the list and copy it's name. For example to run `minimap2` you would likely choose the most recent tag `2.31--h118bc1c_0`:
 
 ![biocontainers.pro image tags list](img/biocontainers_tags.png)
+
+???+ warning "Never use a `latest` tag!"
+        NEVER use a "`latest`" tag if available! You will obtain different versions of the container image (and thus the software it contains) depending on when the container image is pulled every time you run your code (though individual image tags are of course cached locally). This can cause downstream trouble, inconsistent output, and code that used to work just fine can suddenly break - all impacting reproducibility significantly. Not exactly the point.
 
 To now run the tool simply prepend `apptainer run docker://quay.io/biocontainers/image:tag` to the command you would normally use to run the tool, and that's it. For example to run a simple `minimap2` mapping, you would normally write something like this in your batch scripts:
 
@@ -38,7 +41,9 @@ To run minimap2 from a container instead, write for example:
 apptainer run docker://quay.io/biocontainers/minimap2:2.31--h118bc1c_0 minimap2 database.fastq input.fastq > out.file
 ```
 
-And **that's it!**. It's easy to adapt all your current scripts to use containers this way instead of using [conda environments](conda.md), which can be slow to build, but more importantly they often contain tens of thousands of files, which can significantly burden the network storage when many users use conda environments simultaneously. **It's therefore recommended to use containers as much as possible!**
+And **that's it!**
+
+It's easy to adapt all your current scripts to use containers this way instead of using [conda environments](conda.md), which can be slow to build, but more importantly they often contain tens of thousands of files, which can significantly burden the network storage when many users use conda environments simultaneously. **It's therefore recommended to use containers as much as possible!**
 
 ???+ important "Files in your home folder can cause trouble!"
       In addition to the [network storage mount points](../storage/intro/#mount-points_1), by default the `/tmp` folder, your home folder, and the folder from where apptainer is run are mounted and made available inside the container. However, sometimes configuration files at standardized locations within your home folder may interfere with whatever is installed and configured inside the container (for example conda or R packages), and it may be necessary to avoid mounting your home folder entirely by using `--no-home`.
