@@ -17,8 +17,8 @@ Furthermore, when using containers, all software and exact versions (image tags)
  - Ease of deployment: no daemon running as root on each node, a container is simply an executable
  - Ability to run workflows that require MPI and GPU support
 
-### Pre-built container images specifically for bioinformatic software
-Similar to [conda packages](conda.md), usually it's not necessary to build a container image yourself unless you want to customize things in detail, since there are a plethora of free, pre-built container images already publicly available that work straight of the box. For bioinformatic software the community-driven project [biocontainers.pro](https://biocontainers.pro/) has made **ALL** conda packages from the [bioconda channel](https://bioconda.github.io/index.html) available as container images, so it should contain anything and everything you need (more than 11000 tools at the time of writing), and if not - you can contribute! All their container images are hosted on the container registry [quay.io](https://quay.io/organization/biocontainers), but they are also listed in the [bioconda package index](https://bioconda.github.io/conda-package_index.html). Under each tool there should be a "Container" section like this one, where you should see a link to a list of available tags:
+### Pre-built container images specifically for bioinformatics
+Similar to [conda packages](conda.md), usually it's not necessary to build a container image yourself unless you want to customize things in detail, since there are a plethora of free, pre-built container images already publicly available that work straight of the box. For bioinformatic software the community-driven project [biocontainers.pro](https://biocontainers.pro/) has made **ALL** conda packages from the [bioconda channel](https://bioconda.github.io/index.html) available as container images, so it should contain anything and everything you need (more than 11000 tools at the time of writing), and if not - you can contribute! All their container images are hosted on the container registry [quay.io](https://quay.io/organization/biocontainers), and they are also listed in the [bioconda package index](https://bioconda.github.io/conda-package_index.html). Under each tool there should be a "Container" section like this one, where you should see a link to a list of available tags:
 
 ![minimap2 container section on bioconda](img/bioconda_container_section.png)
 
@@ -35,7 +35,7 @@ To now run the tool simply prepend `apptainer run docker://quay.io/biocontainers
 minimap2 database.fastq input.fastq > out.file
 ```
 
-To run minimap2 from a container instead, write for example:
+To run `minimap2` from a container instead, write for example:
 
 ```
 apptainer run docker://quay.io/biocontainers/minimap2:2.31--h118bc1c_0 minimap2 database.fastq input.fastq > out.file
