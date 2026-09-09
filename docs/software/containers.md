@@ -26,8 +26,8 @@ Container images are always tagged for each version or release, so you have to *
 
 ![biocontainers.pro image tags list](img/biocontainers_tags.png)
 
-???+ warning "Never use a \"latest\" tag!"
-        NEVER use a "`latest`" tag if available! You will obtain different versions of the container image (and thus the software it contains) depending on when the container image is pulled every time you run your code (though individual image tags are of course cached locally). This can cause downstream trouble, inconsistent output, and code that used to work just fine can suddenly break - all impacting reproducibility significantly. Not exactly the point.
+???+ warning "Never use a 'latest' tag!"
+      NEVER use a "latest" tag if available! You will obtain different versions of the container image (and thus the software it contains) depending on when the container image is pulled every time you run your code (though individual image tags are of course cached locally). This can cause downstream trouble, inconsistent output, and code that used to work just fine can suddenly break - all impacting reproducibility significantly. Not exactly the point.
 
 To now run the tool simply prepend `apptainer run docker://quay.io/biocontainers/image:tag` to the command you would normally use to run the tool, and that's it. For example to run a simple `minimap2` mapping, you would normally write something like this in your batch scripts:
 
