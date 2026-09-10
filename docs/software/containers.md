@@ -46,7 +46,7 @@ And **that's it!**
 It's easy to adapt all your current scripts to use containers this way instead of using [conda environments](conda.md), which can be slow to build, but more importantly they often contain tens of thousands of files, which can significantly burden the network storage when many users use conda environments simultaneously. **It's therefore recommended to use containers as much as possible!**
 
 ???+ important "Files in your home folder can cause trouble!"
-      In addition to the [network storage mount points](../storage/intro/#mount-points_1), by default the `/tmp` folder, your home folder, and the folder from where apptainer is run are mounted and made available inside the container. However, sometimes configuration files at standardized locations within your home folder may interfere with whatever is installed and configured inside the container (for example conda environments or R package libraries), so sometimes it may be necessary to avoid mounting your home folder entirely by using `--no-home`.
+      In addition to the [network storage mount points](../storage/intro.md#mount-points_1), by default the `/tmp` folder, your home folder, and the folder from where apptainer is run are mounted and made available inside the container. However, sometimes configuration files at standardized locations within your home folder may interfere with whatever is installed and configured inside the container (for example conda environments or R package libraries), so sometimes it may be necessary to avoid mounting your home folder entirely by using `--no-home`.
 
 ### Pulling a container image to a file
 Apptainer will normally cache the images you pull, which is ideal because people often use some of the same tools across multiple projects. But alternatively, you can also pull the container images to a single file if necessary and run from that instead:
@@ -94,10 +94,10 @@ From: user/image:tag
 `apptainer build myimage.sif myimage.def`. Apptainer should now correctly activate the environment first before running any commands. Or run `apptainer exec myimage.sif conda run -n myenv yourcommand --someoption somefile`.
 
 ???+ info "Build containers on a login node, not within a slurm job"
-    Because [`/tmp` is mounted within a separate namespace](../storage/local/) different from the system namespace inside slurm jobs, it is not possible to build containers within slurm jobs. It must be done on a login node. It should not require a lot of resources.
+    Because [`/tmp` is mounted within a separate namespace](../storage/local.md) different from the system namespace inside slurm jobs, it is not possible to build containers within slurm jobs. It must be done on a login node. It should not require a lot of resources.
 
 ### GPU support
-To make a GPU available for an apptainer container simply include the `--nvccli` flag (not `--nv`) and ensure to also [request a GPU](../slurm/jobsubmission/#requesting-one-or-more-gpus) for the job.
+To make a GPU available for an apptainer container simply include the `--nvccli` flag (not `--nv`) and ensure to also [request a GPU](../slurm/jobsubmission.md#requesting-one-or-more-gpus) for the job.
 
 ## Docker containers
 Docker itself is not supported directly for non-admin users due to security and compatibility issues with our user authentication mechanism, but you can instead just run them through apptainer by prepending `docker://` to the container path, described above. Refer to [this page](https://apptainer.org/docs/user/main/docker_and_oci.html) for additional details.

@@ -38,7 +38,7 @@ When you are done with your work, it's important to stop the app to free up reso
 Then stop the job by clicking the red **Cancel** button under **My Interactive Sessions**, see the screenshots above.
 
 !!! warning "Always inspect and optimize efficiency for next time!"
-    When the job completes, **!!!ALWAYS!!!** inspect the CPU and memory usage of the job in either the notification email received or using [these commands](../../../slurm/accounting.md#job-efficiency-summary) and adjust the next job accordingly! This is essential to avoid wasting resources which other people could have used, and to reduce queue time.
+    When the job completes, **!!!ALWAYS!!!** inspect the CPU and memory usage of the job in either the notification email received or using [these commands](../../../slurm/usagereporting.md#job-efficiency-summary) and adjust the next job accordingly! This is essential to avoid wasting resources which other people could have used, and to reduce queue time.
 
 ## Containerization
 The RStudio server runs in the SLURM job from within a [singularity/apptainer container](../../../software/containers.md#singularityapptainer), that is based on [Rocker](https://rocker-project.org/) container images. This means that R packages installed from the RStudio app may not work with other R installations due to different base operating system packages, so the RStudio app uses a different R library location by default, which is located under `$HOME/R/rstudio-server/R_MAJOR_VERSION`.
@@ -47,3 +47,7 @@ Furthermore, because RStudio is running in an isolated Linux container, you cann
 
 ## Known issues
 If you only see a gray background when starting the RStudio Server, you may have a stuck R session if it was abruptly terminated due to job time limit or it ran out of memory etc. To resolve this problem delete the `~/.local/share/rstudio` folder to reset everything. This will also delete any unsaved files you've had open recently, so if you want you can also just rename the folder instead to fx `rstudio_backup` to create a backup.
+
+TODO: how to run markdown, install tinytex!
+open terminal in RStudio and run `quarto install tinytex`
+version likely incompatible with different R versions so stick to one

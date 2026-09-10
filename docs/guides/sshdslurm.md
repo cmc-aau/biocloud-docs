@@ -9,7 +9,7 @@ When using the [Visual Studio Code IDE](https://code.visualstudio.com/) to work 
 When you normally connect to a remote server, you use an SSH client to connect to the SSH daemon `sshd`, which is a service running in the background on the server. You then simply talk to this daemon using the SSH protocol to execute commands on the server. The trick here is then to start a separate `sshd` process that runs within a SLURM job to connect to instead through a bridge connection to the job through one of the login nodes.
 
 ## SLURM job script
-[Log in through SSH](../access/ssh.md) on one of the login nodes, copy the following SLURM batch script somewhere, and [adjust the resource requirements](../slurm/jobsubmission.md#non-interactive-jobs) for your session. Submit the job using `sbatch` as usual, and remember to [cancel](../slurm/jobcontrol.md#cancel-a-job) it when you are done. It won't stop when you close the VS Code window on your computer unless it runs out of time. You will have to submit a job like this every time you want to use VS Code interactively (for anything else than code editing and file browsing etc). 
+[Log in through SSH](../access/ssh.md) on one of the login nodes, copy the following SLURM batch script somewhere, and [adjust the resource requirements](../slurm/jobsubmission.md#batch-jobs-non-interactive-jobs) for your session. Submit the job using `sbatch` as usual, and remember to [cancel](../slurm/jobcontrol.md#cancel-a-job) it when you are done. It won't stop when you close the VS Code window on your computer unless it runs out of time. You will have to submit a job like this every time you want to use VS Code interactively (for anything else than code editing and file browsing etc). 
 
 ```
 #!/bin/bash
