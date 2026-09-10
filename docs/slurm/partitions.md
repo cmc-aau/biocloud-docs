@@ -24,7 +24,7 @@ This partition is reserved for short and small interactive jobs, where users can
 
 | Hostname | CPU model | CPUs | Memory | Scratch space | Features |
 | ---: | :---: | :---: | :---: | :---: | :---: |
-| `bio-node11` | 2x AMD EPYC 9565 | 144C / 288T | 1.5 TB | | `zen5`<br>`epyc9565` |
+| `bio-node02` | 2x AMD EPYC 7552 | 96C / 192T | 0.5 TB | | `zen3`<br>`epyc7552` |
 
 ### Batch job partitions
 These partitions are dedicated to non-interactive and efficient batch jobs that can potentially run for a long time. Some nodes have a higher memory per CPU ratio than others, hence they are separated into different partitions, where those with more memory are prefixed with `x`. The partitions are otherwise named appropriately according to the generation of AMD EPYC CPUs installed in the nodes.
@@ -34,7 +34,6 @@ These partitions are dedicated to non-interactive and efficient batch jobs that 
 | Hostname | CPU model | CPUs | Memory | Scratch space | Features |
 | ---: | :---: | :---: | :---: | :---: | :---: |
 | `bio-node01`| 2x AMD EPYC 7713 | 128C / 256T | 1.0 TB | 3.5 TB NVMe | `zen3`<br>`epyc7713`<br>`scratch` |
-| `bio-node02` | 2x AMD EPYC 7552 | 96C / 192T | 0.5 TB | | `zen3`<br>`epyc7552` |
 | `bio-node[03,04,06,07]` | 2x AMD EPYC 7643 | 96C / 192T | 1.0 TB | | `zen3`<br>`epyc7643` |
 | `bio-node05` | 2x AMD EPYC 7643 | 96C / 192T | 1.0 TB | 18 TB NVMe | `zen3`<br>`epyc7643`<br>`scratch` |
 
@@ -49,7 +48,7 @@ These partitions are dedicated to non-interactive and efficient batch jobs that 
 
 | Hostname | CPU model | CPUs | Memory | Scratch space | Features |
 | ---: | :---: | :---: | :---: | :---: | :---: |
-| `bio-node[12-13]` | 2x AMD EPYC 9565 | 144C / 288T | 1.5 TB | | `zen5`<br>`epyc9565` |
+| `bio-node[11-13]` | 2x AMD EPYC 9565 | 144C / 288T | 1.5 TB | | `zen5`<br>`epyc9565`<br>`clc` (bio-node11 only) |
 | `bio-node[16-17]` | 2x AMD EPYC 9535 | 128C / 256T | 1.5 TB | | `zen5`<br>`epyc9535` |
 
 **`zen5x`**
