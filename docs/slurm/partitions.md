@@ -12,12 +12,12 @@ Below is a brief overview of all CPU partitions. Details about the exact CPU mod
 ### Overview
 | Partition | Nodes | Total CPUs | Total memory | Billing factor | Priority tier |
 | ---: | :--: | :--: | :--: | :--: | :--: |
-| `interactive` | 1 | 288T | 1.5 TB | 0.5x | - |
-| `zen5` | 4 | 1088T | 6.0 TB | 1.0x | 1st |
-| `zen3` | 8 | 1408T | 6.5 TB | 0.5x | 2nd |
+| `interactive` | 1 | 192T | 0.5 TB | 0.5x | - |
+| `zen5` | 4 | 1376T | 6.0 TB | 1.0x | 1st |
+| `zen3` | 8 | 1216T | 6.5 TB | 0.5x | 2nd |
 | `zen5x` | 2 | 576T | 4.6 TB | 1.5x | 3rd |
 | `zen3x` | 2 | 448T | 4.0 TB | 1.0x | 4th |
-| **TOTAL** | **17** | **3872** | **22.6 TB** | | |
+| **TOTAL** | **17** | **3808** | **22.6 TB** | | |
 
 ### The `interactive` partition
 This partition is reserved for short and small interactive jobs, where users can do data analysis, quick testing, and day-to-day work without having to wait for hours or even days due to queue time. Therefore, no batch jobs will be able to run here, and there is a [limited amount of resources](accounting.md#usage-limits-and-qos) available to ensure high availability. Ideally, the `interactive` partition should never be fully utilized. Furthermore, it is optimized for interactive jobs, which are usually very inefficient (e.i. the allocated CPU's do absolutely nothing when you are just typing or clicking around).
