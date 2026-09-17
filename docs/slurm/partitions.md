@@ -1,5 +1,5 @@
 # Compute node partitions
-The compute nodes are divided into separate partitions based on their hardware configuration. This is to allow that for example CPU's from different manufacturer generations can be set up with a different [billing factor](https://slurm.schedmd.com/archive/slurm-24.11.4/slurm.conf.html#OPT_TRESBillingWeights) to ensure fair usage accounting (newer CPU's are faster), nodes with more memory (per CPU) are only used for jobs that actually require more memory, and GPU nodes are only used for jobs that require GPU's, etc.
+The 17 compute nodes are divided into separate partitions based on their hardware configuration. This is to allow that for example CPU's from different manufacturer generations can be set up with a different [billing factor](https://slurm.schedmd.com/archive/slurm-24.11.4/slurm.conf.html#OPT_TRESBillingWeights) to ensure fair usage accounting (newer CPU's are faster), nodes with more memory (per CPU) are only used for jobs that actually require more memory, and GPU nodes are only used for jobs that require GPU's, etc.
 
 ## Automatic partition selection
 BioCloud is a quite **heterogeneous cluster** because nodes are purchased at different times, hence their hardware configuration is also different. Furthermore, the number of partitions will only increase in the future as more nodes are added to the cluster at different times, which increases complexity, making it difficult or confusing to submit jobs to the most appropriate partition(s). This can result in an inefficient cluster with longer queue times and wasted computing resources. Therefore, the most appropriate partition for **batch jobs** is automatically assigned by the SLURM scheduler according to custom logics defined for our specific setup. Manually specifying a partition using the `--partition` option will have no effect, as it will be overridden. Interactive jobs will **always** be assigned the `interactive` partition.
@@ -14,10 +14,10 @@ Below is a brief overview of all CPU partitions. Details about the exact CPU mod
 | ---: | :--: | :--: | :--: | :--: | :--: |
 | `interactive` | 1 | 192T | 0.5 TB | 0.5x | - |
 | `zen5` | 5 | 1376T | 6.0 TB | 1.0x | 1st |
-| `zen3` | 7 | 1216T | 6.5 TB | 0.5x | 2nd |
+| `zen3` | 6 | 1216T | 6.5 TB | 0.5x | 2nd |
 | `zen5x` | 2 | 576T | 4.6 TB | 1.5x | 3rd |
 | `zen3x` | 2 | 448T | 4.0 TB | 1.0x | 4th |
-| **TOTAL** | **17** | **3808** | **22.6 TB** | | |
+| **TOTAL** | **16** | **3808** | **22.6 TB** | | |
 
 ### The `interactive` partition
 This partition is reserved for short and small interactive jobs, where users can do data analysis, quick testing, and day-to-day work without having to wait for hours or even days due to queue time. Therefore, no batch jobs will be able to run here, and there is a [limited amount of resources](accounting.md#usage-limits-and-qos) available to ensure high availability. Ideally, the `interactive` partition should never be fully utilized. Furthermore, it is optimized for interactive jobs, which are usually very inefficient (e.i. the allocated CPU's do absolutely nothing when you are just typing or clicking around).
