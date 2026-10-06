@@ -16,7 +16,7 @@ import os
 from snakemake.utils import min_version
 
 # minimum snakemake version required
-min_version("7.18.2")
+min_version("9.19.0")
 
 # config file path
 configfile: "config/config.yaml"
@@ -46,7 +46,7 @@ input_dir: "data/samples/"
 tmp_dir: "tmp"
 log_dir: "logs"
 db_path: "/databases/midas/MiDAS5.2_20231221/output/FLASVs.fa"
-max_threads: 128
+max_threads: 64
 ```
 
 The config file can contain anything, and is used to allow the user to customize how the workflow will run, which input and database files to use, individual settings for certain tools, and so on. Importantly, it should **NOT** contain any settings relevant for the exact computing setup and how things are run on a particular platform. These are instead given as options to the `snakemake` command when running the workflow, more on that on the [next page](biocloud.md).
