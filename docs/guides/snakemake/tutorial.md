@@ -48,7 +48,7 @@ db_path: "/databases/midas/MiDAS5.2_20231221/output/FLASVs.fa"
 max_threads: 128
 ```
 
-The config file can contain anything, and is used to allow the user to customize how the workflow will run, which input and database files to use, individual settings for certain tools, and so on. Importantly, it should **NOT** contain any settings relevant for the exact computing setup and how things are run on a particular platform. For this Snakemake instead uses [profiles](https://snakemake.readthedocs.io/en/latest/executing/cli.html#profiles) that are supposed to be configured in `config.yaml` files under `profiles/` instead, more on them on the [next page](biocloud.md).
+The config file can contain anything, and is used to allow the user to customize how the workflow will run, which input and database files to use, individual settings for certain tools, and so on. Importantly, it should **NOT** contain any settings relevant for the exact computing setup and how things are run on a particular platform. These are instead given as options to the `snakemake` command when running the workflow, more on that on the [next page](biocloud.md).
 
 ### Rules
 Rules define the actual workflow steps and from these Snakemake will dynamically start one or more tasks depending on the input data and configuration. The two rules in the above example `Snakefile` are placed in two files separate from the `Snakefile` and imported using `include` statements to provide a better overview as the workflow grows, but they could also have been written directly in the `Snakefile` itself. The files can each contain any number of rules or arbitrary Python code. The two files for the workflow look like this:

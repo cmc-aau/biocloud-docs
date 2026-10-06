@@ -20,7 +20,6 @@ project/
 │   └── config.yaml
 ├── data/
 ├── logs/
-├── profiles/
 ├── results/
 └── workflow/
     ├── envs/
@@ -49,7 +48,7 @@ At first it might seem like a lot of files and folders, but workflows can grow q
 To setup Snakemake use the [`environment.yaml`](https://github.com/cmc-aau/snakemake_project_template/blob/main/environment.yml) file provided in the template repository to create a [conda environment from a file](../../software/conda.md#creating-an-environment) for the project with `mamba env create -f environment.yml`. 
 You can also just create and activate a conda environment for the project on the command line:
 ```
-mamba create -c mamba-forge -c biomamba -n snakemake snakemake==7.18.2
+mamba create -c conda-forge -c bioconda -n snakemake snakemake==9.16.3 snakemake-executor-plugin-slurm==2.2.0
 mamba activate snakemake
 ```
 
