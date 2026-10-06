@@ -85,7 +85,6 @@ Host bio-* bio-*.srv.aau.dk sshgw.aau.dk
     User abc@bio.aau.dk
     Port 22
     IdentityFile ~/.ssh/biocloud
-    ForwardAgent yes
   
 # BioCloud login nodes
 # uncomment the ProxyJump line to enable a proxy connection through sshgw.aau.dk for external access (to avoid using VPN).
