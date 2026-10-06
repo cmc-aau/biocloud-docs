@@ -1,8 +1,8 @@
 # Connecting to GitHub
 A short guide to authenticating with GitHub from BioCloud. For more details, see the official GitHub guide [Connecting to GitHub with SSH](https://docs.github.com/en/authentication/connecting-to-github-with-ssh).
 
-## Connecting from VS Code
-If you only use [Git in VS Code](https://code.visualstudio.com/docs/sourcecontrol/intro-to-git), just sign in with GitHub from the "Accounts" icon in the bottom left corner:
+## Connecting from VSCode
+If you only use [Git in VSCode](https://code.visualstudio.com/docs/sourcecontrol/intro-to-git), just sign in with GitHub from the "Accounts" icon in the bottom left corner:
 
 ![signinwithgithub](img/github_vscode_accounts_menu.png)
 
@@ -26,7 +26,7 @@ To use git from the command line or other applications you must authenticate wit
 Use the SSH key on **your own computer**. The key never leaves your computer.
 
 1. [Create an SSH key and add it to your GitHub account](#add-an-ssh-key-to-your-github-account) on your own computer, then add it to the SSH agent with `ssh-add ~/.ssh/github` (on Windows, [enable the ssh-agent service](https://learn.microsoft.com/en-us/windows-server/administration/openssh/openssh_keymanagement#user-key-generation) first).
-2. Add `ForwardAgent yes` to the BioCloud hosts in your `~/.ssh/config` (included in the [SSH config template](../access/ssh.md#ssh-config-file-template)). VS Code forwards the agent by default.
+2. Add `ForwardAgent yes` to the BioCloud hosts in your `~/.ssh/config`. VSCode forwards the agent by default.
 3. Connect to BioCloud and [test the connection](#test-the-connection).
 
 !!! warning "Only forward to trusted hosts"

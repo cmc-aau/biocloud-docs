@@ -1,5 +1,5 @@
 # Job submission
-Once you are [logged in](../access/ssh.md) to one of the login nodes through SSH, there are several ways to request resources and run jobs at different complexity levels through SLURM. Here are the most essential ways for interactive (foreground) and non-interactive (background) use. Usually, you only need to be acquainted with 3 SLURM job submission commands depending on your needs. These are [`srun`](https://slurm.schedmd.com/archive/slurm-24.11.4/srun.html), [`salloc`](https://slurm.schedmd.com/archive/slurm-24.11.4/salloc.html), and [`sbatch`](https://slurm.schedmd.com/archive/slurm-24.11.4/sbatch.html). They all share the exact same [options](#most-essential-options) to define trackable resource constraints ("TRES" in SLURM parlor, fx number of CPUs, memory, GPU, etc), time limits, email for job status notifications, and many other things, but are made for different use-cases, which will be described below.
+Once you are [logged in](../access/ssh.md) to one of the login nodes through SSH, there are several ways to request resources and run jobs at different complexity levels through SLURM. Here are the most essential ways for interactive (foreground) and non-interactive (background) use. Usually, you only need to be acquainted with 3 SLURM job submission commands depending on your needs. These are [`srun`](https://slurm.schedmd.com/archive/slurm-24.11.4/srun.html), [`salloc`](https://slurm.schedmd.com/archive/slurm-24.11.4/salloc.html), and [`sbatch`](https://slurm.schedmd.com/archive/slurm-24.11.4/sbatch.html). They all share the exact same [options](#most-essential-options) to define trackable resource constraints ("TRES" in SLURM parlance, fx number of CPUs, memory, GPU, etc), time limits, email for job status notifications, and many other things, but are made for different use-cases, which will be described below.
 
 ## Interactive jobs
 An interactive job is useful for quick testing and development purposes, where you only need resources for a short period of time to experiment with scripts or workflows on minimal test data, before submitting larger batch jobs using [`sbatch`](#batch-jobs-non-interactive-jobs) that are expected to run for much longer in the background.
@@ -19,7 +19,7 @@ $ salloc --cpus-per-task 2 --mem 4G --time 0-3:00:00
 Resources will then remain allocated until the shell is terminated with `CTRL+d`, typing `exit`, or closing the window. If it takes more than a few seconds to allocate resources, your job might be queued due to a variety of reasons. If so check the [`REASON` codes](jobcontrol.md#get-job-status-info) for the job with `squeue` from another session.
 
 ???+ warning "Interactive jobs and CPU efficiency"
-      When using an interactive shell through [`salloc`](https://slurm.schedmd.com/archive/slurm-24.11.4/salloc.html) it's important to keep in mind that the allocated resources remain reserved entirely for you until you `exit` the shell session. So please don't leave it hanging idle for too long if you know you are not going to actively use it, otherwise other users might have needed the resources in the meantime. Furthermore, interactive jobs are usually very inefficient, because the allocated CPU's do absolutely nothing when you are just typing or clicking around. Therefore, interactive jobs will run on the dedicated `interactive` partition, which is optimized for inefficient jobs.
+      When using an interactive shell through [`salloc`](https://slurm.schedmd.com/archive/slurm-24.11.4/salloc.html) it's important to keep in mind that the allocated resources remain reserved entirely for you until you `exit` the shell session. So please don't leave it hanging idle for too long if you know you are not going to actively use it, otherwise other users might have needed the resources in the meantime. Furthermore, interactive jobs are usually very inefficient, because the allocated CPUs do absolutely nothing when you are just typing or clicking around. Therefore, interactive jobs will run on the dedicated `interactive` partition, which is optimized for inefficient jobs.
 
 If you just need to run a single command/script in the foreground, it's much better to use [`srun`](https://slurm.schedmd.com/archive/slurm-24.11.4/srun.html) instead of [`salloc`](https://slurm.schedmd.com/archive/slurm-24.11.4/salloc.html), which will run things immediately on a compute node instead of first starting an interactive shell. As opposed to [`salloc`](https://slurm.schedmd.com/archive/slurm-24.11.4/salloc.html) the job is terminated **immediately** once the command/script finishes, which increases CPU utilization:
 
@@ -36,7 +36,7 @@ sbatch --cpus-per-task 2 --mem 4G --time 0-01:00:00 --wrap "mycommand myoptions"
 [`srun`](https://slurm.schedmd.com/archive/slurm-24.11.4/srun.html) is sometimes also used to run multiple tasks/steps (parallel processes) from within batch scripts, which can then span multiple compute nodes and run concurrently.
 
 ???- info "Connectivity and interactive jobs"
-      Keep in mind that with interactive jobs briefly losing connection to the login-node can result in the job being killed. This is to avoid that resources would otherwise remain blocked due to unresponsive shell sessions hanging until time runs out. If you still see the job in the `squeue` overview, however, use [`sattach`](https://slurm.schedmd.com/archive/slurm-24.11.4/sattach.html) to reattach to a running interactive job, just remember to append `.interactive` to the job ID, fx `38.interactive`.
+      Keep in mind that with interactive jobs briefly losing connection to the login node can result in the job being killed. This is to avoid that resources would otherwise remain blocked due to unresponsive shell sessions hanging until time runs out. If you still see the job in the `squeue` overview, however, use [`sattach`](https://slurm.schedmd.com/archive/slurm-24.11.4/sattach.html) to reattach to a running interactive job, just remember to append `.interactive` to the job ID, fx `38.interactive`.
 
 ### Graphical (GUI) apps
 #### From the command line
@@ -48,7 +48,7 @@ $ command_to_start_graphical_app
 
 It's important to mention that in order for this to work properly, you must first ensure that you have connected to the particular login node using either the `ssh -X` option, or that you have set the `ForwardX11 yes` option in your SSH config file, [see example here](../access/ssh.md#ssh-config-file).
 
-#### From the interactive web portal (Open Ondemand)
+#### From the interactive web portal (OpenOnDemand)
 To run graphical/interactive software, you can also just use the [interactive web portal](../guides/webportal/apps/virtualdesktop.md) to start a virtual desktop and run it in there. This is especially handy if it needs to run for a long time, because you can log off while it's running and come back later to check the status. Just remember to **stop/cancel the job** as soon as possible to free up resources for other users. If the particular software is started from the command line, you could simply append `mycommand && scancel <jobid>` to the command to automatically stop the job serving the virtual desktop once the command has finished running.
 
 ## Batch jobs (non-interactive jobs)
@@ -63,7 +63,7 @@ Submit the batch script to the SLURM job queue using `sbatch script.sh`, and it 
 You can also simply add `#SBATCH` lines to any shell script you already have, and also run the script with arguments, so for example instead of `bash script.sh -i input -o output ...` you can simply run `sbatch script.sh -i input -o output ...`.
 
 ???+ warning "ALWAYS check up on running and recently completed jobs"
-      The queue time and efficiency of the whole cluster is directly dependent on the average CPU efficiency of all jobs. It is therefore extremely important to ensure that your job uses all the CPU's that you've requested for most of the duration of the job. If not, please cancel the job and submit a new one with fewer CPU's, or adjust the job to use all the CPU's more efficiently. Furthermore, please ALWAYS also [check up on the CPU efficiency](usagereporting.md#job-efficiency-summary) of recently finished jobs by either checking the stats in job notification emails or by using `seff <jobid>` and adjust your next submissions accordingly to avoid idle CPU's.
+      The queue time and efficiency of the whole cluster is directly dependent on the average CPU efficiency of all jobs. It is therefore extremely important to ensure that your job uses all the CPUs that you've requested for most of the duration of the job. If not, please cancel the job and submit a new one with fewer CPUs, or adjust the job to use all the CPUs more efficiently. Furthermore, please ALWAYS also [check up on the CPU efficiency](usagereporting.md#job-efficiency-summary) of recently finished jobs by either checking the stats in job notification emails or by using `seff <jobid>` and adjust your next submissions accordingly to avoid idle CPUs.
 
 ???- "Non-interactive job output (`stdout`/`stderr` streams)"
       The job is handled in the background by the SLURM daemons on the individual compute nodes, so you won't see any output in the terminal. It will instead be written to the file(s) defined by `--output` and/or `--error`. To follow along in real time run for example `tail -f job_123.out` from a login node.
@@ -91,15 +91,15 @@ mamba activate minimap2
 # (It's best practice to use the same variable everywhere from here and onwards. If you fx change the resource requirements above it's easy to forget to update it everywhere)
 max_threads="$(nproc)"
 
-# Run any number of commands as part a full pipeline script or call scripts from elsewhere
+# Run any number of commands as part of a full pipeline script or call scripts from elsewhere
 minimap2 -t "$max_threads" database.fastq input.fastq > out.file
 ```
 
 ### Array jobs
-If you need to run the same command or script multiple times with different input files, parameters, or arguments, [SLURM jobs arrays](https://slurm.schedmd.com/archive/slurm-24.11.4/job_array.html) might become handy. This allows you to submit any number of identical jobs at once, which can then run simultaneously in parallel across the cluster. By making the unique array ID for each job within the array available with the [environment variable](other.md#slurm-environment-variables) `SLURM_ARRAY_TASK_ID`, you can ensure that each job will run with a different input file, parameter, or argument, etc. Each job within the array will get their respective job array ID appended to the parent job ID, for example `<jobid>_[0,1,2,3]`, and can be [controlled](jobcontrol.md) individually. You can also set `--mail-type=ARRAY_TASKS` to receive notification emails for each task in the array if necessary.
+If you need to run the same command or script multiple times with different input files, parameters, or arguments, [SLURM job arrays](https://slurm.schedmd.com/archive/slurm-24.11.4/job_array.html) might become handy. This allows you to submit any number of identical jobs at once, which can then run simultaneously in parallel across the cluster. By making the unique array ID for each job within the array available with the [environment variable](other.md#slurm-environment-variables) `SLURM_ARRAY_TASK_ID`, you can ensure that each job will run with a different input file, parameter, or argument, etc. Each job within the array will get their respective job array ID appended to the parent job ID, for example `<jobid>_[0,1,2,3]`, and can be [controlled](jobcontrol.md) individually. You can also set `--mail-type=ARRAY_TASKS` to receive notification emails for each task in the array if necessary.
 
 ```
-#!/bin/bash -l
+#!/usr/bin/bash -l
 #SBATCH --job-name=myarray_job
 #SBATCH --output=job_%j_%x_%a.out
 #SBATCH --cpus-per-task=10
@@ -158,7 +158,7 @@ $ srun --jobid <jobid> --pty bash
 $ htop
 ```
 
-When using `htop` you can hit `u` to filter processes to only show those running by your user, and `t` for tree view to see the process tree started from each slurm job on the node.
+When using `htop` you can hit `u` to filter processes to only show those running by your user, and `t` for tree view to see the process tree started from each SLURM job on the node.
 
 ![htop example](img/htop.png)
 

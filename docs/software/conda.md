@@ -3,7 +3,7 @@
 
 Conda was initially created for Python packages but it can package and distribute software for any language. Conda also doesn't require elevated privileges allowing users to install anything with ease. Most tools are already available in the default [Anaconda repository](https://anaconda.cloud/package-categories), but other community-driven channels like [bioconda](https://bioconda.github.io/) allow installing practically anything. In comparison to [containers](containers.md), Conda is a dependency manager at the Python package level, while containers also manage operating system dependencies at the base operating system level, hence containers and conda environments are often used together to ensure complete reproducibility and portability, see for example the [biocontainers.pro](https://biocontainers.pro/) project.
 
-[Cheatsheet here](https://docs.conda.io/projects/conda/en/latest/_downloads/843d9e0198f2a193a3484886fa28163c/conda-cheatsheet.pdf)
+[Cheatsheet here](https://docs.conda.io/projects/conda/en/latest/user-guide/cheatsheet.html)
 
 ???+ info "It is recommended to use mamba instead of conda"
       As `conda` is notoriously slow, it is recommended to instead use the `mamba` command, which is written in C++ and is generally much faster. `mamba` is a drop-in replacement with identical sub-commands, so the syntax and usage remains the same. While recent versions of `conda` have adopted the much faster `libmamba` environment solver from `mamba` by default, many other functions can still be slow, for example the shell initialization which happens on login. Note that `conda` and `mamba` both use the same package cache, which can result in [permission issues](https://github.com/conda-forge/miniforge/issues/495) if you use both, so it's best to stick to one of them.
@@ -54,7 +54,7 @@ mamba env list
 ```
 
 ## Installing packages using pip within conda environments
-Software that can only be installed with pip have to be installed within a Conda environment by using pip inside the environment. While issues can arise, per the [Conda guide for using pip in a Conda environment](https://www.anaconda.com/blog/using-pip-in-a-conda-environment), there are some best practices to follow to reduce their likelihood:
+Software that can only be installed with pip has to be installed within a Conda environment by using pip inside the environment. While issues can arise, per the [Conda guide for using pip in a Conda environment](https://www.anaconda.com/blog/using-pip-in-a-conda-environment), there are some best practices to follow to reduce their likelihood:
 
  - Ensure you have installed `pip` within the conda environment before anything, so that you are not accidentally using the system-wide installation, which will likely give you the common error `error: externally-managed-environment`
  - Ensure the python version itself is compatible with the package you are trying to install
@@ -65,8 +65,8 @@ Software that can only be installed with pip have to be installed within a Conda
 
 For example:
 ```
-conda create -n myenv python=3.12 pip
-conda activate myenv
+mamba create -n myenv python=3.12 pip
+mamba activate myenv
 python3 -m pip install <package> --no-cache-dir
 ```
 
@@ -87,8 +87,8 @@ Be aware that specific versions are specified using double `==` with `pip` depen
 ## R and installing R packages within conda environments
 Use the notation `r-{package}` to install R and required R packages within an environment, see the list of packages [here](https://anaconda.org/r/repo?sort=_name&sort_order=asc). Alternatively using [renv](https://rstudio.github.io/renv/articles/renv.html) is **highly recommended** for project reproducibility and portability if you need to install many packages.
 
-## VS Code and conda environments
-To ensure VS Code uses for example R and Python installations in conda environments, first install your preferred extensions, then make a file `.vscode/settings.json` in the current project folder and write for example:
+## VSCode and conda environments
+To ensure VSCode uses for example R and Python installations in conda environments, first install your preferred extensions, then make a file `.vscode/settings.json` in the current project folder and write for example:
 ```shell
 {
   "r.rterm.linux": "${userHome}/.conda/envs/myproject/bin/R",

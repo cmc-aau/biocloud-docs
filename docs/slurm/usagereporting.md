@@ -20,8 +20,8 @@ $ sstat --jobs <job_id>.batch --format=jobid,avecpu,maxrss,ntasks
       | averss | Average resident set size of all tasks. |
       | avevmsize | Average virtual memory of all tasks in a job. |
       | jobid | The id of the Job. |
-      | maxrss | Maximum number of bytes read by all tasks in the job. |
-      | maxvsize | Maximum number of bytes written by all tasks in the job. |
+      | maxrss | Maximum resident set size (memory) of all tasks in the job. |
+      | maxvsize | Maximum virtual memory size of all tasks in the job. |
       | ntasks | Number of tasks in a job. |
       
       For all variables see the [SLURM documentation](https://slurm.schedmd.com/archive/slurm-24.11.4/sstat.html#SECTION_Job-Status-Fields)

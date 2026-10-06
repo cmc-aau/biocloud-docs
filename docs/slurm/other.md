@@ -1,5 +1,5 @@
 # Other commands / FAQ
-Below are some nice to know commands with example output and some common problems. This will continously be populated as people ask for certain things. **Your question here!**
+Below are some nice to know commands with example output and some common problems. This will continuously be populated as people ask for certain things. **Your question here!**
 
 ## I'm not allowed to submit jobs
 ```
@@ -16,7 +16,7 @@ Example output (A=allocated, I=idle, O=other, T=total):
 ```
 $ sinfo -o "%C"
 CPUS(A/I/O/T)
-620/596/240/1456
+3144/728/0/3872
 ```
 
 ## Show details about the whole cluster configuration
@@ -40,7 +40,7 @@ SLURM jobs will have a variety of environment variables set within job allocatio
 | `SLURM_CPUS_PER_TASK` | Number of cpus requested per task. Only set if the `--cpus-per-task` option is specified. |
 | `SLURM_JOB_ACCOUNT` | Account name associated of the job allocation |
 | `SLURM_JOBID`, `SLURM_JOB_ID` | The ID of the job allocation |
-| `SLURM_JOB_CPUS_PER_NODE` | Count of processors available to the job on this  |node.
+| `SLURM_JOB_CPUS_PER_NODE` | Count of processors available to the job on this node. |
 | `SLURM_JOB_DEPENDENCY` | Set to value of the `--dependency` option |
 | `SLURM_JOB_NAME` | Name of the job |
 | `SLURM_NODELIST`, `SLURM_JOB_NODELIST` | List of nodes allocated to the job |

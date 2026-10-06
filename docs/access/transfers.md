@@ -1,8 +1,8 @@
 # Transferring data to/from BioCloud
-To move files between your personal computer and BioCloud, you can use the file transfer support built into VS Code or MobaXterm. Other GUI tools such as [FileZilla](https://filezilla-project.org/download.php) or [WinSCP](https://winscp.net/eng/index.php) also work well. From a terminal, common SSH-based tools include `scp`, `rsync`, `rclone`, and `sftp`. An example `rsync` command could look like this:
+To move files between your personal computer and BioCloud, you can use the file transfer support built into VSCode or MobaXterm. Other GUI tools such as [FileZilla](https://filezilla-project.org/download.php) or [WinSCP](https://winscp.net/eng/index.php) also work well. From a terminal, common SSH-based tools include `scp`, `rsync`, `rclone`, and `sftp`. An example `rsync` command could look like this:
 
 ```
-# always use -a or archive mode to ensure no files will be deleted at the destination when rsync tries to synchronize the two (i.e. ensure contents are identical)
+# -a: archive mode (recursive, preserves permissions, timestamps etc), -v: verbose, -P: show progress and resume partial transfers
 rsync -avP /path/to/local/folder/ abc@bio.aau.dk@bio-fe02.srv.aau.dk:path/to/destination/folder/
 ```
 
@@ -30,7 +30,7 @@ Example `rsync` batch script:
 #SBATCH --cpus-per-task=1
 #SBATCH --mem=1G
 #SBATCH --time=2-00:00:00
-#SBATCH --mail-type=END,FAIL,TIME_LIMIT_80
+#SBATCH --mail-type=END,FAIL,TIME_LIMIT_90
 #SBATCH --mail-user=abc@bio.aau.dk
 
 rsync -avP user@externalsrc:/path/to/src/folder/ local/biocloud/destination

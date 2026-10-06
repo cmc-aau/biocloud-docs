@@ -1,14 +1,14 @@
 # RStudio
 [RStudio](https://posit.co/products/open-source/rstudio/) is an integrated development environment (IDE) for R and Python. It includes a console, syntax-highlighting editor that supports direct code execution, and tools for plotting, history, debugging, and workspace management. This app will allow you to run an RStudio server in a SLURM job and access it directly from your browser.
 
-Before continuing, please first follow the guide to [getting access to the OpenOndemand web portal](../../../access/webportal.md).
+Before continuing, please first follow the guide to [getting access to the OpenOnDemand web portal](../../../access/webportal.md).
 
 ## Starting the app
 Start by selecting the desired R version and the amount of resources that you expect to use and for how long:
 
 ![rstudio resources](img/rstudio_resources.png)
 
-If you need to use a node with specific [features](../../../slurm/jobsubmission.md#requesting-compute-nodes-with-special-features), for example if you need some fast and [local scratch space](../../../storage/local.md), or otherwise need to pass any additional options to the Slurm `sbatch` command used to launch the job, you can enter them in the "additional job options" field. Then click Launch!
+If you need to use a node with specific [features](../../../slurm/jobsubmission.md#requesting-compute-nodes-with-special-features), for example if you need some fast and [local scratch space](../../../storage/local.md), or otherwise need to pass any additional options to the SLURM `sbatch` command used to launch the job, you can enter them in the "additional job options" field. Then click Launch!
 
 ## Accessing the app
 When you've clicked **Launch** SLURM will immediately start finding a compute node with the requested amount of resources available, and you will see a **Queued** status. When the chosen compute node partition is not fully allocated this usually only takes a few seconds, however if it takes longer, you can check the job status and the reason why it's pending under the [Jobs](../jobqueue.md) menu, or by using [shell commands](../../../slurm/jobcontrol.md#get-job-status-info).
@@ -47,7 +47,3 @@ Furthermore, because RStudio is running in an isolated Linux container, you cann
 
 ## Known issues
 If you only see a gray background when starting the RStudio Server, you may have a stuck R session if it was abruptly terminated due to job time limit or it ran out of memory etc. To resolve this problem delete the `~/.local/share/rstudio` folder to reset everything. This will also delete any unsaved files you've had open recently, so if you want you can also just rename the folder instead to fx `rstudio_backup` to create a backup.
-
-TODO: how to run markdown, install tinytex!
-open terminal in RStudio and run `quarto install tinytex`
-version likely incompatible with different R versions so stick to one

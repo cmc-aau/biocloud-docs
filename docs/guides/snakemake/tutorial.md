@@ -44,6 +44,7 @@ The `configfile` variable is a required Snakemake variable and must point to a [
 output_dir: "results"
 input_dir: "data/samples/"
 tmp_dir: "tmp"
+log_dir: "logs"
 db_path: "/databases/midas/MiDAS5.2_20231221/output/FLASVs.fa"
 max_threads: 128
 ```
@@ -163,7 +164,7 @@ This is also the final output defined in the `all` rule, so once these 3 files h
 If we now run the workflow again, Snakemake won't do anything unless specifically asked to, because the expected final output has already been produced previously. The same is true for the individual tasks and this is how Snakemake adds checkpoints to workflows. It will not start from scratch every time you run a workflow, but instead move on from the last checkpoint until the final output has been produced, which is very handy if (when) something fails.
 
 ## The Directed Acyclic Graph (DAG)
-The `Snakefile` will be read sequentially by Snakemake, however the exact order of the individual rules doesn't matter, since Snakemake will, before running anything, first build a dependency graph called the **DAG** (Directed Acyclic Graph) between all the rules depending on the `input`'s and `output`'s defined for each rule and the exact input data used. Some rules can therefore be run completely independently of eachother in parallel if they don't depend on eachother like in the example workflow above, while other rules will not run before an expected output from another rule has been produced first. This is a very powerful feature that is well-suited for HPC systems that use a job scheduling system like SLURM, because the tasks can be submitted by Snakemake as separate jobs with separate resource allocations and run simultaneously, while still under Snakemake's control. The workflow DAG can be visualized using the following command, and will for this particular example data with 3 samples look like this:
+The `Snakefile` will be read sequentially by Snakemake, however the exact order of the individual rules doesn't matter, since Snakemake will, before running anything, first build a dependency graph called the **DAG** (Directed Acyclic Graph) between all the rules depending on the `input`'s and `output`'s defined for each rule and the exact input data used. Some rules can therefore be run completely independently of each other in parallel if they don't depend on each other like in the example workflow above, while other rules will not run before an expected output from another rule has been produced first. This is a very powerful feature that is well-suited for HPC systems that use a job scheduling system like SLURM, because the tasks can be submitted by Snakemake as separate jobs with separate resource allocations and run simultaneously, while still under Snakemake's control. The workflow DAG can be visualized using the following command, and will for this particular example data with 3 samples look like this:
 
 ```shell
 snakemake --dag | dot -Tsvg > dag.svg

@@ -1,5 +1,5 @@
 # Compute node partitions
-The 17 compute nodes are divided into separate partitions based on their hardware configuration. This is to allow that for example CPU's from different manufacturer generations can be set up with a different [billing factor](https://slurm.schedmd.com/archive/slurm-24.11.4/slurm.conf.html#OPT_TRESBillingWeights) to ensure fair usage accounting (newer CPU's are faster), nodes with more memory (per CPU) are only used for jobs that actually require more memory, and GPU nodes are only used for jobs that require GPU's, etc.
+The 17 compute nodes are divided into separate partitions based on their hardware configuration. This is to allow that for example CPUs from different manufacturer generations can be set up with a different [billing factor](https://slurm.schedmd.com/archive/slurm-24.11.4/slurm.conf.html#OPT_TRESBillingWeights) to ensure fair usage accounting (newer CPUs are faster), nodes with more memory (per CPU) are only used for jobs that actually require more memory, and GPU nodes are only used for jobs that require GPUs, etc.
 
 ## Automatic partition selection
 BioCloud is a quite **heterogeneous cluster** because nodes are purchased at different times, hence their hardware configuration is also different. Furthermore, the number of partitions will only increase in the future as more nodes are added to the cluster at different times, which increases complexity, making it difficult or confusing to submit jobs to the most appropriate partition(s). This can result in an inefficient cluster with longer queue times and wasted computing resources. Therefore, the most appropriate partition for **batch jobs** is automatically assigned by the [slurmjobpacker plugin](https://github.com/KasperSkytte/slurmjobpacker), which was developed specifically to solve this problem. Manually specifying a partition using the `--partition` option will have no effect, as it will be overridden. Interactive jobs will **always** be assigned the `interactive` partition.
@@ -20,7 +20,7 @@ Below is a brief overview of all CPU partitions. Details about the exact CPU mod
 | **TOTAL** | **16** | **3808** | **22.6 TB** | | |
 
 ### The `interactive` partition
-This partition is reserved for short and small interactive jobs, where users can do data analysis, quick testing, and day-to-day work without having to wait for hours or even days due to queue time. Therefore, no batch jobs will be able to run here, and there is a [limited amount of resources](accounting.md#usage-limits-and-qos) available to ensure high availability. Ideally, the `interactive` partition should never be fully utilized. Furthermore, it is optimized for interactive jobs, which are usually very inefficient (e.i. the allocated CPU's do absolutely nothing when you are just typing or clicking around).
+This partition is reserved for short and small interactive jobs, where users can do data analysis, quick testing, and day-to-day work without having to wait for hours or even days due to queue time. Therefore, no batch jobs will be able to run here, and there is a [limited amount of resources](accounting.md#usage-limits-and-qos) available to ensure high availability. Ideally, the `interactive` partition should never be fully utilized. Furthermore, it is optimized for interactive jobs, which are usually very inefficient (i.e. the allocated CPUs do absolutely nothing when you are just typing or clicking around).
 
 | Hostname | CPU model | CPUs | Memory | Scratch space | Features |
 | ---: | :---: | :---: | :---: | :---: | :---: |
@@ -55,7 +55,7 @@ These partitions are dedicated to non-interactive and efficient batch jobs that 
 
 | Hostname | CPU model | CPUs | Memory | Scratch space | Features |
 | ---: | :---: | :---: | :---: | :---: | :---: |
-| `node[14-15]` | 2x AMD EPYC 9565 | 144C / 288T | 2.3 TB | 12.8 TB NVMe | `zen5`<br>`epyc9565`<br>`scratch` |
+| `bio-node[14-15]` | 2x AMD EPYC 9565 | 144C / 288T | 2.3 TB | 12.8 TB NVMe | `zen5`<br>`epyc9565`<br>`scratch` |
 
 ## GPU partitions
 Nodes in this partition have GPUs installed and should ONLY be used when a GPU is needed for the job. The partition is chosen depending on the GPU model requested using the `--gres` option to `salloc`, `srun`, and `sbatch` job submission commands. Instructions on how to request a GPU node can be found in the [job submission](jobsubmission.md#requesting-one-or-more-gpus) page.

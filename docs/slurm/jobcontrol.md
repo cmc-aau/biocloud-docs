@@ -40,7 +40,6 @@ Use sinfo or squeue to obtain more details.
 Use [`squeue`](https://slurm.schedmd.com/archive/slurm-24.11.4/squeue.html), for example:
 ```
 $ squeue
-squeue
       JOBID             NAME       USER ACCOUNT        TIME   TIME_LEFT CPU MIN_ME ST PRIO  PARTITION NODELIST(REASON)
     1275175    RStudioServer user01@bio     acc1       0:00  3-00:00:00  32     5G PD    4       zen3 (QOSMaxCpuPerUserLimit)
     1275180       sshdbridge user02@bio     acc2       7:14     7:52:46   8    40G  R    6       zen3 bio-node03
@@ -64,8 +63,8 @@ $ squeue --start
 ```
 
 ??? "Job state codes (ST)"
-      | Status	Code | Explaination |
-      | --- | --- |
+      | Status | Code | Explanation |
+      | --- | --- | --- |
       | COMPLETED | CD | The job has completed successfully. |
       | COMPLETING | CG | The job is finishing but some processes are still active. |
       | FAILED | F | The job terminated with a non-zero exit code and failed to execute. |
@@ -77,14 +76,14 @@ $ squeue --start
 
       A complete list can be found in SLURM's [documentation](https://slurm.schedmd.com/archive/slurm-24.11.4/squeue.html#lbAG)
 
-??? "Job reason codes (REASON )"
-      | Reason Code | Explaination |
+??? "Job reason codes (REASON)"
+      | Reason Code | Explanation |
       | --- | --- |
       | Priority | One or more higher priority jobs is in queue for running. Your job will eventually run. |
       | Dependency | This job is waiting for a dependent job to complete and will run afterwards. |
       | Resources | The job is waiting for resources to become available and will eventually run. |
       | InvalidAccount | The job’s account is invalid. Cancel the job and rerun with correct account. |
-      | InvaldQoS | The job’s QoS is invalid. Cancel the job and rerun with correct account. |
+      | InvalidQOS | The job’s QOS is invalid. Cancel the job and rerun with correct QOS. |
       | QOSGrpCpuLimit | All CPUs assigned to your job’s specified QoS are in use; job will run eventually. |
       | QOSGrpMaxJobsLimit | Maximum number of jobs for your job’s QoS have been met; job will run eventually. |
       | QOSGrpNodeLimit | All nodes assigned to your job’s specified QoS are in use; job will run eventually. |
@@ -129,8 +128,6 @@ $ scancel <job_id>
 # cancel ALL your jobs
 $ scancel --me
 ```
-
-If the particular job doesn't stop and doesn't respond, consider using [`skill`](https://slurm.schedmd.com/archive/slurm-24.11.4/skill.html) instead.
 
 ## Pause or resume a job
 Use [`scontrol`](https://slurm.schedmd.com/archive/slurm-24.11.4/scontrol.html) to control your own jobs, for example suspend a running job:

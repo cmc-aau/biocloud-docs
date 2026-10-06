@@ -1,5 +1,5 @@
 # Other software
-In rare cases, some software tools are not readily available through conda or biocontainers, or they are problematic to get to run properly. Below are some guides on how to run some them. Most are installed under `/software/lib/biocloud-software`.
+In rare cases, some software tools are not readily available through conda or biocontainers, or they are problematic to get to run properly. Below are some guides on how to run some of them. Most are installed under `/software/lib/biocloud-software`.
 
 ## ARB 7
 ARB version 6.0 can be installed through conda from the [bioconda](https://anaconda.org/bioconda/arb-bio) channel, however it is not maintained anymore, and the latest version 7.0 is not available. To run version 7.0 on BioCloud, you need to run a wrapper script that runs ARB 7.0 from a custom built container image. You can do that through either a [virtual desktop](../guides/webportal/apps/virtualdesktop.md) started from the web portal, or through an [interactive shell session](../slurm/jobsubmission.md#graphical-gui-apps) using `salloc` from a login node. ARB 7 is then available by simply typing `arb7` in the terminal.
