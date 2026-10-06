@@ -1,7 +1,7 @@
 # Shell access through SSH
 SSH (Secure Shell) is a widely used protocol for securely gaining access to a shell (or terminal) on remote Linux machines and is the primary way to access the BioCloud servers. This page provides instructions on how to access the BioCloud through SSH using a few different SSH clients on all major platforms. There are many other SSH clients available than those listed below, but regardless of the client, everything will run over the same SSH protocol in the exact same way.
 
-If you need to run interactive GUI (graphical user interface) apps like CLC, Arb, RStudio, VS Code, etc, you don't necessarily need to connect through SSH. Instead you can use the [interactive web portal](webportal.md) described on the next page.
+If you need to run interactive GUI (graphical user interface) apps like CLC, Arb, RStudio, VSCode, etc, you don't necessarily need to connect through SSH. Instead you can use the [interactive web portal](webportal.md) described on the next page.
 
 BioCloud is **only** available while connected to the local campus network. To connect from elsewhere you first need to either connect to the university VPN, or configure SSH to connect through a public SSH gateway, see [external access](#external-access) below. You then authenticate using your usual AAU account credentials.
 
@@ -19,13 +19,13 @@ After successfully logging in to one of the login nodes using any of the SSH cli
 It's rarely enough with just a terminal because you more often than not need to edit some scripts in order to do anything, which is not very convenient to do in a terminal, so below are some instructions on how to connect using a few popular code editors, or IDEs (integrated development environments), with built-in SSH support, but also [just a terminal](#just-a-terminal).
 
 ### Visual Studio Code
-[Visual Studio Code](https://code.visualstudio.com/) (VS Code) is a popular free cross-platform code editor with a myriad of [extensions](https://marketplace.visualstudio.com/VSCode) available for anything and everything including syntax highlighting for any programming language, integrated git support, [GitHub copilot](https://github.com/features/copilot) for AI autocompletion of code, and the list goes on. If you want one editor for everything, there isn't currently anything better out there. If you need an interactive VS Code session and actually run things from there, please follow [this guide](../guides/sshdslurm.md) to connect VS Code directly to a SLURM job instead. Alternatively, you can also start a Code Server (an open source alternative to VS Code) in a SLURM job from the [interactive web portal](../access/webportal.md) described on the next page.
+[Visual Studio Code](https://code.visualstudio.com/) (VSCode) is a popular free cross-platform code editor with a myriad of [extensions](https://marketplace.visualstudio.com/VSCode) available for anything and everything including syntax highlighting for any programming language, integrated git support, [GitHub copilot](https://github.com/features/copilot) for AI autocompletion of code, and the list goes on. If you want one editor for everything, there isn't currently anything better out there. If you need an interactive VSCode session and actually run things from there, please follow [this guide](../guides/sshdslurm.md) to connect VSCode directly to a SLURM job instead. Alternatively, you can also start a Code Server (an open source alternative to VSCode) in a SLURM job from the [interactive web portal](../access/webportal.md) described on the next page.
 
 #### Installation (Windows, macOS, or Linux)
 Download and install using the instructions on the official [website](https://code.visualstudio.com/).
 
-#### Connecting to a login-node
-1. Open VS Code and install the "Remote - SSH" extension from the Extensions sidebar menu.
+#### Connecting to a login node
+1. Open VSCode and install the "Remote - SSH" extension from the Extensions sidebar menu.
 2. Click on the "Remote Explorer" icon after the extension has been installed.
 3. Add a host by either:
     - clicking on the "+" icon and enter your AAU email followed by `@` and then the server's hostname, for example: `abc@bio.aau.dk@bio-fe01.srv.aau.dk`, or
@@ -35,12 +35,12 @@ Download and install using the instructions on the official [website](https://co
 5. Once connected open a project or workspace folder (or create one while doing so) by clicking File -> Open Folder (CTRL+k CTRL+o, CMD instead of CTRL if on macOS) to start your work
 
 !!! warning "Project folders in VSCode"
-      When connecting using VSCode, please only open individual project folders and **not** your entire home folder. If you do VSCode may scan **all files** in your home folder, which can leave a forever-running process on the login-node consuming all the CPUs available. Instead, it's much better to use workspaces and only add relevant folders one-by-one, if you need to work within multiple folders at once:
+      When connecting using VSCode, please only open individual project folders and **not** your entire home folder. If you do VSCode may scan **all files** in your home folder, which can leave a forever-running process on the login node consuming all the CPUs available. Instead, it's much better to use workspaces and only add relevant folders one-by-one, if you need to work within multiple folders at once:
 
       ![VSCode workspaces](img/vscodeworkspaces.png)
 
 ### MobaXterm
-A more old-school and Windows-only client is MobaXterm. It's not as full-featured as VS Code, but is more lightweight.
+A more old-school and Windows-only client is MobaXterm. It's not as full-featured as VSCode, but is more lightweight.
 
 #### Installation (Windows only)
 Download and install MobaXterm Home Edition from the official [website](https://mobaxterm.mobatek.net/download.html).
@@ -85,7 +85,6 @@ Host bio-* bio-*.srv.aau.dk sshgw.aau.dk
     User abc@bio.aau.dk
     Port 22
     IdentityFile ~/.ssh/biocloud
-    ForwardAgent yes
   
 # BioCloud login nodes
 # uncomment the ProxyJump line to enable a proxy connection through sshgw.aau.dk for external access (to avoid using VPN).

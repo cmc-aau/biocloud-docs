@@ -30,7 +30,7 @@ nav:
     - storage/sharedfolders.md
     - storage/policy.md
   - Guides:
-    - Interactive Web portal (OpenOndemand):
+    - Interactive Web portal (OpenOnDemand):
       - guides/webportal/files.md
       - guides/webportal/jobqueue.md
       #- guides/webportal/jobcomposer.md

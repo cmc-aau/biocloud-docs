@@ -4,7 +4,7 @@ Many steps in a complex workflow will only run on a single thread regardless of 
 
 **`launchscript.sh`**
 ```
-#!/bin/bash
+#!/usr/bin/bash
 
 set -euo pipefail
 

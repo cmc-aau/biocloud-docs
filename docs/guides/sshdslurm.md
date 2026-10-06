@@ -1,18 +1,18 @@
-# Interactive VS Code session in a SLURM job
-When using the [Visual Studio Code IDE](https://code.visualstudio.com/) to work remotely, you would normally install the [Remote - SSH](https://code.visualstudio.com/docs/remote/ssh) on your local computer and connect to the particular machine over an SSH connection to work there instead. This is useful when you for example need to work closer to raw data to avoid moving large data around, or when you simply need more juice for demanding tasks. In order to use VS Code remotely on a SLURM cluster, however, you can't normally connect directly to a compute node, and connecting directly to login nodes to run things there is **strictly forbidden**. This small guide will show you how you can connect your VS Code session directly to a SLURM job running on a compute node instead.
+# Interactive VSCode session in a SLURM job
+When using the [Visual Studio Code IDE](https://code.visualstudio.com/) to work remotely, you would normally install the [Remote - SSH](https://code.visualstudio.com/docs/remote/ssh) extension on your local computer and connect to the particular machine over an SSH connection to work there instead. This is useful when you for example need to work closer to raw data to avoid moving large data around, or when you simply need more juice for demanding tasks. In order to use VSCode remotely on a SLURM cluster, however, you can't normally connect directly to a compute node, and connecting directly to login nodes to run things there is **strictly forbidden**. This small guide will show you how you can connect your VSCode session directly to a SLURM job running on a compute node instead.
 
 ???+ "Consider using Code Server from the web interface"
-      Before continuing with this guide, first consider if using a [Code Server from the web interface](webportal/apps/coder.md) is sufficient for your needs instead, as it is much easier to get started with. [Code Server](https://github.com/coder/code-server) is an open source alternative to [Visual Studio Code](https://code.visualstudio.com/) provided by [Coder](https://coder.com/), with almost the same features. If you really need the full VS Code IDE experience, however, then continue reading.
+      Before continuing with this guide, first consider if using a [Code Server from the web interface](webportal/apps/coder.md) is sufficient for your needs instead, as it is much easier to get started with. [Code Server](https://github.com/coder/code-server) is an open source alternative to [Visual Studio Code](https://code.visualstudio.com/) provided by [Coder](https://coder.com/), with almost the same features. If you really need the full VSCode IDE experience, however, then continue reading.
 
 
 ## How does it work?
 When you normally connect to a remote server, you use an SSH client to connect to the SSH daemon `sshd`, which is a service running in the background on the server. You then simply talk to this daemon using the SSH protocol to execute commands on the server. The trick here is then to start a separate `sshd` process that runs within a SLURM job to connect to instead through a bridge connection to the job through one of the login nodes.
 
 ## SLURM job script
-[Log in through SSH](../access/ssh.md) on one of the login nodes, copy the following SLURM batch script somewhere, and [adjust the resource requirements](../slurm/jobsubmission.md#non-interactive-jobs) for your session. Submit the job using `sbatch` as usual, and remember to [cancel](../slurm/jobcontrol.md#cancel-a-job) it when you are done. It won't stop when you close the VS Code window on your computer unless it runs out of time. You will have to submit a job like this every time you want to use VS Code interactively (for anything else than code editing and file browsing etc). 
+[Log in through SSH](../access/ssh.md) on one of the login nodes, copy the following SLURM batch script somewhere, and [adjust the resource requirements](../slurm/jobsubmission.md#batch-jobs-non-interactive-jobs) for your session. Submit the job using `sbatch` as usual, and remember to [cancel](../slurm/jobcontrol.md#cancel-a-job) it when you are done. It won't stop when you close the VSCode window on your computer unless it runs out of time. You will have to submit a job like this every time you want to use VSCode interactively (for anything else than code editing and file browsing etc). 
 
 ```
-#!/bin/bash
+#!/usr/bin/bash
 #SBATCH --output=/dev/null
 #SBATCH --job-name=sshdbridge
 #SBATCH --time=0-9:00:00
@@ -45,7 +45,7 @@ echo "Starting sshd on port $PORT"
       In order to connect to the job, you **must** set up and use [public key authentication](../access/ssh.md#ssh-public-key-authentication), password authentication will not work.
 
 ## Configure SSH connection
-On your local computer, you need to set up a bridge connection through a login node by adding a few lines to your [SSH config file](../access/ssh.md#ssh-config-file). You will only have to do this once. You can find it through VS Code under the "Remote Explorer" side menu by clicking the little cog "Open SSH Config File":
+On your local computer, you need to set up a bridge connection through a login node by adding a few lines to your [SSH config file](../access/ssh.md#ssh-config-file). You will only have to do this once. You can find it through VSCode under the "Remote Explorer" side menu by clicking the little cog "Open SSH Config File":
 
 ![Edit SSH config](../img/sshconfigvscode.png)
 
@@ -71,7 +71,7 @@ Finally, click the "Connect in New (or current) Window" icon next to the name. I
 
 ![Connect through bridge host](img/sshdbridgevscodeconnected.png)
 
-Now you can start working! Whatever you do in VS Code now will run remotely inside a SLURM job on one of the compute nodes with a connection through the login node. Magic.
+Now you can start working! Whatever you do in VSCode now will run remotely inside a SLURM job on one of the compute nodes with a connection through the login node. Magic.
 
 ## Notes
  - You will **NOT** be able to connect if you use an [SSH jump host](../access/ssh.md#using-an-ssh-jump-host). [Connect through VPN](../access/ssh.md#vpn) instead if you are not at AAU.

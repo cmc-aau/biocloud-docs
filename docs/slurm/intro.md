@@ -1,5 +1,5 @@
 # Introduction to SLURM
-SLURM (Simple Linux Utility for Resource Management) is a highly flexible and powerful job scheduler for managing and scheduling computational workloads on high-performance computing (HPC) clusters. SLURM is designed to efficiently allocate resources and manage job execution on clusters of any size, from a single server to tens of thousands. SLURM manages resources on an HPC cluster by dividing similar compute nodes into [partitions](partitions.md). Users submit jobs with specified resource requirements to these partitions from a login-node, and then the SLURM controller schedules and allocates resources to those jobs based on available resources. SLURM also stores detailed usage information of all jobs in a usage accounting database, which allows enforcement of fair-share policies and priorities for job scheduling for each partition.
+SLURM (Simple Linux Utility for Resource Management) is a highly flexible and powerful job scheduler for managing and scheduling computational workloads on high-performance computing (HPC) clusters. SLURM is designed to efficiently allocate resources and manage job execution on clusters of any size, from a single server to tens of thousands. SLURM manages resources on an HPC cluster by dividing similar compute nodes into [partitions](partitions.md). Users submit jobs with specified resource requirements to these partitions from a login node, and then the SLURM controller schedules and allocates resources to those jobs based on available resources. SLURM also stores detailed usage information of all jobs in a usage accounting database, which allows enforcement of fair-share policies and priorities for job scheduling for each partition.
 
 ## BioCloud SLURM cluster overview
 ![SLURM overview](img/slurm-overview-inverted.png)
@@ -7,7 +7,7 @@ SLURM (Simple Linux Utility for Resource Management) is a highly flexible and po
 (Note: the exact partitions in the figure may be outdated, but the setup is the same)
 
 ## Getting started
-Start with obtaining shell access to one of the login nodes `bio-fe[01-02].srv.aau.dk`, as described on the [SSH access](../access/ssh.md) page. To start with it's always nice to get an overview of the cluster, it's partitions, and how many resources that are currently allocated. This is achieved with the `sinfo` command, example output:
+Start with obtaining shell access to one of the login nodes `bio-fe[01-02].srv.aau.dk`, as described on the [SSH access](../access/ssh.md) page. To start with it's always nice to get an overview of the cluster, its partitions, and how many resources that are currently allocated. This is achieved with the `sinfo` command, example output:
 
 ```
 $ sinfo
