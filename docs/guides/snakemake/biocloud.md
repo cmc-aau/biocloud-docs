@@ -39,7 +39,7 @@ snakemake \
 ```
 
 ## Cluster mode
-Requires Snakemake 8+ and the [SLURM executor plugin](https://snakemake.github.io/snakemake-plugin-catalog/plugins/executor/slurm.html) (`snakemake-executor-plugin-slurm`, included in the template `environment.yml`). Define `threads`, `mem_mb`, and `runtime` (minutes) for every rule. **Never** set a partition or nodes anywhere, the partition is [selected automatically](../../slurm/partitions.md#automatic-partition-selection).
+Requires Snakemake 8+ and the [SLURM executor plugin](https://snakemake.github.io/snakemake-plugin-catalog/plugins/executor/slurm.html) (`snakemake-executor-plugin-slurm`, included in the template `environment.yml`). Define `threads`, `mem_mb`, and `runtime` (minutes) for every rule. When running snakemake in cluster mode from a slurm job, you will likely see a warning saying it's recommended to run snakemake on a login node, but this can be safely ignored.
 
 ```shell
 #!/usr/bin/bash -l
@@ -59,7 +59,10 @@ snakemake \
   --jobs 50 \
   --default-resources mem_mb=1024 runtime=60 \
   --keep-going \
-  --rerun-incomplete
+  --rerun-incomplete \
+  --slurm-efficiency-report
 ```
 
-The warning `You are running snakemake in a SLURM job context` can be ignored. Use `--slurm-efficiency-report` to check the resource usage of each rule.
+???+ info "Use efficiency reports for tuning resource requirements"
+    The SLURM executor plugin for snakemake also includes a feature to automatically generate a [job efficiency report](https://snakemake.github.io/snakemake-plugin-catalog/plugins/executor/slurm.html#getting-job-efficiency-information), which contains resource utilization and efficiency metrics for all tasks. This is essential information for tuning resource requirements for each rule to minimize waste. Turn it on with `--slurm-efficiency-report` while developing workflows.
+
