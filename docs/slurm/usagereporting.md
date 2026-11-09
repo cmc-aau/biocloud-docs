@@ -2,7 +2,7 @@
 Every month users get an automated usage report sent by email. The report contains only basic, but important, information such as total CPU allocation hours and an efficiency summary of all jobs run in the past month. The latter is essential information to minimize wasted resources and thus also the average queue time for all users. For additional data you can use some of the commands below.
 
 ## Running jobs
-Use [`sstat`](https://slurm.schedmd.com/archive/slurm-24.11.4/sstat.html) to show the status and live usage accounting information of only **running** jobs. For batch scripts you need to add `.batch` to the job ID, for example:
+Use [`sstat`](https://slurm.schedmd.com/archive/slurm-26.05.5/sstat.html) to show the status and live usage accounting information of only **running** jobs. For batch scripts you need to add `.batch` to the job ID, for example:
 ```
 $ sstat <job_id>.batch
 ```
@@ -24,10 +24,10 @@ $ sstat --jobs <job_id>.batch --format=jobid,avecpu,maxrss,ntasks
       | maxvsize | Maximum virtual memory size of all tasks in the job. |
       | ntasks | Number of tasks in a job. |
       
-      For all variables see the [SLURM documentation](https://slurm.schedmd.com/archive/slurm-24.11.4/sstat.html#SECTION_Job-Status-Fields)
+      For all variables see the [SLURM documentation](https://slurm.schedmd.com/archive/slurm-26.05.5/sstat.html#SECTION_Job-Status-Fields)
 
 ## Past jobs
-To view the status of **past** jobs and their usage accounting information use [`sacct`](https://slurm.schedmd.com/archive/slurm-24.11.4/sacct.html). `sacct` will return **everything** accounted for by default which is very inconvenient to view in a terminal window, so the below command will show the most essential information:
+To view the status of **past** jobs and their usage accounting information use [`sacct`](https://slurm.schedmd.com/archive/slurm-26.05.5/sacct.html). `sacct` will return **everything** accounted for by default which is very inconvenient to view in a terminal window, so the below command will show the most essential information:
 ```
 $ sacct -o jobid,jobname,start,end,NNodes,NCPUS,ReqMem,CPUTime,AveRSS,MaxRSS --user=$USER --units=G -j 138
 JobID           JobName               Start                 End   NNodes      NCPUS     ReqMem    CPUTime     AveRSS     MaxRSS 
@@ -38,7 +38,7 @@ JobID           JobName               Start                 End   NNodes      NC
 
 ```
 
-There is a large number of other options to show, see [SLURM docs](https://slurm.schedmd.com/archive/slurm-24.11.4/sacct.html#SECTION_Job-Accounting-Fields). If you really want to see everything use for example `sacct --long | less -S`.
+There is a large number of other options to show, see [SLURM docs](https://slurm.schedmd.com/archive/slurm-26.05.5/sacct.html#SECTION_Job-Accounting-Fields). If you really want to see everything use for example `sacct --long | less -S`.
 
 ## Reservations
 Show current reservations in the system and reservation usage of the reservation total

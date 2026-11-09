@@ -37,7 +37,7 @@ Use sinfo or squeue to obtain more details.
 ```
 
 ## Get job status info
-Use [`squeue`](https://slurm.schedmd.com/archive/slurm-24.11.4/squeue.html), for example:
+Use [`squeue`](https://slurm.schedmd.com/archive/slurm-26.05.5/squeue.html), for example:
 ```
 $ squeue
       JOBID             NAME       USER ACCOUNT        TIME   TIME_LEFT CPU MIN_ME ST PRIO  PARTITION NODELIST(REASON)
@@ -74,7 +74,7 @@ $ squeue --start
       | SUSPENDED | S | A running job has been stopped with its cores released to other jobs. |
       | STOPPED | ST | A running job has been stopped with its cores retained. |
 
-      A complete list can be found in SLURM's [documentation](https://slurm.schedmd.com/archive/slurm-24.11.4/squeue.html#lbAG)
+      A complete list can be found in SLURM's [documentation](https://slurm.schedmd.com/archive/slurm-26.05.5/squeue.html#lbAG)
 
 ??? "Job reason codes (REASON)"
       | Reason Code | Explanation |
@@ -94,7 +94,7 @@ $ squeue --start
       | AssociationMaxJobsLimit | Maximum number of jobs for your job’s association have been met; job will run eventually. |
       | AssociationNodeLimit | All nodes assigned to your job’s specified association are in use; job will run eventually. |
 
-      A complete list can be found in SLURM's [documentation](https://slurm.schedmd.com/archive/slurm-24.11.4/squeue.html#lbAF)
+      A complete list can be found in SLURM's [documentation](https://slurm.schedmd.com/archive/slurm-26.05.5/squeue.html#lbAF)
 
 The columns to show can be customized using the `--format` option, but can also be set with the environment variable `SQUEUE_FORMAT` to avoid typing it every time. You can always override this to suit your needs in your `.bashrc` file. The default format is currently:
 
@@ -102,7 +102,7 @@ The columns to show can be customized using the `--format` option, but can also 
 SQUEUE_FORMAT="%.12i %.16j %.10u %.10M %.12L %.3C %.6m %.2t %.9P %R"
 ```
 
-See a full list [here](https://slurm.schedmd.com/archive/slurm-24.11.4/squeue.html#OPT_format).
+See a full list [here](https://slurm.schedmd.com/archive/slurm-26.05.5/squeue.html#OPT_format).
 
 ## Prevent pending job from starting
 Pending jobs can be marked in a "hold" state to prevent them from starting
@@ -121,7 +121,7 @@ scontrol requeue <job_id>
 ```
 
 ## Cancel a job
-With `sbatch` you won't be able to just hit CTRL+c to stop what's running like you're used to in a terminal. Instead you must use `scancel`. Get the job ID from `squeue --me`, then use [`scancel`](https://slurm.schedmd.com/archive/slurm-24.11.4/scancel.html) to cancel a running job, for example:
+With `sbatch` you won't be able to just hit CTRL+c to stop what's running like you're used to in a terminal. Instead you must use `scancel`. Get the job ID from `squeue --me`, then use [`scancel`](https://slurm.schedmd.com/archive/slurm-26.05.5/scancel.html) to cancel a running job, for example:
 ```
 $ scancel <job_id>
 
@@ -130,7 +130,7 @@ $ scancel --me
 ```
 
 ## Pause or resume a job
-Use [`scontrol`](https://slurm.schedmd.com/archive/slurm-24.11.4/scontrol.html) to control your own jobs, for example suspend a running job:
+Use [`scontrol`](https://slurm.schedmd.com/archive/slurm-26.05.5/scontrol.html) to control your own jobs, for example suspend a running job:
 ```
 $ scontrol suspend <job_id>
 ```
@@ -165,4 +165,4 @@ $ scontrol update JobId=<jobid> timelimit=<new timelimit>
 $ scontrol update JobId=<jobid> mailtype+=TIME_LIMIT_90
 ```
 
-If the job is already running, adjusting the time limit must be done by an administrator, but some things are still adjustable by the user, for example `mailtype` and possibly others. For a full list see [`scontrol update job`](https://slurm.schedmd.com/archive/slurm-24.11.4/scontrol.html#SECTION_JOBS---SPECIFICATIONS-FOR-UPDATE-COMMAND).
+If the job is already running, adjusting the time limit must be done by an administrator, but some things are still adjustable by the user, for example `mailtype` and possibly others. For a full list see [`scontrol update job`](https://slurm.schedmd.com/archive/slurm-26.05.5/scontrol.html#SECTION_JOBS---SPECIFICATIONS-FOR-UPDATE-COMMAND).
