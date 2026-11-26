@@ -143,7 +143,11 @@ $ sbatch --prefer=zen5 batchscript.sh
 Of course these options can be written in the `#SBATCH` section of batch scripts as well.
 
 ## How to check up on the resource utilization of running jobs
-When jobs start running, it's important to check up on them once in a while to ensure that they run as intended before potentially wasting resources for a long time (especially CPUs). This can be done by starting an interactive shell session within running (non-interactive batch) jobs using the `srun` command. First, obtain the job ID from the queue using `sq` (convenient alias for `squeue --me`):
+When jobs start running, it's important to check up them once in a while to ensure that they run as intended before potentially wasting resources for a long time (especially CPUs), increasing the average queue time for everybody. This can be done in a few different ways. For a simple overview over time, find your job in the [job packer live view](https://biocloud.bio.aau.dk/rnode/localhost/8650/2d) available from the [web interface](../access/webportal.md), and click it:
+
+![hej](img/job_utilization.png)
+
+Alternatively, to get a more detailed view of the exact processes and steps that may be inefficient, you can start an interactive shell session within running (non-interactive batch) jobs using the `srun` command. First, obtain the job ID from the queue using `sq` (convenient alias for `squeue --me`):
 
 ```
 $ sq
