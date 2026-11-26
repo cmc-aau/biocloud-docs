@@ -4,9 +4,9 @@ Please first ensure you understand the basics of [submitting SLURM jobs](../../s
 ???+ warning "When to use cluster mode"
     Cluster mode is a great way to give each step exactly the resources it needs, but keep these points in mind:
 
-    - If the workflow spawns hundreds or thousands of jobs, don't use cluster mode. The queue and scheduling overhead will often take longer than the tasks themselves.
-    - If all steps are efficient, cluster mode gains you nothing.
-    - Cluster mode requires you to test the memory usage of every rule, which can vary with the input data. This is tedious and often not worth it.
+    - If the workflow spawns hundreds or thousands of short jobs, don't use cluster mode. The queue and scheduling overhead will often take longer than the tasks themselves.
+    - If all steps are efficient, cluster mode gains you nothing. Instead run the workflow within a single, bigger allocation with `--cores=$(nproc)`.
+    - Cluster mode requires you to test the memory usage of every rule, which can vary with the input data. This can be tedious and sometimes not worth it.
 
 ## Dry run for inspection
 Before running the workflow, inspect the [DAG](tutorial.md#the-directed-acyclic-graph-dag) or perform a "dry run" to list all tasks to be run without running anything:
